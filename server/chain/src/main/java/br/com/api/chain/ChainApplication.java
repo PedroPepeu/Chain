@@ -1,13 +1,13 @@
-package com.example.chainAPI;
+package br.com.api.chain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChainApiApplication {
+public class ChainApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChainApiApplication.class, args);
+		SpringApplication.run(ChainApplication.class, args);
 	}
 
 }

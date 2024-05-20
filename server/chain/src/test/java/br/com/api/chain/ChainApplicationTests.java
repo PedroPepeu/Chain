@@ -1,10 +1,10 @@
-package com.example.chainAPI;
+package br.com.api.chain;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChainApiApplicationTests {
+class ChainApplicationTests {
 
 	@Test
 	void contextLoads() {
