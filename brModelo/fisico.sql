@@ -42,7 +42,7 @@ CREATE TABLE Membro_Participa (
 CREATE TABLE Link (
     Descricao VARCHAR[250],
     Id_link VARCHAR[10] PRIMARY KEY,
-    Url VARCHAR[250],
+    Url_link VARCHAR[250],
     Projeto_Id VARCHAR[10]
 );
 
