@@ -27,7 +27,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuario")
-    public List<Usuario> createProject(@RequestBody Usuario newUsuario) {
+    public List<Usuario> createUsuario(@RequestBody Usuario newUsuario) {
         Usuario.save(newUsuario);
         return Usuario.findAll();
     }
@@ -49,7 +49,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/usuario/{id}")
-    public List<Usuario> deleteProject(@PathVariable String id) {
+    public List<Usuario> deleteUsuario(@PathVariable String id) {
         Usuario.deleteById(id);
         return Usuario.findAll();
     }

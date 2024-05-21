@@ -27,13 +27,13 @@ public class LinkController {
     }
 
     @PostMapping("/link")
-    public List<Link> createProject(@RequestBody Link newLink) {
+    public List<Link> createLink(@RequestBody Link newLink) {
         Link.save(newLink);
         return Link.findAll();
     }
 
     @PutMapping("/link/{id}")
-    public List<Link> updateUsuario(@RequestBody Link updateLink, @PathVariable String id) {
+    public List<Link> updateLink(@RequestBody Link updateLink, @PathVariable String id) {
         Link.findById(id)
             .map(link -> {
                 link.setDescricao(updateLink.getDescricao());
@@ -45,7 +45,7 @@ public class LinkController {
     }
 
     @DeleteMapping("/link/{id}")
-    public List<Link> deleteProject(@PathVariable String id) {
+    public List<Link> deleteLink(@PathVariable String id) {
         Link.deleteById(id);
         return Link.findAll();
     }
