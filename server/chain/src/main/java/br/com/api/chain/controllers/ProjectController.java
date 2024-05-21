@@ -41,6 +41,7 @@ public class ProjectController {
                 project.setAdministrador(updateProject.getAdministrador());
                 project.setMembros(updateProject.getMembros());
                 project.setLinks(updateProject.getLinks());
+                return Project.save(project);
             });
 
         return Project.findAll();
