@@ -1,7 +1,5 @@
 package br.com.api.chain.entities;
 
-import java.util.LinkedList;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,6 +44,18 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public void setProjetos(Project projetos[]){
+        this.projetos = projetos;
+    }
+
+    public void setAtividades(Atividade atividades[]){
+        this.atividades = atividades;
+    }
+
+    public void setCalendario(Calendario calendario){
+        this.calendario = calendario;
+    }
+
     public String getNome(){
         return nome;
     }
@@ -58,12 +68,16 @@ public class Usuario {
         return id;
     }
 
-    public String getProjeto(String nome){
-        return null;
+    public Project[] getProjetos(){
+        return projetos;
     }
 
     public Atividade[] getAtividades(){
         return atividades;
+    }
+
+    public Calendario getCalendario(){
+        return calendario;
     }
 
     public String getSenha(){
