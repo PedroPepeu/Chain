@@ -58,8 +58,8 @@ public class Usuario {
         return id;
     }
 
-    public String getProjeto(String nome){
-        return null;
+    public Project[] getProjeto(String nome){
+        return projetos;
     }
 
     public Atividade[] getAtividades(){
