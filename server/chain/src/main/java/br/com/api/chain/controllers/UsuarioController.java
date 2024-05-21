@@ -39,6 +39,9 @@ public class UsuarioController {
                 usuario.setNome(updateUsuario.getNome());
                 usuario.setSenha(updateUsuario.getSenha());
                 usuario.setEmail(updateUsuario.getEmail());
+                usuario.setProjetos(updateUsuario.getProjetos());
+                usuario.setAtividades(updateUsuario.getAtividades());
+                usuario.setCalendario(updateUsuario.getCalendario());
                 return Usuario.save(usuario);
             });
 
