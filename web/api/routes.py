@@ -10,18 +10,7 @@ def not_found(e):
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    user = {'username': 'João'}
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='Home', user=user, posts=posts)
+    return render_template('index.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
