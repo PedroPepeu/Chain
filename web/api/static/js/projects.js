@@ -269,9 +269,5 @@ addTodoListButton.addEventListener('click',()=>{
    }
 });
 
-
-
 let todoList1 = new todoList(root);
-let todoList2 = new todoList(root);
-let todoList3 = new todoList(root);
 
