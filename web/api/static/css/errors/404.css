@@ -1,0 +1,26 @@
+/* Style the video: 100% width and height to cover the entire window */
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    margin: auto auto;
+    padding: 0;
+    color: white;
+}
+.background{
+    background-color: #f3d302;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+
+.myVideo {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
