@@ -8,6 +8,8 @@
     href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/solid.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}">
+  {% block css %}
+  {% endblock %}
   {% if title %}
   <title>{{ title }} - Profile</title>
   {% else %}
@@ -20,7 +22,10 @@
     <div class="top-wrapper">
       <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container">
-          <a class="navbar-brand" href="#">MyProfile</a>
+          <a class="navbar-brand" href="#">
+            <img src="../static/images/logo.png" alt="Bootstrap" height="2">
+          </a>      
+          <a class="navbar-brand" href="#">Chain</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -34,22 +39,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('login') }}">Login</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  Conteudo
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">PBB</a></li>
-                  <li><a class="dropdown-item" href="#">Revisão de literatura</a></li>
-                  <li><a class="dropdown-item" href="#">Aprendizagem de Máquina</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('projects') }}">Projects</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </nav>
