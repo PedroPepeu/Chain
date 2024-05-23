@@ -1,8 +1,14 @@
-function Login(){
+import LoginForm from '../component/LoginForm';
+import '../css/login.css'
+function Login() {
     return (
-        <>
-            <h1>Login teste</h1>
-        </>
+        <div className='Login'>
+                <div className='interfaceLogin'>
+                    <div className='transparenciaLogin'>
+                        <LoginForm></LoginForm>
+                    </div>
+                </div>
+        </div>
     )
 }
 
