@@ -3,33 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Login Chain</title>
-    <link rel="stylesheet" href="estilo/estilo.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,300..800;1,300..800&display=swap"rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Página Login Chain</title>
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
     <main>
         <section class="loginTela">
-            <div class="interface">
+            <div class="tela">
                 <div class="flex">
                     <h1>Realize o Login Abaixo</h1>
                     <div class="transparencia">
-                        <forms class="loginConteudo">
-                            <label for="username">Usuário</label>
-                            <input type="text" id="username" name="username" required>
-                
-                            <label for="password">Senha</label>
-                            <input type="password" id="password" name="password" required>
-                
-                            <button type="submit">Entrar</button>
-                        </forms>
+                        <form class="loginConteudo" action="/action_page.php" method="post">
+                            <div class="imgcontainer">
+                                <img src="../static/images/pepeu.jfif" alt="Pepeu nosso progamador estagiario" title="foto do estagiario Pepeu"class="avatar">
+                            </div>
+
+                            <div class="container">
+                                <label for="username"><b>Usuário</b></label>
+                                <input type="text" id="username" name="username" placeholder="Enter Username" required>
+
+                                <label for="password"><b>Senha</b></label>
+                                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                                
+                                <button type="submit">Entrar</button>
+                                <label>
+                                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                                </label>
+                            </div>
+
+                            <div class="container" style="background-color:#f1f1f1">
+                                <span class="psw">Forgot <a href="#">password?</a></span>
+                                <span class="register">Não tem uma conta? <a href="#">Cadastre-se</a></span>
+                            </div>
+                        </form>
                     </div> <!--transparencia fim-->
                 </div><!--flex-->
-            </div> <!--interface-->
-        </section><!--sobre-->
+            </div> <!--tela-->
+        </section><!--loginTela-->
+    </main>
 </body>
 </html>

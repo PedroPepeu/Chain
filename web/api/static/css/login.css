@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Platypi", serif;
+}
+
+body {
+    background-color: #bf8aff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tela {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section.loginTela {
+    padding: 45px 0;
+    position: relative;
+}
+
+.loginTela .transparencia {
+    width: 600px; /* Largura fixa em pixels */
+    height: auto; /* Altura ajustável */
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    background: rgba(243, 239, 5, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(243, 247, 2, 0.5);
+    border: 1px solid rgb(255, 230, 2);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+span.register {
+    float: left;
+    padding-top: 16px;
+}
+
+@media screen and (max-width: 300px) {
+    span.psw, span.register {
+       display: block;
+       float: none;
+    }
+}
