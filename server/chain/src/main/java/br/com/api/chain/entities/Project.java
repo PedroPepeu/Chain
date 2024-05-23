@@ -21,7 +21,7 @@ public class Project {
     private Link links[];
 
     // Constructor
-    public Project(String nome, Atividade atividades[], Usuario membros[], administrador Usuario, Link links[]) {
+    public Project(String nome, Atividade atividades[], Usuario membros[], Usuario administrador, Link links[]) {
         this.nome = nome;
         this.atividades = atividades;
         this.membros = membros;
