@@ -7,39 +7,47 @@
     <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
+    <div class="backgroundLogin">
+        <img src="../static/images/noite.jfif" alt="imagem background">
+    </div>
     <main>
         <section class="loginTela">
             <div class="tela">
                 <div class="flex">
-                    <h1>Realize o Login Abaixo</h1>
                     <div class="transparencia">
                         <form class="loginConteudo" action="/action_page.php" method="post">
                             <div class="imgcontainer">
-                                <img src="../static/images/pepeu.jfif" alt="Pepeu nosso progamador estagiario" title="foto do estagiario Pepeu"class="avatar">
+                                <img src="../static/images/pepeu.jfif" alt="Pepeu nosso programador estagiário" title="foto do estagiário Pepeu" class="avatar">
                             </div>
-
                             <div class="container">
-                                <label for="username"><b>Usuário</b></label>
-                                <input type="text" id="username" name="username" placeholder="Enter Username" required>
-
-                                <label for="password"><b>Senha</b></label>
-                                <input type="password" id="password" name="password" placeholder="Enter Password" required>
-                                
-                                <button type="submit">Entrar</button>
-                                <label>
-                                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                                </label>
+                                <ul>
+                                    <li>
+                                        <label for="username"><b>Usuário</b></label>
+                                        <input class="textinput" type="text" id="username" name="username" placeholder="Digite seu login" required>
+                                    </li>
+                                    <li>
+                                        <label for="password"><b>Senha</b></label>
+                                        <input class="textinput" type="password" id="password" name="password" placeholder="Digite sua Senha" required>
+                                    </li>
+                                    <li>
+                                        <button type="submit">Entrar</button>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                                        </label>
+                                    </li>
+                                </ul>
                             </div>
-
-                            <div class="container" style="background-color:#f1f1f1">
-                                <span class="psw">Forgot <a href="#">password?</a></span>
+                            <div class="container">
+                                <span class="psw">Esqueceu sua Senha ?<a href="#">Recupere</a></span>
                                 <span class="register">Não tem uma conta? <a href="#">Cadastre-se</a></span>
                             </div>
                         </form>
-                    </div> <!--transparencia fim-->
-                </div><!--flex-->
-            </div> <!--tela-->
-        </section><!--loginTela-->
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
