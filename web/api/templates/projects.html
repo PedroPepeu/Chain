@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/projects.css') }}"></link>
 </head>
+
+
 <body>
-    <h1>TESTETETEETE</h1>
-</body>
+
+    <div id="addTodoListDiv">
+        <input id="addTodoListInput" class="comment">
+        <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
+    </div>
+    
+    <div id="root"></div>
+
+</body>    
+
+<script src="../static/js/projects.js"></script>
+
 </html>
