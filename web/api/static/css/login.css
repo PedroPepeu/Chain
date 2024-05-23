@@ -46,9 +46,8 @@ section.loginTela {
     text-align: center;
     align-items: center;
     margin: 0 auto;
-    padding: 10px;
-    background: #623cea23;
-    border: 1px solid #623CEA;
+    background: #6b08867a;
+    border: 2px solid #623CEA;
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     border-radius: 10px;
@@ -77,11 +76,14 @@ img.avatar {
 .container span{
     color: white;
 }
-.container a{
-    color:  #bf8aff;
-    font-size: 18px;
+.container a {
+    color: #ff0000;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 900; 
     text-decoration: none;
     cursor: pointer;
+    text-shadow: 0 8px 32px #6b088c;
     transition: .2s;
 }
 .container a:hover{
@@ -101,6 +103,7 @@ img.avatar {
 }
 .container label{
     font-size: 18px;
+    font-weight: 900;
 }
 
 
@@ -125,10 +128,23 @@ button:hover{
 }
 span.psw {
     float: right;
-    padding-top: 16px;
+    padding-top: 20px;
+    font-weight: 900;
 }
 
 span.register {
     float: left;
-    padding-top: 16px;
+    padding-top: 20px;
+    font-weight: 900;
+    margin-left: 110px;
 }
+.colormude {
+    display: flex;
+    width: 100%; /* Ajuste a largura conforme necessário */
+    height: 100px; /* Ajuste a altura conforme necessário */
+    background-color: #bf8aff7a;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 10px; /* Adicione borda arredondada conforme necessário */
+}
+
