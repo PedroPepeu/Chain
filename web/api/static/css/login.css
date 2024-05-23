@@ -46,8 +46,8 @@ section.loginTela {
     text-align: center;
     align-items: center;
     margin: 0 auto;
-    background: #6b08867a;
-    border: 2px solid #623CEA;
+    background: #6b088634;
+    border: 1px solid #623CEA;
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     border-radius: 10px;
@@ -77,24 +77,23 @@ img.avatar {
     color: white;
 }
 .container a {
-    color: #ff0000;
-    font-size: 20px;
+    color: white;
+    font-size: 18px; /* Reduzindo o tamanho original do texto */
     font-style: italic;
     font-weight: 900; 
     text-decoration: none;
     cursor: pointer;
-    text-shadow: 0 8px 32px #6b088c;
     transition: .2s;
 }
-.container a:hover{
-    box-shadow: 0 8px 32px 0 #6b088c;
-    font-size: 19px;
+
+.container a:hover {
+    color: #ff0000;
 }
 .textinput{
     width: 30%;
     height: 40px;
     border-radius: 10px;
-    border: 1px solid #623CEA;
+    border: 1px solid #db32548f;
     text-align: center;
 }
 .textinput::placeholder{
@@ -142,7 +141,7 @@ span.register {
     display: flex;
     width: 100%; /* Ajuste a largura conforme necessário */
     height: 100px; /* Ajuste a altura conforme necessário */
-    background-color: #bf8aff7a;
+    background-color: #bf8aff3f;
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     border-radius: 10px; /* Adicione borda arredondada conforme necessário */
