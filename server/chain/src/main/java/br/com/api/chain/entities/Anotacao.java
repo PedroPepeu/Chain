@@ -13,20 +13,20 @@ public class Anotacao {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String idAnotacao;
 
     // MODEL Specific Properties
     private String texto;
-    private Date date;
+    private Date dataAnotacao;
     
     public Anotacao(String id, String texto, Date date) {
-        this.id = id;
+        this.idAnotacao = id;
         this.texto = texto;
-        this.date = date;
+        this.dataAnotacao = date;
     }
 
     public String getId() {
-        return id;
+        return idAnotacao;
     }
 
     public String getTexto() {
@@ -34,11 +34,11 @@ public class Anotacao {
     }
 
     public Date getDate() {
-        return date;
+        return dataAnotacao;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idAnotacao = id;
     }
 
     public void setTexto(String texto) {
@@ -46,6 +46,6 @@ public class Anotacao {
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.dataAnotacao = date;
     }
 }
