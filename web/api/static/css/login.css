@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #bf8aff;
+    background-color: #000000;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -17,6 +17,14 @@ body {
     max-width: 1280px;
     margin: 0 auto;
 }
+.backgroundLogin img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    z-index: -1;
+}
 
 .flex {
     display: flex;
@@ -25,9 +33,12 @@ body {
 }
 
 section.loginTela {
-    padding: 45px 0;
+    padding: 45px 5%;
     position: relative;
+    text-align: center;
+
 }
+
 
 .loginTela .transparencia {
     width: 600px; /* Largura fixa em pixels */
@@ -36,11 +47,10 @@ section.loginTela {
     align-items: center;
     margin: 0 auto;
     padding: 10px;
-    background: rgba(243, 239, 5, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(243, 247, 2, 0.5);
-    border: 1px solid rgb(255, 230, 2);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    background: #623cea23;
+    border: 1px solid #623CEA;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
     border-radius: 10px;
     margin-top: 20px;
 }
@@ -55,25 +65,64 @@ img.avatar {
     border-radius: 50%;
 }
 
-.container {
-    padding: 16px;
+
+.container ul{
+    display: grid;
+    list-style-type: none;
+    color: white;
+}
+.container li{
+    margin-bottom: 20px;
+}
+.container span{
+    color: white;
+}
+.container a{
+    color:  #bf8aff;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s;
+}
+.container a:hover{
+    box-shadow: 0 8px 32px 0 #6b088c;
+    font-size: 19px;
+}
+.textinput{
+    width: 30%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #623CEA;
+    text-align: center;
+}
+.textinput::placeholder{
+    color: #623CEA;
+    opacity: 0.8;
+}
+.container label{
+    font-size: 18px;
 }
 
+
+
 button {
-    background-color: #04AA6D;
+    background-color: #623CEA;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
     font-size: 16px;
+    transition: .2s;
+    border-radius: 10px;
 }
 
-button:hover {
+button:hover{
     opacity: 0.8;
+    box-shadow: 0 8px 32px 0 #6b088c;
+    transform: scale(1.09);
 }
-
 span.psw {
     float: right;
     padding-top: 16px;
@@ -82,11 +131,4 @@ span.psw {
 span.register {
     float: left;
     padding-top: 16px;
-}
-
-@media screen and (max-width: 300px) {
-    span.psw, span.register {
-       display: block;
-       float: none;
-    }
 }
