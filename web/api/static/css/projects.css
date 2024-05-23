@@ -10,7 +10,6 @@ body{
 }
 
 
-
 button{
     outline: none;
     cursor: pointer;
@@ -44,6 +43,8 @@ button{
 
     float: left;
 }
+
+.todoList 
 
 .todoList h2{
     font-size: 1em;
@@ -90,6 +91,7 @@ button{
     border-radius: 4px;
     cursor: pointer;
 }
+
 
 
 .menuContainer{
@@ -160,3 +162,24 @@ button{
     margin-top: 0.5em;
     
 }
+
+.btn-delete{
+    visibility: hidden;
+    height: max-content;
+
+    background: none;
+    border: none;
+    padding: 0.3em;
+    
+}
+
+.todoList:hover .btn-delete{
+    visibility: visible;
+}
+
+.todoList .btn-delete:hover{
+    background-color: rgb(235, 235, 235);
+    border-radius: 4px;
+    cursor: pointer;
+}
+

@@ -1,8 +1,8 @@
 let root = document.getElementById("root");
 
 
-class todoList{
-    constructor(place, title = "to-do list"){
+class todoList {
+    constructor(place, title = "to-do") {
 
         this.place = place;
         this.title = title;
@@ -11,17 +11,17 @@ class todoList{
         this.render();
     }
 
-    addToDo(){
+    addToDo() {
         let text = this.input.value;
         this.cardArray.push(new Card(text, this.div, this));
     }
 
-    render(){
+    render() {
         this.createToDoListElement();
         this.place.append(this.todoListElement);
     }
 
-    createToDoListElement(){
+    createToDoListElement() {
         //Create elements
         this.h2 = document.createElement('h2');
         this.h2.innerText = this.title;
@@ -34,16 +34,28 @@ class todoList{
         this.div = document.createElement('div');
         this.todoListElement = document.createElement('div');
 
+        // Create delete button
+        this.deleteButton = document.createElement('button');
+        this.deleteButton.innerText = 'X';
+        this.deleteButton.classList.add("btn-delete");
+        this.deleteButton.id = "delete-to-do-list-button";
+
         //Add Event listener
-        this.button.addEventListener('click', ()=>{
-            if(this.input.value != ""){
+        this.button.addEventListener('click', () => {
+            if (this.input.value != "") {
                 this.addToDo.call(this);
                 this.input.value = "";
             }
         });
 
+        // Add Event listener to the Delete button
+        this.deleteButton.addEventListener('click', () => {
+            this.todoListElement.remove();
+        });
+
         //Append elements to the to-do list element
         this.todoListElement.append(this.h2);
+        this.todoListElement.append(this.deleteButton);
         this.todoListElement.append(this.input);
         this.todoListElement.append(this.button);
         this.todoListElement.append(this.div);
@@ -51,9 +63,16 @@ class todoList{
     }
 }
 
+class Title{
+    constructor(title, deleteButton){
+        this.title;
+        this.deleteButton;
+    }
+}
 
-class Card{
-    constructor(text, place, todoList){
+
+class Card {
+    constructor(text, place, todoList) {
 
         this.place = place;
         this.todoList = todoList;
@@ -65,11 +84,11 @@ class Card{
         this.render();
     }
 
-    render(){
+    render() {
         this.card = document.createElement('div');
         this.card.classList.add("card");
-        this.card.addEventListener('click', (e)=>{
-            if(e.target != this.deleteButton){
+        this.card.addEventListener('click', (e) => {
+            if (e.target != this.deleteButton) {
                 this.showMenu.call(this);
             }
         });
@@ -79,23 +98,23 @@ class Card{
 
         this.deleteButton = document.createElement('button');
         this.deleteButton.innerText = "X";
-        this.deleteButton.addEventListener('click', ()=>{
+        this.deleteButton.addEventListener('click', () => {
             this.deleteCard.call(this);
         });
 
         this.card.append(this.p);
         this.card.append(this.deleteButton);
-        
+
         this.place.append(this.card);
     }
 
-    deleteCard(){
+    deleteCard() {
         this.card.remove();
         let i = this.todoList.cardArray.indexOf(this);
-        this.todoList.cardArray.splice(i,1);
+        this.todoList.cardArray.splice(i, 1);
     }
 
-    showMenu(){
+    showMenu() {
 
         //Create elements
         this.menu = document.createElement("div");
@@ -121,18 +140,18 @@ class Card{
         this.commentsInput.placeholder = "Write a comment...";
 
         //Event listeners
-        this.menuContainer.addEventListener('click', (e)=>{
+        this.menuContainer.addEventListener('click', (e) => {
             console.log(e.target);
-            if(e.target.classList.contains("menuContainer")){
+            if (e.target.classList.contains("menuContainer")) {
                 this.menuContainer.remove();
             }
         });
-        
-        this.commentsButton.addEventListener('click', ()=>{
-            if(this.commentsInput.value != ""){
-            this.state.comments.push(this.commentsInput.value);
-            this.renderComments();
-            this.commentsInput.value = "";
+
+        this.commentsButton.addEventListener('click', () => {
+            if (this.commentsInput.value != "") {
+                this.state.comments.push(this.commentsInput.value);
+                this.renderComments();
+                this.commentsInput.value = "";
             }
         })
 
@@ -147,26 +166,26 @@ class Card{
 
         this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
         this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
-        
+
         this.renderComments();
     }
 
-    renderComments(){
+    renderComments() {
 
         let currentCommentsDOM = Array.from(this.menuComments.childNodes);
 
-        currentCommentsDOM.forEach(commentDOM =>{
+        currentCommentsDOM.forEach(commentDOM => {
             commentDOM.remove();
         });
 
-        this.state.comments.forEach(comment =>{
+        this.state.comments.forEach(comment => {
             new Comment(comment, this.menuComments, this);
         });
     }
 }
 
-class EditableText{
-    constructor(text, place, card, property, typeOfInput){
+class EditableText {
+    constructor(text, place, card, property, typeOfInput) {
         this.text = text;
         this.place = place;
         this.card = card;
@@ -175,13 +194,13 @@ class EditableText{
         this.render();
     }
 
-    render(){
+    render() {
         this.div = document.createElement("div");
         this.p = document.createElement("p");
 
         this.p.innerText = this.text;
 
-        this.p.addEventListener('click', ()=>{
+        this.p.addEventListener('click', () => {
             this.showEditableTextArea.call(this);
         });
 
@@ -189,7 +208,7 @@ class EditableText{
         this.place.append(this.div);
     }
 
-    showEditableTextArea(){
+    showEditableTextArea() {
         let oldText = this.text;
 
         this.input = document.createElement(this.typeOfInput);
@@ -201,35 +220,35 @@ class EditableText{
         this.saveButton.className = "btn-save";
         this.input.classList.add("comment");
 
-        this.saveButton.addEventListener('click', ()=>{
+        this.saveButton.addEventListener('click', () => {
             this.text = this.input.value;
             this.card.state[this.property] = this.input.value;
-            if(this.property == "text"){
+            if (this.property == "text") {
                 this.card.p.innerText = this.input.value;
             }
             this.div.remove();
             this.render();
         });
 
-        function clickSaveButton(event, object){
+        function clickSaveButton(event, object) {
             // Number 13 is the "Enter" key on the keyboard
             if (event.keyCode === 13) {
                 // Cancel the default action, if needed
                 event.preventDefault();
                 // Trigger the button element with a click
                 object.saveButton.click();
-              }
+            }
         }
 
-        this.input.addEventListener("keyup", (e)=>{
-            if(this.typeOfInput == "input"){
+        this.input.addEventListener("keyup", (e) => {
+            if (this.typeOfInput == "input") {
                 clickSaveButton(e, this);
             }
         });
 
         this.div.append(this.input);
 
-        if(this.typeOfInput == "textarea"){
+        if (this.typeOfInput == "textarea") {
             this.div.append(this.saveButton);
         }
 
@@ -238,19 +257,19 @@ class EditableText{
 
 }
 
-class Comment{
-    constructor(text, place, card){
+class Comment {
+    constructor(text, place, card) {
         this.text = text;
         this.place = place;
         this.card = card;
         this.render();
     }
 
-    render(){
+    render() {
         this.div = document.createElement('div');
         this.div.className = "comment";
         this.div.innerText = this.text;
-        
+
         this.place.append(this.div);
     }
 }
@@ -262,11 +281,11 @@ class Comment{
 let addTodoListInput = document.getElementById("addTodoListInput");
 let addTodoListButton = document.getElementById("addTodoListButton");
 
-addTodoListButton.addEventListener('click',()=>{
-   if ( addTodoListInput.value.trim() != ""){
-    new todoList(root, addTodoListInput.value);
-    addTodoListInput.value = "";
-   }
+addTodoListButton.addEventListener('click', () => {
+    if (addTodoListInput.value.trim() != "") {
+        new todoList(root, addTodoListInput.value);
+        addTodoListInput.value = "";
+    }
 });
 
 let todoList1 = new todoList(root);
