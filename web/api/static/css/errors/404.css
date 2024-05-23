@@ -5,7 +5,7 @@ html, body{
 }
 
 h1{
-    margin: auto auto;
+    margin: 0;
     padding: 0;
     color: white;
 }
@@ -13,7 +13,6 @@ h1{
     background-color: #f3d302;
     height: 100vh;
     width: 100%;
-    z-index: -1;
 }
 
 .myVideo {
@@ -22,5 +21,4 @@ h1{
     width: 100%;
     right: 0;
     bottom: 0;
-    z-index: 0;
 }
