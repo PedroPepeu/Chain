@@ -11,7 +11,7 @@ public class Project {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String idProjeto;
 
     // MODEL Specific Properties
     private String nome;
@@ -35,7 +35,7 @@ public class Project {
     }
 
     public String getId() {
-        return id;
+        return idProjeto;
     }
 
     public Atividade[] getAtividades() {
@@ -60,7 +60,7 @@ public class Project {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idProjeto = id;
     }
 
     public void setAtividades(Atividade[] atividades) {
