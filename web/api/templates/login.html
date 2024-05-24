@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Login Chain</title>
     <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
 </head>
 <body>
-    <div class="backgroundLogin">
-        <img src="../static/images/noite.jfif" alt="imagem background">
-    </div>
+    {% include 'components/header.html' %}
+
     <main>
+        <div class="backgroundLogin">
+            <img src="../static/images/noite.jfif" alt="imagem background">
+        </div>
         <section class="loginTela">
             <div class="tela">
                 <div class="flex">
@@ -51,5 +56,6 @@
             </div>
         </section>
     </main>
+    {% include 'components/footer.html' %}
 </body>
 </html>

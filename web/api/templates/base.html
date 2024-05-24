@@ -7,6 +7,9 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/solid.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/header.css') }}">
+
   {% block css %}
   {% endblock %}
   {% if title %}
@@ -17,6 +20,7 @@
 </head>
 
 <body>
+
   <div class="main-wrapper">
     <div class="top-wrapper">
       {% include 'components/header.html' %}
@@ -52,24 +56,6 @@
           {% block content %}
           {% endblock %}
         </div>
-        <aside class="sticky">
-          <section>
-            <div class="social acw">
-              <nav>
-                <ul>
-                  <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="menu acw">
-              {% block indexes%}
-              {% endblock %}
-            </div>
-          </section>
-        </aside>
       </div>
     </div>
     <div class="bottom-wrapper">
