@@ -5,7 +5,6 @@
     --background: #bf8aff; 
     --white: #ffffff;
     --black: #000000;
-
 }
 
 .acw{
@@ -19,6 +18,14 @@
 
 .acb{
     color: black;
+}
+
+.acb a{
+    color: black;
+}
+
+.bg{
+    background-color: black;
 }
 
 

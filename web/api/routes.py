@@ -15,13 +15,16 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.html')
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    return render_template('cadastro.html')
 
 @app.route('/projects', methods=['GET', 'POST'])
 def projects():
     return render_template('projects.html')
+
+@app.route('/profile', methods=['GET'])
+def profile():
+    return render_template('profile.html')

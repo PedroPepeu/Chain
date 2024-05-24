@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/profile.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/brands.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/solid.css') }}">
+    <title>Perfil</title>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="sidebar">
+            <div class="info">
+                <img src="../static/images/logo.png" alt="Perfil">
+                <h1>Nome do sujeito</h1>
+                <h1>Email do sujeito</h1>
+            </div>
+            <div class="calendario">
+                <div class="top">
+                    <h1>Calendário</h1>
+                </div>
+                <div class="dates">
+
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="top-bar">
+                <h1>Projetos</h1>
+                <button id="addProjectButton"></button>
+            </div>
+            <div class="projects">
+
+            </div>
+            {% include 'components/footer.html' %}
+        </div>
+    </div>
+</body>
+</html>

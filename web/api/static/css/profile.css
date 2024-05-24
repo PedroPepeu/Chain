@@ -1,0 +1,113 @@
+:root{
+    --sidebar-color: #623cea;
+    --topbar-color: #db3254;
+    --white: #f3efe0;
+}
+
+html, body{
+    margin: 0;
+}
+
+.main-wrapper{
+    display: flex;
+    position: relative;
+}
+
+.sidebar{
+    position: fixed;
+    height: 100vh;
+    width: 20vw;
+    background-color: var(--sidebar-color);
+}
+
+.info{
+    border-radius: 6px;
+    margin: 5vw auto;
+    margin-bottom: 10rem;
+    height: 15vw;
+    width: 15vw;
+    display: grid;
+    align-items: center;
+}
+
+.info img{
+    margin: auto auto;
+    height: 8vw;
+}  
+
+.info h1{
+    text-align: center;
+    font-size: 24px;
+}
+
+
+.calendario{
+    border-radius: 6px;
+    margin: 5vw auto;
+    height: 15vw;
+    width: 15vw;
+}
+
+.calendario .top{
+    background-color: var(--topbar-color);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendario .dates{
+    background-color: var(--white);
+    height: 100%;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.calendario h1{
+    text-align: center;
+    font-size: 12px;
+}
+
+.main-content{
+    margin-left: 20vw;
+    height: 100vh;
+    width: 80vw;
+    background-color: var(--white);
+}
+
+.top-bar{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 5rem;
+    border-radius: 6px;
+    height: 3rem;
+    width: 80%;
+    background-color: var(--topbar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-bar h1 {
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.top-bar button {
+    background-color: var(--sidebar-color);
+    height: 10px;
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.projects{
+    height: 100vh;
+    width: 100%;
+    background-color: var(--white);
+}
