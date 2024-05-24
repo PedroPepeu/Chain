@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Login Chain</title>
     <link rel="stylesheet" href="../static/css/login.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/brands.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/header.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
 </head>
+
 <body>
     {% include 'components/header.html' %}
 
@@ -20,26 +25,30 @@
             <div class="tela">
                 <div class="flex">
                     <div class="transparencia">
-                        <form class="loginConteudo" action="/action_page.php" method="post">
+                        <form class="loginConteudo" action="{{ url_for('profile') }}">
                             <div class="imgcontainer">
-                                <img src="../static/images/pepeu.jfif" alt="Pepeu nosso programador estagiário" title="foto do estagiário Pepeu" class="avatar">
+                                <img src="../static/images/pepeu.jfif" alt="Pepeu nosso programador estagiário"
+                                    title="foto do estagiário Pepeu" class="avatar">
                             </div>
                             <div class="containerLogin">
                                 <ul>
                                     <li>
                                         <label for="username"><b>Usuário</b></label>
-                                        <input class="textinput" type="text" id="username" name="username" placeholder="Digite seu login" required>
+                                        <input class="textinput" type="text" id="username" name="username"
+                                            placeholder="Digite seu login" required>
                                     </li>
                                     <li>
                                         <label for="password"><b>Senha</b></label>
-                                        <input class="textinput" type="password" id="password" name="password" placeholder="Digite sua Senha" required>
+                                        <input class="textinput" type="password" id="password" name="password"
+                                            placeholder="Digite sua Senha" required>
                                     </li>
                                     <li>
                                         <button type="submit">Entrar</button>
                                     </li>
                                     <li>
                                         <label>
-                                            <input type="checkbox" checked="checked" name="remember"> me lembrar da senha
+                                            <input type="checkbox" checked="checked" name="remember"> me lembrar da
+                                            senha
                                         </label>
                                     </li>
                                 </ul>
@@ -58,4 +67,5 @@
     </main>
     {% include 'components/footer.html' %}
 </body>
+
 </html>

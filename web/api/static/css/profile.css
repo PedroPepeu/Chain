@@ -1,0 +1,67 @@
+html, body{
+    margin: 0;
+}
+
+.main-wrapper{
+    display: flex;
+    position: relative;
+}
+
+.sidebar{
+    position: fixed;
+    height: 100vh;
+    width: 20vw;
+    background-color: gold;
+}
+
+.info{
+    background-color: black;
+    border-radius: 6px;
+    margin: 5vw auto;
+    margin-bottom: 10rem;
+    height: 15vw;
+    width: 15vw;
+}
+
+.calendario{
+    background-color: black;
+    border-radius: 6px;
+    margin: 5vw auto;
+    height: 15vw;
+    width: 15vw;
+}
+
+.main-content{
+    margin-left: 20vw;
+    height: 100vh;
+    width: 80vw;
+    background-color: pink;
+}
+
+.top-bar{
+    position: relative;
+    margin-top: 5rem;
+    height: 3rem;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-bar h1 {
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.top-bar button {
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.projects{
+    height: 100vh;
+    width: 100%;
+    background-color: bisque;
+}
