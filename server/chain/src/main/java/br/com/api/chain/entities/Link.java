@@ -9,38 +9,30 @@ import jakarta.persistence.Id;
 public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String idLink;
     
     private String descricao;
-    private String url;
+    private String urlLink;
 
     public Link(String id, String descricao, String url){
-        this.id = id;
+        this.idLink = id;
         this.descricao = descricao;
-        this.url = url;
-    }
-
-    public void setId(String id){
-        this.id = id;
+        this.urlLink = url;
     }
 
     public void setDescricao(String descricao){
         this.descricao = descricao;
     }
 
-    public void setUrl(String url){
-        this.url = url;
-    }
-
-    public String getId(){
-        return id;
+    public void setUrlLink(String url){
+        this.urlLink = url;
     }
 
     public String getDescricao(){
         return descricao;
     }
 
-    public String getUrl(){
-        return url;
+    public String getUrlLink(){
+        return urlLink;
     }
 }

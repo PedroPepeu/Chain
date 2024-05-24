@@ -37,7 +37,7 @@ public class LinkController {
         Link.findById(id)
             .map(link -> {
                 link.setDescricao(updateLink.getDescricao());
-                link.setUrl(updateLink.getUrl());
+                link.setUrlLink(updateLink.getUrlLink());
                 return Link.save(link);
             });
 
