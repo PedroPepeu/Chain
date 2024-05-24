@@ -12,12 +12,12 @@ main{
     max-width: 1280px;
     margin: 0 auto;
 }
-.backgroundLogin img{
+.backgroundCadastro img{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 120%;
+    height: 130%;
     z-index: -1;
 }
 
@@ -26,7 +26,7 @@ main{
     flex-direction: column;
 }
 
-section.loginTela {
+section.cadastroTela {
     padding: 45px 5%;
     position: relative;
     text-align: center;
@@ -34,7 +34,7 @@ section.loginTela {
 }
 
 
-.loginTela .transparencia {
+.cadastroTela .transparencia {
     width: 600px;
     height: auto;
     margin: 0 auto;
@@ -47,7 +47,7 @@ section.loginTela {
 
 }
 
-.imgcontainerLogin {
+.imgcontainerCadastro {
     margin: 24px 0 12px 0;
 }
 
@@ -57,12 +57,12 @@ img.avatar {
 }
 
 
-.containerLogin ul {
+.containerCadastro ul {
     display: grid;
     list-style-type: none;
     color: white;
 }
-.containerLogin li {
+.containerCadastro li {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,14 +80,14 @@ img.avatar {
     color: #623CEA;
     opacity: 0.8;
 }
-.containerLogin label{
+.containerCadastro label{
     font-size: 18px;
     font-weight: 900;
 }
 
 
 
-.containerLogin button {
+.containerCadastro button {
     background-color: #623CEA;
     color: white;
     padding: 14px 20px;
@@ -100,7 +100,7 @@ img.avatar {
     border-radius: 10px;
 }
 
-.containerLogin button:hover{
+.containerCadastro button:hover{
     opacity: 0.8;
     box-shadow: 0 8px 32px 0 #6b088c;
     transform: scale(1.09);
