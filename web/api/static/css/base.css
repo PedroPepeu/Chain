@@ -9,9 +9,9 @@ html, body{
 /* STRUCTURE */
 
 :root{
-    --header-color: #623cea;
+    --header-color: #6b088c; /* #623cea */
     --footer-color: #fff; /* #6b088c */
-    --background: #bf8aff;
+    --background: #bf8aff; 
     --white: #ffffff;
     --black: #000000;
 
@@ -90,24 +90,6 @@ aside{
     margin: 0 auto;
 }
 
-/* FOOTER */
-
-footer {
-    background-color: var(--footer-color);
-    padding-bottom: 30px;
-    padding-top: 15px;
-    color: var(--black);
-    font-size: 14px;
-    text-align: center;
-    clear: both;
-}
-
-.container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
 .acw{
     color: #f3efe0;
 }
@@ -119,61 +101,6 @@ footer {
 
 .acb{
     color: black;
-}
-
-.container>div {
-    flex: 1;
-    margin: 0 0px;
-}
-
-.links ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.links ul li {
-    margin-bottom: 10px;
-}
-
-.links a {
-    text-decoration: none;
-}
-
-.contato p {
-    margin: 5px 0;
-    text-align: center;
-}
-
-
-.social ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.social ul li {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.social a {
-    text-decoration: none;
-}
-
-.social i {
-    text-align: center;
-    font-size: 24px;
-}
-
-.legal {
-    margin-top: 20px;
-}
-
-.legal p {
-    text-align: center;
-}
-
-.legal a {
-    text-decoration: none;
 }
 
 /* WAVE (MAYBE WE WILL USE IT IN THE FUTURE) */

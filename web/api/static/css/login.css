@@ -1,16 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Platypi", serif;
-}
+
 
 body {
     background-color: #000000;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
 }
 
 .tela {
@@ -107,7 +100,7 @@ img.avatar {
 
 
 
-button {
+.container button {
     background-color: #623CEA;
     color: white;
     padding: 14px 20px;
@@ -120,18 +113,18 @@ button {
     border-radius: 10px;
 }
 
-button:hover{
+.container button:hover{
     opacity: 0.8;
     box-shadow: 0 8px 32px 0 #6b088c;
     transform: scale(1.09);
 }
-span.psw {
+.container span.psw {
     float: right;
     padding-top: 20px;
     font-weight: 900;
 }
 
-span.register {
+.container span.register {
     float: left;
     padding-top: 20px;
     font-weight: 900;
@@ -146,4 +139,3 @@ span.register {
     -webkit-backdrop-filter: blur(1px);
     border-radius: 10px; /* Adicione borda arredondada conforme necessário */
 }
-
