@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Login Chain</title>
     <link rel="stylesheet" href="../static/css/login.css">
-
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/brands.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/header.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
+    <script src="../static/js/login.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
             <div class="tela">
                 <div class="flex">
                     <div class="transparencia">
-                        <form class="loginConteudo" action="{{ url_for('profile') }}">
+                        <form class="loginConteudo" id ="loginConteudo">
                             <div class="imgcontainer">
                                 <img src="../static/images/pepeu.jfif" alt="Pepeu nosso programador estagiário"
                                     title="foto do estagiário Pepeu" class="avatar">
@@ -56,8 +58,8 @@
                             </div>
                             <div class="containerLogin">
                                 <div class="colormude">
-                                    <span class="psw">Esqueceu sua Senha ? <a href="#">Recuperar</a></span>
-                                    <span class="register">Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></span>
+                                    <span class="psw">Esqueceu sua Senha ? <a id="RecuperarConta">Recuperar</a></span>
+                                    <span class="cadastrar">Não tem uma conta? <a  id="cadastrarConta" >Cadastre-se</a></span>
                                 </div>
                             </div>
                         </form>
