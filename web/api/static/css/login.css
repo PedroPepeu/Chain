@@ -1,16 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Platypi", serif;
-}
 
 body {
     background-color: #000000;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+
 }
 
 .tela {
@@ -54,7 +47,7 @@ section.loginTela {
     margin-top: 20px;
 }
 
-.imgcontainer {
+.imgcontainerLogin {
     text-align: center;
     margin: 24px 0 12px 0;
 }
@@ -65,18 +58,18 @@ img.avatar {
 }
 
 
-.container ul{
+.containerLogin ul{
     display: grid;
     list-style-type: none;
     color: white;
 }
-.container li{
+.containerLogin li{
     margin-bottom: 20px;
 }
-.container span{
+.containerLogin span{
     color: white;
 }
-.container a {
+.containerLogin a {
     color: white;
     font-size: 18px; /* Reduzindo o tamanho original do texto */
     font-style: italic;
@@ -86,7 +79,7 @@ img.avatar {
     transition: .2s;
 }
 
-.container a:hover {
+.containerLogin a:hover {
     color: #ff0000;
 }
 .textinput{
@@ -100,14 +93,14 @@ img.avatar {
     color: #623CEA;
     opacity: 0.8;
 }
-.container label{
+.containerLogin label{
     font-size: 18px;
     font-weight: 900;
 }
 
 
 
-button {
+.containerLogin button {
     background-color: #623CEA;
     color: white;
     padding: 14px 20px;
@@ -120,18 +113,18 @@ button {
     border-radius: 10px;
 }
 
-button:hover{
+.containerLogin button:hover{
     opacity: 0.8;
     box-shadow: 0 8px 32px 0 #6b088c;
     transform: scale(1.09);
 }
-span.psw {
+.containerLogin span.psw {
     float: right;
     padding-top: 20px;
     font-weight: 900;
 }
 
-span.register {
+.containerLogin span.register {
     float: left;
     padding-top: 20px;
     font-weight: 900;
