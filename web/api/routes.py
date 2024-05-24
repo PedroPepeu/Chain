@@ -17,6 +17,10 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    return render_template('cadastro.html')
+
 @app.route('/projects', methods=['GET', 'POST'])
 def projects():
     return render_template('projects.html')
