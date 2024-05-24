@@ -5,15 +5,14 @@ services:
   db:
     container_name: chain-db
     image: mariadb
-    restart: always
+    hostname: localhost
     environment:
-      MARIADB_USER: admin
-      MARIADB_ROOT_PASSWORD: foo
-    volumes:
-      - data:/var/lib/mysql
-
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
+      # MARIADB_USER: admin
+      # MARIADB_PASSWORD: foo
+    
   adminer:
     image: adminer
     restart: always
     ports:
-      - "8080:8080"
+    - 8080:8080
