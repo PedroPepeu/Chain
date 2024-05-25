@@ -1,53 +1,53 @@
 /* Lógico_1: */
 
 CREATE TABLE Administrador (
-    engenheiroDeSoftwareId VARCHAR[10] PRIMARY KEY
+    engenheiroDeSoftwareId VARCHAR(10) PRIMARY KEY
 );
 
 CREATE TABLE Projeto (
-    nome VARCHAR[50],
-    idProjeto VARCHAR[10] PRIMARY KEY,
-    administradorId VARCHAR[10]
+    nome VARCHAR(50),
+    idProjeto VARCHAR(10) PRIMARY KEY,
+    administradorId VARCHAR(10)
 );
 
 CREATE TABLE Atividade (
-    idAtividade VARCHAR[10] PRIMARY KEY,
-    nome VARCHAR[50],
+    idAtividade VARCHAR(10) PRIMARY KEY,
+    nome VARCHAR(50),
     dataInicio DATE,
     dataEntrega DATE,
     concluida BOOLEAN,
-    projetoId VARCHAR[10]
+    projetoId VARCHAR(10)
 );
 
 CREATE TABLE Anotacao (
-    idAnotacao VARCHAR[10] PRIMARY KEY,
-    texto VARCHAR[250],
+    idAnotacao VARCHAR(10) PRIMARY KEY,
+    texto VARCHAR(250),
     dataAnotacao DATE,
-    engenheiroDeSoftwareId VARCHAR[10]
+    engenheiroDeSoftwareId VARCHAR(10)
 );
 
 CREATE TABLE EngenheiroDeSoftware (
-    email VARCHAR[50],
-    nome VARCHAR[50],
-    idEngenheiro VARCHAR[10] PRIMARY KEY,
-    senha VARCHAR[50]
+    email VARCHAR(50),
+    nome VARCHAR(50),
+    idEngenheiro VARCHAR(10) PRIMARY KEY,
+    senha VARCHAR(50)
 );
 
 CREATE TABLE MembroParticipa (
-    cargo VARCHAR[50],
-    engenheiroDeSoftwareId VARCHAR[10],
-    projetoId VARCHAR[10]
+    cargo VARCHAR(50),
+    engenheiroDeSoftwareId VARCHAR(10),
+    projetoId VARCHAR(10)
 );
 
 CREATE TABLE Link (
-    descricao VARCHAR[250],
-    idLink VARCHAR[10] PRIMARY KEY,
-    urlLink VARCHAR[250],
-    projetoId VARCHAR[10]
+    descricao VARCHAR(250),
+    idLink VARCHAR(10) PRIMARY KEY,
+    urlLink VARCHAR(250),
+    projetoId VARCHAR(10)
 );
 
 CREATE TABLE Realizada (
-    atividadeId VARCHAR[10]
+    atividadeId VARCHAR(10)
 );
  
 ALTER TABLE Administrador ADD CONSTRAINT FK_Administrador_2
