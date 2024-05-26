@@ -1,53 +1,53 @@
 /* Lógico_1: */
 
-CREATE TABLE Administrador (
-    engenheiroDeSoftwareId VARCHAR(10) PRIMARY KEY
+CREATE TABLE administrador (
+    engenheiroDeSoftwareId Integer PRIMARY KEY
 );
 
-CREATE TABLE Projeto (
+CREATE TABLE projeto (
     nome VARCHAR(50),
-    idProjeto VARCHAR(10) PRIMARY KEY,
-    administradorId VARCHAR(10)
+    id Integer PRIMARY KEY,
+    administradorId Integer
 );
 
-CREATE TABLE Atividade (
-    idAtividade VARCHAR(10) PRIMARY KEY,
+CREATE TABLE atividade (
+    id Integer PRIMARY KEY,
     nome VARCHAR(50),
     dataInicio DATE,
     dataEntrega DATE,
     concluida BOOLEAN,
-    projetoId VARCHAR(10)
+    projetoId Integer
 );
 
-CREATE TABLE Anotacao (
-    idAnotacao VARCHAR(10) PRIMARY KEY,
+CREATE TABLE anotacao (
+    id Integer PRIMARY KEY,
     texto VARCHAR(250),
     dataAnotacao DATE,
-    engenheiroDeSoftwareId VARCHAR(10)
+    engenheiroDeSoftwareId Integer
 );
 
-CREATE TABLE EngenheiroDeSoftware (
+CREATE TABLE engenheiro_de_software (
     email VARCHAR(50),
     nome VARCHAR(50),
-    idEngenheiro VARCHAR(10) PRIMARY KEY,
+    id Integer auto_increment PRIMARY KEY,
     senha VARCHAR(50)
 );
 
-CREATE TABLE MembroParticipa (
+CREATE TABLE membro_participa (
     cargo VARCHAR(50),
-    engenheiroDeSoftwareId VARCHAR(10),
-    projetoId VARCHAR(10)
+    engenheiroDeSoftwareId Integer,
+    id Integer
 );
 
-CREATE TABLE Link (
+CREATE TABLE link (
     descricao VARCHAR(250),
-    idLink VARCHAR(10) PRIMARY KEY,
+    id Integer PRIMARY KEY,
     urlLink VARCHAR(250),
-    projetoId VARCHAR(10)
+    projetoId Integer
 );
 
-CREATE TABLE Realizada (
-    atividadeId VARCHAR(10)
+CREATE TABLE realizada (
+    id Integer
 );
  
 ALTER TABLE Administrador ADD CONSTRAINT FK_Administrador_2
