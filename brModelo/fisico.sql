@@ -36,6 +36,7 @@ CREATE TABLE engenheiro_de_software (
 CREATE TABLE membro_participa (
     cargo VARCHAR(50),
     engenheiroDeSoftwareId Integer,
+    projetoId INTEGER,
     id Integer
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE link (
 );
 
 CREATE TABLE realizada (
-    id Integer
+    atividadeId Integer
 );
  
 ALTER TABLE administrador ADD CONSTRAINT FK_Administrador_2

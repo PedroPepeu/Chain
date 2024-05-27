@@ -33,12 +33,11 @@ public class AtividadeController {
         return Atividade.findAll();
     }
 
-    @PutMapping("/atividade/{id}")
+    @PutMapping("/atividade/{id}") // Vou deixar assim por enquanto
     public List<Atividade> updateAtividade(@RequestBody Atividade updateAtividade, @PathVariable String id){
         Atividade.findById(id)
             .map(atividade -> {
                 atividade.setNome(updateAtividade.getNome());
-                atividade.setMembrosAssociados(updateAtividade.getMembrosAssociados());
                 return Atividade.save(atividade);
             });
 

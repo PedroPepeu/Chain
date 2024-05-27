@@ -37,7 +37,7 @@ public class AnotacaoController {
     public List<Anotacao> updateAnotacao(@RequestBody Anotacao updateAnotacao, @PathVariable String id){
         Anotacao.findById(id)
             .map(anotacao -> {
-                anotacao.setDate(updateAnotacao.getDate());
+                anotacao.setDataAnotacao(updateAnotacao.getDataAnotacao());
                 anotacao.setTexto(updateAnotacao.getTexto());
                 return Anotacao.save(anotacao);
             });

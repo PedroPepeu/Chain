@@ -37,10 +37,6 @@ public class ProjectController {
         Project.findById(id)
             .map(project -> {
                 project.setNome(updateProject.getNome());
-                project.setAtividades(updateProject.getAtividades());
-                project.setAdministrador(updateProject.getAdministrador());
-                project.setMembros(updateProject.getMembros());
-                project.setLinks(updateProject.getLinks());
                 return Project.save(project);
             });
 
