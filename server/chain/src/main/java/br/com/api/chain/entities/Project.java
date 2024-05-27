@@ -24,18 +24,18 @@ public class Project {
     private Usuario administrador;
     private Link links[];*/
     @Column (name = "administrador_id")
-    private Integer administradorId;
+    private Usuario administrador;
 
     public Project(){}
 
     // Constructor
-    public Project(String nome, Integer administradorId) {
+    public Project(String nome, Usuario administrador) {
         this.nome = nome;
         /*this.atividades = atividades;
         this.membros = membros;
         this.administrador = administrador;
         this.links = links;*/
-        this.administradorId = administradorId;
+        this.administrador = administrador;
     }
 
     // Getters
@@ -63,6 +63,10 @@ public class Project {
         return links;
     }*/
 
+    public Usuario getAdministrador() {
+        return administrador;
+    }
+
     // Setters
     public void setNome(String nome) {
         this.nome = nome;
@@ -70,6 +74,10 @@ public class Project {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setAdministrador(Usuario administrador) {
+        this.administrador = administrador;
     }
 
     /*public void setAtividades(Atividade[] atividades) {

@@ -1,12 +1,15 @@
 package br.com.api.chain.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,18 +30,20 @@ public class Atividade {
     private Date dataEntrega;
     @Column
     private boolean concluida;
-    @Column (name = "projeto_id")
-    private Integer projetoId;
+
+    @JoinColumn(name = "projeto_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Project projeto;
     //private Usuario membrosAssociados[];
 
     public Atividade(){}
 
-    public Atividade(Integer id, String nome, Date dataInicio, Date dataEntrega, boolean concluida, Integer projetoId){
+    public Atividade(Integer id, String nome, Date dataInicio, Date dataEntrega, boolean concluida, Project projeto){
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataEntrega = dataEntrega;
         this.concluida = concluida;
-        this.projetoId = projetoId;
+        this.projeto = projeto;
         //this.membrosAssociados = membrosAssociados;
     }
 
@@ -70,12 +75,12 @@ public class Atividade {
         this.id = id;
     }
 
-    public void setProjetoId(Integer projetoId) {
-        this.projetoId = projetoId;
+    public void setProjeto(Project projeto) {
+        this.projeto = projeto;
     }
 
-    public Integer getProjetoId() {
-        return projetoId;
+    public Project getProjeto() {
+        return projeto;
     }
 
     public void setNome(String nome){

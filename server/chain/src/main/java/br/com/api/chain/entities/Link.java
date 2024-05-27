@@ -1,10 +1,13 @@
 package br.com.api.chain.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,16 +21,18 @@ public class Link {
     private String descricao;
     @Column (name = "url_link")
     private String urlLink;
-    @Column (name = "projeto_id")
-    private Integer projetoId;
+
+    @JoinColumn(name = "projeto_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Project projeto;
 
     public Link(){}
 
-    public Link(Integer id, String descricao, String url, Integer projetoId){
+    public Link(Integer id, String descricao, String url, Project projeto){
         this.id = id;
         this.descricao = descricao;
         this.urlLink = url;
-        this.projetoId = projetoId;
+        this.projeto = projeto;
     }
 
     public void setDescricao(String descricao){
@@ -46,12 +51,12 @@ public class Link {
         this.id = id;
     }
 
-    public void setProjetoId(Integer projetoId) {
-        this.projetoId = projetoId;
+    public void setProjeto(Project projeto) {
+        this.projeto = projeto;
     }
 
-    public Integer getProjetoId() {
-        return projetoId;
+    public Project getProjeto() {
+        return projeto;
     }
 
     public String getDescricao(){

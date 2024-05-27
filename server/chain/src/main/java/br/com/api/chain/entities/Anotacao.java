@@ -4,11 +4,14 @@ package br.com.api.chain.entities;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,16 +28,18 @@ public class Anotacao {
     private String texto;
     @Column(name = "data_anotacao")
     private Date dataAnotacao;
-    @Column (name = "engenheiro_de_software_id")
-    private Integer engenheiroDeSoftwareId; 
+
+    @JoinColumn(name = "engenheiro_de_software_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Usuario engenheiro;
     
     public Anotacao(){}
 
-    public Anotacao(Integer id, String texto, Date date, Integer engenheiroDeSoftwareId) {
+    public Anotacao(Integer id, String texto, Date date, Usuario engenheiro) {
         this.id = id;
         this.texto = texto;
         this.dataAnotacao = date;
-        this.engenheiroDeSoftwareId = engenheiroDeSoftwareId;
+        this.engenheiro = engenheiro;
     }
 
     public Integer getId() {
@@ -45,8 +50,8 @@ public class Anotacao {
         return dataAnotacao;
     }
 
-    public Integer getEngenheiroDeSoftwareId() {
-        return engenheiroDeSoftwareId;
+    public Usuario getEngenheiro() {
+        return engenheiro;
     }
 
     public String getTexto() {
@@ -61,8 +66,8 @@ public class Anotacao {
         this.dataAnotacao = dataAnotacao;
     }
 
-    public void setEngenheiroDeSoftwareId(Integer engenheiroDeSoftwareId) {
-        this.engenheiroDeSoftwareId = engenheiroDeSoftwareId;
+    public void setEngenheiro(Usuario engenheiro) {
+        this.engenheiro = engenheiro;
     }
 
     public void setTexto(String texto) {
