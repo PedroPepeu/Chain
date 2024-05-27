@@ -16,9 +16,9 @@ public class Link {
     
     @Column
     private String descricao;
-    @Column
+    @Column (name = "url_link")
     private String urlLink;
-    @Column
+    @Column (name = "projeto_id")
     private Integer projetoId;
 
     public Link(){}

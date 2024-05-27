@@ -23,7 +23,7 @@ public class Project {
     private Usuario membros[];
     private Usuario administrador;
     private Link links[];*/
-    @Column
+    @Column (name = "administrador_id")
     private Integer administradorId;
 
     public Project(){}

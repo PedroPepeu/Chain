@@ -21,13 +21,13 @@ public class Atividade {
      // MODEL Specific Properties
     @Column
     private String nome;
-    @Column
+    @Column (name = "data_inicio")
     private Date dataInicio;
-    @Column
+    @Column (name = "data_entrega")
     private Date dataEntrega;
     @Column
     private boolean concluida;
-    @Column
+    @Column (name = "projeto_id")
     private Integer projetoId;
     //private Usuario membrosAssociados[];
 

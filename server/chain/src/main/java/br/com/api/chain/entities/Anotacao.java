@@ -23,9 +23,9 @@ public class Anotacao {
     // MODEL Specific Properties
     @Column
     private String texto;
-    @Column
+    @Column(name = "data_anotacao")
     private Date dataAnotacao;
-    @Column
+    @Column (name = "engenheiro_de_software_id")
     private Integer engenheiroDeSoftwareId; 
     
     public Anotacao(){}
