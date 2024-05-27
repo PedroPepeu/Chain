@@ -50,40 +50,40 @@ CREATE TABLE realizada (
     id Integer
 );
  
-ALTER TABLE Administrador ADD CONSTRAINT FK_Administrador_2
+ALTER TABLE administrador ADD CONSTRAINT FK_Administrador_2
     FOREIGN KEY (engenheiroDeSoftwareId)
-    REFERENCES EngenheiroDeSoftware (idEngenheiro)
+    REFERENCES engenheiro_de_software (id)
     ON DELETE CASCADE;
  
-ALTER TABLE Projeto ADD CONSTRAINT FK_Projeto_2
+ALTER TABLE projeto ADD CONSTRAINT FK_Projeto_2
     FOREIGN KEY (administradorId)
-    REFERENCES Administrador (engenheiroDeSoftwareId)
+    REFERENCES administrador (engenheiroDeSoftwareId)
     ON DELETE CASCADE;
  
-ALTER TABLE Atividade ADD CONSTRAINT FK_Atividade_2
+ALTER TABLE atividade ADD CONSTRAINT FK_Atividade_2
     FOREIGN KEY (projetoId)
-    REFERENCES Projeto (idProjeto)
+    REFERENCES projeto (id)
     ON DELETE CASCADE;
  
-ALTER TABLE Anotacao ADD CONSTRAINT FK_Anotacao_2
+ALTER TABLE anotacao ADD CONSTRAINT FK_Anotacao_2
     FOREIGN KEY (engenheiroDeSoftwareId)
-    REFERENCES EngenheiroDeSoftware (idEngenheiro)
+    REFERENCES engenheiro_de_software (id)
     ON DELETE CASCADE;
  
-ALTER TABLE MembroParticipa ADD CONSTRAINT FK_Membro_Participa_1
+ALTER TABLE membro_participa ADD CONSTRAINT FK_Membro_Participa_1
     FOREIGN KEY (engenheiroDeSoftwareId)
-    REFERENCES EngenheiroDeSoftware (idEngenheiro);
+    REFERENCES engenheiro_de_software (id);
  
-ALTER TABLE MembroParticipa ADD CONSTRAINT FK_Membro_Participa_2
+ALTER TABLE membro_participa ADD CONSTRAINT FK_Membro_Participa_2
     FOREIGN KEY (projetoId)
-    REFERENCES Projeto (idProjeto);
+    REFERENCES projeto (id);
  
-ALTER TABLE Link ADD CONSTRAINT FK_Link_2
+ALTER TABLE link ADD CONSTRAINT FK_Link_2
     FOREIGN KEY (projetoId)
-    REFERENCES Projeto (idProjeto)
+    REFERENCES projeto (id)
     ON DELETE CASCADE;
  
-ALTER TABLE Realizada ADD CONSTRAINT FK_Realizada_1
+ALTER TABLE realizada ADD CONSTRAINT FK_Realizada_1
     FOREIGN KEY (atividadeId)
-    REFERENCES Atividade (idAtividade)
+    REFERENCES atividade (id)
     ON DELETE SET NULL;

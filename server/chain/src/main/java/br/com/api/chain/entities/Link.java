@@ -1,23 +1,33 @@
 package br.com.api.chain.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="link")
 public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String idLink;
+    private Integer id;
     
+    @Column
     private String descricao;
+    @Column
     private String urlLink;
+    @Column
+    private Integer projetoId;
 
-    public Link(String id, String descricao, String url){
-        this.idLink = id;
+    public Link(){}
+
+    public Link(Integer id, String descricao, String url, Integer projetoId){
+        this.id = id;
         this.descricao = descricao;
         this.urlLink = url;
+        this.projetoId = projetoId;
     }
 
     public void setDescricao(String descricao){
@@ -26,6 +36,22 @@ public class Link {
 
     public void setUrlLink(String url){
         this.urlLink = url;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setProjetoId(Integer projetoId) {
+        this.projetoId = projetoId;
+    }
+
+    public Integer getProjetoId() {
+        return projetoId;
     }
 
     public String getDescricao(){

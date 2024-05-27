@@ -2,29 +2,44 @@ package br.com.api.chain.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="atividade")
 public class Atividade {
 
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String idAtividade;
+    private Integer id;
 
      // MODEL Specific Properties
+    @Column
     private String nome;
+    @Column
     private Date dataInicio;
+    @Column
     private Date dataEntrega;
+    @Column
     private boolean concluida;
-    private Usuario membrosAssociados[];
+    @Column
+    private Integer projetoId;
+    //private Usuario membrosAssociados[];
 
-    public Atividade(String nome, Usuario membrosAssociados[]){
+    public Atividade(){}
+
+    public Atividade(Integer id, String nome, Date dataInicio, Date dataEntrega, boolean concluida, Integer projetoId){
         this.nome = nome;
-        this.membrosAssociados = membrosAssociados;
+        this.dataInicio = dataInicio;
+        this.dataEntrega = dataEntrega;
+        this.concluida = concluida;
+        this.projetoId = projetoId;
+        //this.membrosAssociados = membrosAssociados;
     }
 
     public Date getDataInicio() {
@@ -43,17 +58,33 @@ public class Atividade {
         return this.nome;
     }
 
-    public Usuario[] getMembrosAssociados(){
+    /*public Usuario[] getMembrosAssociados(){
         return this.getMembrosAssociados();
+    }*/
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setProjetoId(Integer projetoId) {
+        this.projetoId = projetoId;
+    }
+
+    public Integer getProjetoId() {
+        return projetoId;
     }
 
     public void setNome(String nome){
         this.nome = nome;
     }
 
-    public void setMembrosAssociados(Usuario membrosAssociados[]){
+    /*public void setMembrosAssociados(Usuario membrosAssociados[]){
         this.membrosAssociados = membrosAssociados;
-    }
+    }*/
 
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;

@@ -1,32 +1,41 @@
 package br.com.api.chain.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="projeto")
 public class Project {
     
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String idProjeto;
+    private Integer id;
 
     // MODEL Specific Properties
+    @Column
     private String nome;
-    private Atividade atividades[];
+    /*private Atividade atividades[];
     private Usuario membros[];
     private Usuario administrador;
-    private Link links[];
+    private Link links[];*/
+    @Column
+    private Integer administradorId;
+
+    public Project(){}
 
     // Constructor
-    public Project(String nome, Atividade atividades[], Usuario membros[], Usuario administrador, Link links[]) {
+    public Project(String nome, Integer administradorId) {
         this.nome = nome;
-        this.atividades = atividades;
+        /*this.atividades = atividades;
         this.membros = membros;
         this.administrador = administrador;
-        this.links = links;
+        this.links = links;*/
+        this.administradorId = administradorId;
     }
 
     // Getters
@@ -34,11 +43,11 @@ public class Project {
         return nome;
     }
 
-    public String getId() {
-        return idProjeto;
+    public Integer getId() {
+        return id;
     }
 
-    public Atividade[] getAtividades() {
+    /*public Atividade[] getAtividades() {
         return atividades;
     }
 
@@ -52,18 +61,18 @@ public class Project {
 
     public Link[] getLinks() {
         return links;
-    }
+    }*/
 
     // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setId(String id) {
-        this.idProjeto = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setAtividades(Atividade[] atividades) {
+    /*public void setAtividades(Atividade[] atividades) {
         this.atividades = atividades;
     }
 
@@ -77,6 +86,6 @@ public class Project {
 
     public void setLinks(Link[] links) {
         this.links = links;
-    }
+    }*/
 
 }
