@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     
     @Column
     private String descricao;
@@ -28,8 +28,7 @@ public class Link {
 
     public Link(){}
 
-    public Link(Integer id, String descricao, String url, Project projeto){
-        this.id = id;
+    public Link(String descricao, String url, Project projeto){
         this.descricao = descricao;
         this.urlLink = url;
         this.projeto = projeto;
@@ -43,11 +42,11 @@ public class Link {
         this.urlLink = url;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

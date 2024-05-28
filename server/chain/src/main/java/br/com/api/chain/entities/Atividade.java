@@ -1,6 +1,7 @@
 package br.com.api.chain.entities;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -19,7 +21,7 @@ public class Atividade {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
      // MODEL Specific Properties
     @Column
@@ -34,17 +36,19 @@ public class Atividade {
     @JoinColumn(name = "projeto_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private Project projeto;
-    //private Usuario membrosAssociados[];
+
+    @ManyToMany(mappedBy = "atividades")
+    private List<Usuario> membrosAssociados;
 
     public Atividade(){}
 
-    public Atividade(Integer id, String nome, Date dataInicio, Date dataEntrega, boolean concluida, Project projeto){
+    public Atividade(String nome, Date dataInicio, Date dataEntrega, boolean concluida, Project projeto, List<Usuario> membrosAssociados){
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataEntrega = dataEntrega;
         this.concluida = concluida;
         this.projeto = projeto;
-        //this.membrosAssociados = membrosAssociados;
+        this.membrosAssociados = membrosAssociados;
     }
 
     public Date getDataInicio() {
@@ -63,15 +67,11 @@ public class Atividade {
         return this.nome;
     }
 
-    /*public Usuario[] getMembrosAssociados(){
-        return this.getMembrosAssociados();
-    }*/
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,13 +83,13 @@ public class Atividade {
         return projeto;
     }
 
+    public List<Usuario> getMembrosAssociados() {
+        return membrosAssociados;
+    }
+
     public void setNome(String nome){
         this.nome = nome;
     }
-
-    /*public void setMembrosAssociados(Usuario membrosAssociados[]){
-        this.membrosAssociados = membrosAssociados;
-    }*/
 
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
@@ -101,5 +101,9 @@ public class Atividade {
 
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
+    }
+
+    public void setMembrosAssociados(List<Usuario> membrosAssociados) {
+        this.membrosAssociados = membrosAssociados;
     }
 }

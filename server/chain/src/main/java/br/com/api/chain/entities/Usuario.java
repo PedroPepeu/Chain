@@ -1,10 +1,16 @@
 package br.com.api.chain.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,7 +18,7 @@ import jakarta.persistence.Table;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column
     private String nome;
@@ -21,21 +27,28 @@ public class Usuario {
     @Column
     private String email;
 
-    //@OneToMany ver mais informações sobre
-    //private Anotacao anotacoes;
+    @ManyToMany
+        @JoinTable(
+            name = "realiza",
+            joinColumns = @JoinColumn(name = "engenheiro_de_software_id"),
+            inverseJoinColumns = @JoinColumn(name = "atividade_id")
+        )
+    private List<Atividade> atividades;
 
-    /*private Project projetos[];
-    private Calendario calendario;
+    @OneToMany
+    private List<ParticipaProjeto> projetos;
+
+    /*private Calendario calendario;
     private Atividade atividades[];*/
 
     public Usuario(){}
 
-    public Usuario(Integer id, String nome, String senha, String email){
-        this.id = id;
+    public Usuario(String nome, String senha, String email, List<Atividade> atividades, List<ParticipaProjeto> projetos){
         this.nome = nome;
         this.senha = senha;
         this.email = email;
-        //this.projetos = projetos;
+        this.atividades = atividades;
+        this.projetos = projetos;
         //this.calendario = calendario;
     }
 
@@ -47,25 +60,29 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setId(Integer id){
+    public void setId(Long id){
         this.id = id;
+    }
+
+    public List<ParticipaProjeto> getProjetos() {
+        return projetos;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
     }
 
     public void setSenha(String senha){
         this.senha = senha;
     }
 
-    /*public void setProjetos(Project projetos[]){
-        this.projetos = projetos;
-    }
-
-    public void setAtividades(Atividade atividades[]){
-        this.atividades = atividades;
-    }
-
-    public void setCalendario(Calendario calendario){
+    /*public void setCalendario(Calendario calendario){
         this.calendario = calendario;
-    } Ver como fazer depois*/
+    }*/
 
     public String getNome(){
         return nome;
@@ -75,23 +92,19 @@ public class Usuario {
         return email;
     }
 
-    public Integer getId(){
+    public Long getId(){
         return id;
     }
 
-    /*public Project[] getProjetos(){
-        return projetos;
-    }
-
-    public Atividade[] getAtividades(){
-        return atividades;
-    }
-
-    public Calendario getCalendario(){
+    /*public Calendario getCalendario(){
         return calendario;
     }*/
 
     public String getSenha(){
         return senha;
+    }
+
+    public void setProjetos(List<ParticipaProjeto> projetos) {
+        this.projetos = projetos;
     }
 }

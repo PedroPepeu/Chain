@@ -1,10 +1,13 @@
 package br.com.api.chain.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,7 +17,7 @@ public class Project {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     // MODEL Specific Properties
     @Column
@@ -26,13 +29,16 @@ public class Project {
     @Column (name = "administrador_id")
     private Usuario administrador;
 
+    @OneToMany
+    private List<ParticipaProjeto> membros;
+
     public Project(){}
 
     // Constructor
-    public Project(String nome, Usuario administrador) {
+    public Project(String nome, Usuario administrador, List<ParticipaProjeto> membros) {
         this.nome = nome;
-        /*this.atividades = atividades;
         this.membros = membros;
+        /*this.atividades = atividades;
         this.administrador = administrador;
         this.links = links;*/
         this.administrador = administrador;
@@ -43,16 +49,12 @@ public class Project {
         return nome;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /*public Atividade[] getAtividades() {
         return atividades;
-    }
-
-    public Usuario[] getMembros() {
-        return membros;
     }
 
     public Usuario getAdministrador() {
@@ -63,6 +65,10 @@ public class Project {
         return links;
     }*/
 
+    public List<ParticipaProjeto> getMembros() {
+        return membros;
+    }
+
     public Usuario getAdministrador() {
         return administrador;
     }
@@ -72,7 +78,7 @@ public class Project {
         this.nome = nome;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,12 +86,12 @@ public class Project {
         this.administrador = administrador;
     }
 
-    /*public void setAtividades(Atividade[] atividades) {
-        this.atividades = atividades;
+    public void setMembros(List<ParticipaProjeto> membros) {
+        this.membros = membros;
     }
 
-    public void setMembros(Usuario[] membros) {
-        this.membros = membros;
+    /*public void setAtividades(Atividade[] atividades) {
+        this.atividades = atividades;
     }
 
     public void setAdministrador(Usuario administrador) {
