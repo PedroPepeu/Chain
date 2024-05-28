@@ -21,10 +21,10 @@ public class Anotacao {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     // MODEL Specific Properties
-    @Column
+    @Column(length = 250)
     private String texto;
     @Column(name = "data_anotacao")
     private Date dataAnotacao;
@@ -41,7 +41,7 @@ public class Anotacao {
         this.engenheiro = engenheiro;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -57,7 +57,7 @@ public class Anotacao {
         return texto;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

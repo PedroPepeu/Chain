@@ -14,7 +14,7 @@ public class ParticipaProjeto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @ManyToOne
     private Usuario engenheiro;
@@ -22,7 +22,7 @@ public class ParticipaProjeto {
     @ManyToOne
     private Project projeto;
 
-    @Column
+    @Column(length = 50)
     private String cargo;
 
     public ParticipaProjeto(Usuario engenheiro, Project projeto, String cargo) {
@@ -31,7 +31,7 @@ public class ParticipaProjeto {
         this.cargo = cargo;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public class ParticipaProjeto {
         return cargo;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

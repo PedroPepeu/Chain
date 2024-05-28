@@ -21,10 +21,10 @@ public class Atividade {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
      // MODEL Specific Properties
-    @Column
+    @Column(length = 50)
     private String nome;
     @Column (name = "data_inicio")
     private Date dataInicio;
@@ -67,11 +67,11 @@ public class Atividade {
         return this.nome;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

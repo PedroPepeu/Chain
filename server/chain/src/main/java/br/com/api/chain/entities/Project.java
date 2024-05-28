@@ -17,10 +17,10 @@ public class Project {
     // MODEL ID FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     // MODEL Specific Properties
-    @Column
+    @Column(length = 50)
     private String nome;
     /*private Atividade atividades[];
     private Usuario membros[];
@@ -49,7 +49,7 @@ public class Project {
         return nome;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -78,7 +78,7 @@ public class Project {
         this.nome = nome;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -15,11 +15,11 @@ import jakarta.persistence.Table;
 public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     
-    @Column
+    @Column(length = 250)
     private String descricao;
-    @Column (name = "url_link")
+    @Column (name = "url_link", length = 250)
     private String urlLink;
 
     @JoinColumn(name = "projeto_id")
@@ -42,11 +42,11 @@ public class Link {
         this.urlLink = url;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -14,17 +14,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="engenheiro_de_software")
+@Table(name = "engenheiro_de_software")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
-    @Column
+    @Column(length = 50)
     private String nome;
-    @Column
+    @Column(length = 50)
     private String senha;
-    @Column
+    @Column(length = 50)
     private String email;
 
     @ManyToMany
@@ -60,7 +60,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setId(Long id){
+    public void setId(int id){
         this.id = id;
     }
 
@@ -92,7 +92,7 @@ public class Usuario {
         return email;
     }
 
-    public Long getId(){
+    public int getId(){
         return id;
     }
 
