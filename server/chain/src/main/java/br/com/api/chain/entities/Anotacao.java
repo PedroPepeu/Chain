@@ -1,51 +1,63 @@
 package br.com.api.chain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="anotacao")
 public class Anotacao {
-    
-    // MODEL ID FIELD
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String idAnotacao;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    // MODEL Specific Properties
+    @Column(name="texto")
     private String texto;
-    private Date dataAnotacao;
-    
-    public Anotacao(String id, String texto, Date date) {
-        this.idAnotacao = id;
+
+    @Column(name="data_anotacao")
+    private LocalDate dataAnotacao;
+
+    @Column(name="engenheiro_de_software_id")
+    private Integer engenheiroId;
+
+    public Anotacao(){}
+
+    public Anotacao(Integer id, String texto, LocalDate dataAnotacao, Integer engenheiroId){
+        this.id = id;
         this.texto = texto;
-        this.dataAnotacao = date;
+        this.dataAnotacao = dataAnotacao;
+        this.engenheiroId = engenheiroId;
     }
 
-    public String getId() {
-        return idAnotacao;
+    public Integer getId() {
+        return id;
     }
 
     public String getTexto() {
         return texto;
     }
 
-    public Date getDate() {
+    public LocalDate getDataAnotacao() {
         return dataAnotacao;
     }
 
-    public void setId(String id) {
-        this.idAnotacao = id;
+    public Integer getEngenheiroId() {
+        return engenheiroId;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setTexto(String texto) {
         this.texto = texto;
     }
 
-    public void setDate(Date date) {
-        this.dataAnotacao = date;
+    public void setDataAnotacao(LocalDate dataAnotacao) {
+        this.dataAnotacao = dataAnotacao;
+    }
+
+    public void setEngenheiroId(Integer engenheiroId) {
+        this.engenheiroId = engenheiroId;
     }
 }

@@ -2,12 +2,8 @@ package br.com.api.chain.controllers;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.chain.entities.Atividade;
@@ -15,39 +11,15 @@ import br.com.api.chain.repositories.AtividadeRepository;
 
 @RestController
 public class AtividadeController {
-    
-    public AtividadeRepository Atividade;
+    private final AtividadeRepository atividadeRepository;
 
-    public AtividadeController(AtividadeRepository atividade) {
-        this.Atividade = atividade;
+    @Autowired
+    public AtividadeController(AtividadeRepository atividadeRepository){
+        this.atividadeRepository = atividadeRepository;
     }
 
-    @GetMapping("/atividade")
-    public List<Atividade> getAtividade(){
-        return Atividade.findAll();
-    }
-
-    @PostMapping("/atividade")
-    public List<Atividade> createAtividade(@RequestBody Atividade newAtividade){
-        Atividade.save(newAtividade);
-        return Atividade.findAll();
-    }
-
-    @PutMapping("/atividade/{id}")
-    public List<Atividade> updateAtividade(@RequestBody Atividade updateAtividade, @PathVariable String id){
-        Atividade.findById(id)
-            .map(atividade -> {
-                atividade.setNome(updateAtividade.getNome());
-                atividade.setMembrosAssociados(updateAtividade.getMembrosAssociados());
-                return Atividade.save(atividade);
-            });
-
-        return Atividade.findAll();
-    }
-
-    @DeleteMapping("/atividade/{id}")
-    public List<Atividade> deleteAtividade(@PathVariable String id){
-        Atividade.deleteById(id);
-        return Atividade.findAll();
+    @GetMapping("/atividades")
+    public List<Atividade> getAtividades(){
+        return atividadeRepository.findAll();
     }
 }
