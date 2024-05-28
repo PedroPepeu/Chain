@@ -1,69 +1,89 @@
 package br.com.api.chain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="atividade")
 public class Atividade {
-
-    // MODEL ID FIELD
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String idAtividade;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-     // MODEL Specific Properties
+    @Column(name="nome")
     private String nome;
-    private Date dataInicio;
-    private Date dataEntrega;
+
+    @Column(name="concluida")
     private boolean concluida;
-    private Usuario membrosAssociados[];
 
-    public Atividade(String nome, Usuario membrosAssociados[]){
+    @Column(name="projeto_id")
+    private Integer projetoId;
+
+    @Column(name="data_inicio")
+    private LocalDate dataInicio;
+
+    @Column(name="data_entrega")
+    private LocalDate dataEntrega;
+
+    public Atividade(){}
+
+    public Atividade(Integer id, String nome, boolean concluida, Integer projetoId, LocalDate dataInicio, LocalDate dataEntrega){
+        this.id = id;
         this.nome = nome;
-        this.membrosAssociados = membrosAssociados;
+        this.concluida = concluida;
+        this.projetoId = projetoId;
+        this.dataInicio = dataInicio;
+        this.dataEntrega = dataEntrega;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public Integer getId() {
+        return id;
     }
 
-    public Date getDataEntrega() {
-        return dataEntrega;
+    public String getNome() {
+        return nome;
     }
 
     public boolean isConcluida() {
         return concluida;
     }
 
-    public String getNome(){
-        return this.nome;
+    public Integer getProjetoId() {
+        return projetoId;
     }
 
-    public Usuario[] getMembrosAssociados(){
-        return this.getMembrosAssociados();
+    public LocalDate getDataInicio() {
+        return dataInicio;
     }
 
-    public void setNome(String nome){
+    public LocalDate getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setMembrosAssociados(Usuario membrosAssociados[]){
-        this.membrosAssociados = membrosAssociados;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public void setDataEntrega(Date dataEntrega) {
-        this.dataEntrega = dataEntrega;
     }
 
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
     }
+
+    public void setProjetoId(Integer projetoId) {
+        this.projetoId = projetoId;
+    }
+
+    public void setDataInicio(LocalDate dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public void setDataEntrega(LocalDate dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
+    
 }

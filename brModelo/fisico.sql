@@ -1,89 +1,89 @@
 /* Lógico_1: */
 
-CREATE TABLE administrador (
-    engenheiroDeSoftwareId Integer PRIMARY KEY
-);
-
 CREATE TABLE projeto (
     nome VARCHAR(50),
-    id Integer PRIMARY KEY,
-    administradorId Integer
+    id INTEGER auto_increment PRIMARY KEY,
+    administrador_id INTEGER
 );
 
 CREATE TABLE atividade (
-    id Integer PRIMARY KEY,
+    id INTEGER auto_increment PRIMARY KEY,
     nome VARCHAR(50),
-    dataInicio DATE,
-    dataEntrega DATE,
+    data_inicio DATE,
+    data_entrega DATE,
     concluida BOOLEAN,
-    projetoId Integer
+    projeto_id INTEGER
 );
 
 CREATE TABLE anotacao (
-    id Integer PRIMARY KEY,
+    id INTEGER auto_increment PRIMARY KEY,
     texto VARCHAR(250),
-    dataAnotacao DATE,
-    engenheiroDeSoftwareId Integer
+    data_anotacao DATE,
+    engenheiro_de_software_id INTEGER
 );
 
 CREATE TABLE engenheiro_de_software (
     email VARCHAR(50),
     nome VARCHAR(50),
-    id Integer auto_increment PRIMARY KEY,
+    id INTEGER auto_increment PRIMARY KEY,
     senha VARCHAR(50)
-);
-
-CREATE TABLE membro_participa (
-    cargo VARCHAR(50),
-    engenheiroDeSoftwareId Integer,
-    id Integer
 );
 
 CREATE TABLE link (
     descricao VARCHAR(250),
-    id Integer PRIMARY KEY,
-    urlLink VARCHAR(250),
-    projetoId Integer
+    id INTEGER auto_increment PRIMARY KEY,
+    url_link VARCHAR(250),
+    projeto_id INTEGER
 );
 
-CREATE TABLE realizada (
-    id Integer
+CREATE TABLE participa (
+    id INTEGER auto_increment PRIMARY KEY,
+    engenheiro_de_software_id INTEGER,
+    projeto_id INTEGER,
+    cargo VARCHAR(50)
+);
+
+CREATE TABLE realiza (
+    engenheiro_de_software_id INTEGER,
+    atividade_id INTEGER
 );
  
-ALTER TABLE Administrador ADD CONSTRAINT FK_Administrador_2
-    FOREIGN KEY (engenheiroDeSoftwareId)
-    REFERENCES EngenheiroDeSoftware (idEngenheiro)
+ALTER TABLE projeto ADD CONSTRAINT FK_projeto_2
+    FOREIGN KEY (administrador_id)
+    REFERENCES engenheiro_de_software (id)
     ON DELETE CASCADE;
  
-ALTER TABLE Projeto ADD CONSTRAINT FK_Projeto_2
-    FOREIGN KEY (administradorId)
-    REFERENCES Administrador (engenheiroDeSoftwareId)
+ALTER TABLE atividade ADD CONSTRAINT FK_atividade_2
+    FOREIGN KEY (projeto_id)
+    REFERENCES projeto (id)
     ON DELETE CASCADE;
  
-ALTER TABLE Atividade ADD CONSTRAINT FK_Atividade_2
-    FOREIGN KEY (projetoId)
-    REFERENCES Projeto (idProjeto)
+ALTER TABLE anotacao ADD CONSTRAINT FK_anotacao_2
+    FOREIGN KEY (engenheiro_de_software_id)
+    REFERENCES engenheiro_de_software (id)
     ON DELETE CASCADE;
  
-ALTER TABLE Anotacao ADD CONSTRAINT FK_Anotacao_2
-    FOREIGN KEY (engenheiroDeSoftwareId)
-    REFERENCES EngenheiroDeSoftware (idEngenheiro)
+ALTER TABLE link ADD CONSTRAINT FK_link_2
+    FOREIGN KEY (projeto_id)
+    REFERENCES projeto (id)
     ON DELETE CASCADE;
  
-ALTER TABLE MembroParticipa ADD CONSTRAINT FK_Membro_Participa_1
-    FOREIGN KEY (engenheiroDeSoftwareId)
-    REFERENCES EngenheiroDeSoftware (idEngenheiro);
+ALTER TABLE participa ADD CONSTRAINT FK_participa_1
+    FOREIGN KEY (engenheiro_de_software_id)
+    REFERENCES engenheiro_de_software (id)
+    ON DELETE RESTRICT;
  
-ALTER TABLE MembroParticipa ADD CONSTRAINT FK_Membro_Participa_2
-    FOREIGN KEY (projetoId)
-    REFERENCES Projeto (idProjeto);
+ALTER TABLE participa ADD CONSTRAINT FK_participa_2
+    FOREIGN KEY (projeto_id)
+    REFERENCES projeto (id)
+    ON DELETE SET NULL;
  
-ALTER TABLE Link ADD CONSTRAINT FK_Link_2
-    FOREIGN KEY (projetoId)
-    REFERENCES Projeto (idProjeto)
-    ON DELETE CASCADE;
+ALTER TABLE realiza ADD CONSTRAINT FK_realiza_1
+    FOREIGN KEY (engenheiro_de_software_id)
+    REFERENCES engenheiro_de_software (id)
+    ON DELETE SET NULL;
  
-ALTER TABLE Realizada ADD CONSTRAINT FK_Realizada_1
-    FOREIGN KEY (atividadeId)
-    REFERENCES Atividade (idAtividade)
+ALTER TABLE realiza ADD CONSTRAINT FK_realiza_2
+    FOREIGN KEY (atividade_id)
+    REFERENCES atividade (id)
     ON DELETE SET NULL;
