@@ -17,12 +17,13 @@ public class Anotacao {
     @Column(name="data_anotacao")
     private LocalDate dataAnotacao;
 
-    @Column(name="engenheiro_de_software_id")
-    private Integer engenheiroId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "engenheiro_de_software_id")
+    private EngenheiroDeSoftware engenheiroId;
 
     public Anotacao(){}
 
-    public Anotacao(Integer id, String texto, LocalDate dataAnotacao, Integer engenheiroId){
+    public Anotacao(Integer id, String texto, LocalDate dataAnotacao, EngenheiroDeSoftware engenheiroId){
         this.id = id;
         this.texto = texto;
         this.dataAnotacao = dataAnotacao;
@@ -41,7 +42,7 @@ public class Anotacao {
         return dataAnotacao;
     }
 
-    public Integer getEngenheiroId() {
+    public EngenheiroDeSoftware getEngenheiroId() {
         return engenheiroId;
     }
 
@@ -57,7 +58,7 @@ public class Anotacao {
         this.dataAnotacao = dataAnotacao;
     }
 
-    public void setEngenheiroId(Integer engenheiroId) {
+    public void setEngenheiroId(EngenheiroDeSoftware engenheiroId) {
         this.engenheiroId = engenheiroId;
     }
 }
