@@ -2,6 +2,8 @@ package br.com.api.chain.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,8 +19,10 @@ public class Atividade {
     @Column(name="concluida")
     private boolean concluida;
 
-    @Column(name="projeto_id")
-    private Integer projetoId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "projeto_id")
+    @JsonBackReference
+    private Projeto projetoId;
 
     @Column(name="data_inicio")
     private LocalDate dataInicio;
@@ -28,7 +32,7 @@ public class Atividade {
 
     public Atividade(){}
 
-    public Atividade(Integer id, String nome, boolean concluida, Integer projetoId, LocalDate dataInicio, LocalDate dataEntrega){
+    public Atividade(Integer id, String nome, boolean concluida, Projeto projetoId, LocalDate dataInicio, LocalDate dataEntrega){
         this.id = id;
         this.nome = nome;
         this.concluida = concluida;
@@ -49,7 +53,7 @@ public class Atividade {
         return concluida;
     }
 
-    public Integer getProjetoId() {
+    public Projeto getProjetoId() {
         return projetoId;
     }
 
@@ -73,7 +77,7 @@ public class Atividade {
         this.concluida = concluida;
     }
 
-    public void setProjetoId(Integer projetoId) {
+    public void setProjetoId(Projeto projetoId) {
         this.projetoId = projetoId;
     }
 
