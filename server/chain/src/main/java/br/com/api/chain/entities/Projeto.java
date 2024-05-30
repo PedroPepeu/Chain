@@ -30,14 +30,19 @@ public class Projeto {
     @JsonManagedReference
     private List<Atividade> atividades;
 
+    @OneToMany(mappedBy = "projetoId", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Membro> membros;
+
     public Projeto(){}
 
-    public Projeto(Integer id, String nome, EngenheiroDeSoftware administradorId, List<Link> links, List<Atividade> atividades){
+    public Projeto(Integer id, String nome, EngenheiroDeSoftware administradorId, List<Link> links, List<Atividade> atividades, List<Membro> membros){
         this.id = id;
         this.nome = nome;
         this.administradorId = administradorId;
         this.links = links;
         this.atividades = atividades;
+        this.membros = membros;
     }
 
     public Integer getId(){
@@ -64,8 +69,16 @@ public class Projeto {
         return nome;
     }
 
+    public List<Membro> getMembros() {
+        return membros;
+    }
+
     public EngenheiroDeSoftware getAdministradorId(){
         return administradorId;
+    }
+
+    public void setMembros(List<Membro> membros) {
+        this.membros = membros;
     }
 
     public void setId(Integer id){
