@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/brands.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/solid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/projects.css') }}"></link>
     <title>Perfil</title>
 </head>
 <body>
@@ -23,14 +24,17 @@
                     <h1>Calendário</h1>
                 </div>
                 <div class="dates">
-
+                    
                 </div>
             </div>
         </div>
         <div class="main-content">
             <div class="top-bar">
                 <h1>Projetos</h1>
-                <button onclick="addProject()"></button>
+                <div class="createProject">
+                    <input id="addProjectInput">
+                    <button class="button-5" id="addCreationButton">+</button>
+                </div>
             </div>
             <div id="projects">
             </div>
