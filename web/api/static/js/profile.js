@@ -1,11 +1,46 @@
-function addProject() {
-    var node = document.createElement('div')
-    node.style.width = '60vw';
-    node.style.height = '20rem';
-    node.style.backgroundColor = '#000';
-    node.style.marginTop = '10px';
-    node.style.marginBottom = '10px';
-    node.style.borderRadius = '10px'
-    document.getElementById("projects").appendChild(node);
+let origin = document.getElementById("projects");
+
+class Project {
+    constructor(place, title = 'default') {
+        this.place = place;
+        this.title = title;
+
+        this.render();
+    }
+
+    render() {
+        var node = document.createElement('div');
+        node.className = 'project';
+
+        this.a = document.createElement('a');
+        this.input = document.createElement('input');
+        this.a.href = './projects';
+        this.a.innerText = this.title;
+
+        node.appendChild(this.a);
+        node.appendChild(description());
+        this.place.appendChild(node);
+    }
 }
+
+function description() {
+    var description = document.createElement('div');
+    description.className = 'description';
+    return description;
+}
+
+
+
+
+let projectName = document.getElementById("addProjectInput")
+let buttonCreation = document.getElementById("addCreationButton")
+
+buttonCreation.addEventListener('click', () => {
+    if (projectName.value.trim() != "") {
+        new Project(origin, projectName.value);
+        projectName.value = "";
+    }
+});
+
+
 

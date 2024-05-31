@@ -2,6 +2,7 @@
     --sidebar-color: #623cea;
     --topbar-color: #db3254;
     --white: #f3efe0;
+    --background: #bf8aff; 
 }
 
 html, body{
@@ -13,10 +14,11 @@ html, body{
     position: relative;
 }
 
+
 .sidebar{
     position: fixed;
     height: 100vh;
-    width: 20vw;
+    width: 18vw;
     background-color: var(--sidebar-color);
 }
 
@@ -48,6 +50,23 @@ html, body{
     width: 15vw;
 }
 
+.project{
+    background-color: var(--sidebar-color);
+    width: 50vw;
+    min-height: 10rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.description{
+    width: 40vw;
+    min-height: 5rem;
+    background-color: #db3254;
+}
+
 .calendario .top{
     background-color: var(--topbar-color);
     border-top-right-radius: 10px;
@@ -73,10 +92,11 @@ html, body{
 }
 
 .main-content{
-    margin-left: 20vw;
-    height: 100vh;
-    width: 80vw;
+    margin-left: 18vw;
+    min-height: 100vh;
+    width: 82vw;
     background-color: var(--white);
+    background-color: var(--background);
 }
 
 .top-bar{
@@ -99,7 +119,6 @@ html, body{
 }
 
 .top-bar button {
-    background-color: var(--sidebar-color);
     height: 10px;
     margin: 0;
     margin-right: 10px;
@@ -107,11 +126,71 @@ html, body{
 }
 
 #projects{
-    background-color: aqua;
     min-height: 100vh;
     width: 100%;
     display: grid;
     justify-content: center;
     align-items: center;
 }
+
+
+
+/* Project Creation */
+
+.createProject{
+    display: flex;
+}
+
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 1rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 1rem;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.project a{
+    color: #000;
+    font-size: 24px;
+    text-decoration: None;
+}
+
+
 
