@@ -1,3 +1,10 @@
+:root{
+    --sidebar-color: #623cea;
+    --topbar-color: #db3254;
+    --white: #f3efe0;
+    --background: #bf8aff; 
+}
+
 *{
     padding: 0;
     margin: 0;
@@ -5,7 +12,7 @@
 
 body{
     /*background-color: rgb(30, 30, 95);*/
-    background-color: rgb(43, 43, 83);
+    background-color: var(--background);
     font-family: "Open Sans";
 }
 
@@ -26,10 +33,11 @@ button{
 
 
 #root{
-    margin: 1em;
     /*border: 1px solid grey;*/
     /*display: flex;*/
-    min-width: 1200px;
+    width: 65vw;
+    margin: 0 auto;
+    min-height: 80vh;
 }
 
 
@@ -125,6 +133,11 @@ button{
     margin-bottom: 1em;
 }
 
+.menuDate{
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
 .menuDescription{
     margin-bottom: 2em;
     line-height: 1.5em;
@@ -181,5 +194,33 @@ button{
     background-color: rgb(235, 235, 235);
     border-radius: 4px;
     cursor: pointer;
+}
+
+html, body{
+    margin: 0;
+}
+
+.main-wrapper{
+    display: flex;
+    position: relative;
+}
+
+
+.sidebar{
+    padding-top: 5rem;
+    position: fixed;
+    height: 100vh;
+    width: 18vw;
+    background-color: var(--sidebar-color);
+    display: grid;
+    justify-content: center;
+}
+
+.main-content{
+    margin-left: 18vw;
+    min-height: 100vh;
+    width: 82vw;
+    background-color: var(--white);
+    background-color: var(--background);
 }
 
