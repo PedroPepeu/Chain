@@ -1,39 +1,40 @@
 /* Lógico_1: */
 
 CREATE TABLE projeto (
-    nome VARCHAR(50),
+    nome VARCHAR(50) NOT NULL,
     id INTEGER auto_increment PRIMARY KEY,
-    administrador_id INTEGER
+    administrador_id INTEGER NOT NULL
 );
 
 CREATE TABLE atividade (
     id INTEGER auto_increment PRIMARY KEY,
-    nome VARCHAR(50),
-    data_inicio DATE,
-    data_entrega DATE,
-    concluida BOOLEAN,
-    projeto_id INTEGER
+    nome VARCHAR(50) NOT NULL,
+    descricao VARCHAR(250),
+    data_inicio DATE NOT NULL,
+    data_entrega DATE NOT NULL,
+    concluida BOOLEAN NOT NULL,
+    projeto_id INTEGER NOT NULL
 );
 
 CREATE TABLE anotacao (
     id INTEGER auto_increment PRIMARY KEY,
-    texto VARCHAR(250),
-    data_anotacao DATE,
-    engenheiro_de_software_id INTEGER
+    texto VARCHAR(250) NOT NULL,
+    data_anotacao DATE NOT NULL,
+    engenheiro_de_software_id INTEGER NOT NULL
 );
 
 CREATE TABLE engenheiro_de_software (
-    email VARCHAR(50),
-    nome VARCHAR(50),
+    email VARCHAR(50) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
     id INTEGER auto_increment PRIMARY KEY,
-    senha VARCHAR(50)
+    senha VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE link (
     descricao VARCHAR(250),
     id INTEGER auto_increment PRIMARY KEY,
-    url_link VARCHAR(250),
-    projeto_id INTEGER
+    url_link VARCHAR(250) NOT NULL,
+    projeto_id INTEGER NOT NULL
 );
 
 CREATE TABLE participa (
