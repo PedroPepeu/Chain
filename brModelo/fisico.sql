@@ -24,7 +24,7 @@ CREATE TABLE anotacao (
 );
 
 CREATE TABLE engenheiro_de_software (
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     nome VARCHAR(50) NOT NULL,
     id INTEGER auto_increment PRIMARY KEY,
     senha VARCHAR(50) NOT NULL

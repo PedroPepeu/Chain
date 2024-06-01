@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.chain.repositories.LinkRepository;
-
+import br.com.api.chain.services.LinkService;
 import br.com.api.chain.entities.Link;
 
 @RestController
 @RequestMapping("/links")
 public class LinkController {
-    private final LinkRepository linkRepository;
+    private final LinkService linkService;
 
     @Autowired
-    public LinkController(LinkRepository linkRepository){
-        this.linkRepository = linkRepository;
+    public LinkController(LinkService linkService){
+        this.linkService = linkService;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public List<Link> getLinks(){
         return linkRepository.findAll();
-    }
+    }*/
 }
