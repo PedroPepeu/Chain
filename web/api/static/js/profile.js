@@ -12,26 +12,39 @@ class Project {
 
         this.a = document.createElement('a');
         this.input = document.createElement('input');
-        this.editButton = document.createElement('button'); // Criar o botão de edição
-        this.editButton.innerText = 'Editar Nome'; // Definir o texto do botão
-        this.editButton.addEventListener('click', () => { // Adicionar evento de clique ao botão de edição
-            this.editTitle(); // Chamar a função para editar o título
+        this.editButton = document.createElement('button'); // Botão de edição
+        this.editButton.innerText = 'Editar Nome';
+        this.editButton.addEventListener('click', () => {
+            this.editTitle();
+        });
+
+        this.deleteButton = document.createElement('button'); // Botão de exclusão
+        this.deleteButton.innerText = 'Excluir';
+        this.deleteButton.addEventListener('click', () => {
+            this.deleteProject();
         });
         
         this.a.href = './projects';
         this.a.innerText = this.title;
 
         node.appendChild(this.a);
-        node.appendChild(this.editButton); // Adicionar o botão de edição ao nó
+        node.appendChild(this.editButton);
+        node.appendChild(this.deleteButton); // Adicionando o botão de exclusão
         node.appendChild(description());
         this.place.appendChild(node);
     }
 
     editTitle() {
-        let newTitle = prompt('Digite o novo nome do projeto:'); // Solicitar ao usuário o novo nome
-        if (newTitle !== null) { // Verificar se o usuário não cancelou a ação
-            this.title = newTitle; // Atualizar o título do projeto
-            this.a.innerText = this.title; // Atualizar o texto do link com o novo título
+        let newTitle = prompt('Digite o novo nome do projeto:');
+        if (newTitle !== null) {
+            this.title = newTitle;
+            this.a.innerText = this.title;
+        }
+    }
+
+    deleteProject() {
+        if (confirm('Tem certeza de que deseja excluir este projeto?')) {
+            this.place.removeChild(this.a.parentNode); // Remove o nó pai do link (div.project)
         }
     }
 }
