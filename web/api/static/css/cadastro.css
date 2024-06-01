@@ -1,0 +1,108 @@
+body {
+    background-color: #000000;
+    height: 100vh;
+}
+
+main{
+    position: relative;
+    min-height: 10
+    0vh;
+}
+.tela {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.backgroundCadastro img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 130%;
+    z-index: -1;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+section.cadastroTela {
+    padding: 45px 5%;
+    position: relative;
+    text-align: center;
+    align-items: center;
+}
+
+
+.cadastroTela .transparencia {
+    width: 600px;
+    height: auto;
+    margin: 0 auto;
+    background: #6b088634;
+    border: 1px solid #623CEA;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 10px;
+    margin-top: 20px;
+
+}
+
+.imgcontainerCadastro {
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+
+.containerCadastro ul {
+    display: grid;
+    list-style-type: none;
+    color: white;
+}
+.containerCadastro li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.textinput{
+    text-align: center;
+    width: 50%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #db32548f;
+}
+.textinput::placeholder{
+    color: #623CEA;
+    opacity: 0.8;
+}
+.containerCadastro label{
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+
+.containerCadastro button {
+    background-color: #623CEA;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    font-size: 16px;
+    transition: .2s;
+    border-radius: 10px;
+}
+
+.containerCadastro button:hover{
+    opacity: 0.8;
+    box-shadow: 0 8px 32px 0 #6b088c;
+    transform: scale(1.09);
+}
+
