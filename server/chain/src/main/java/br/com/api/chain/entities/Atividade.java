@@ -17,6 +17,9 @@ public class Atividade {
     @Column(name="nome")
     private String nome;
 
+    @Column(name = "descricao")
+    private String descricao;
+
     @Column(name="concluida")
     private boolean concluida;
 
@@ -40,9 +43,10 @@ public class Atividade {
 
     public Atividade(){}
 
-    public Atividade(Integer id, String nome, boolean concluida, Projeto projetoId, LocalDate dataInicio, LocalDate dataEntrega, Set<EngenheiroDeSoftware> engenheiros){
+    public Atividade(Integer id, String nome, String descricao, boolean concluida, Projeto projetoId, LocalDate dataInicio, LocalDate dataEntrega, Set<EngenheiroDeSoftware> engenheiros){
         this.id = id;
         this.nome = nome;
+        this.descricao = descricao;
         this.concluida = concluida;
         this.projetoId = projetoId;
         this.dataInicio = dataInicio;
@@ -72,6 +76,14 @@ public class Atividade {
 
     public LocalDate getDataEntrega() {
         return dataEntrega;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public void setId(Integer id) {
