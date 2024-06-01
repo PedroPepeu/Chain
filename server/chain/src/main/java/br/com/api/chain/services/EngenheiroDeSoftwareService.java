@@ -26,4 +26,8 @@ public class EngenheiroDeSoftwareService {
         Optional<EngenheiroDeSoftware> eng = usuarioRepositorio.findById(id);
         return eng.get();
     }
+
+    public EngenheiroDeSoftware insertUser(EngenheiroDeSoftware eng){
+        return usuarioRepositorio.save(eng);
+    }
 }
