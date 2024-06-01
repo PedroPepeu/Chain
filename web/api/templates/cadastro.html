@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página cadastro Chain</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/cadastro.css') }}">
+</head>
+<body>
+    <div class="backgroundCadastro">
+        <img src="../static/images/dia.jfif" alt="imagem background">
+    </div>
+    <main>
+        <section class="cadastroTela">
+            <div class="tela">
+                <div class="flex">
+                    <div class="transparencia">
+
+                        <form class="cadastroConteudo">
+
+                            <div class="imgcontainer">
+                                <img src="../static/images/flavio.jfif" alt="nosso estagiario do 190 flavio" title="foto do estagiario 190 flavio" class="avatar">
+                            </div>
+                            <div class="containerCadastro">
+                                <ul>
+                                    <li>
+                                        <label for="username"><b>Nome de usuário</b></label>
+                                        <input class="textinput" type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+                                    </li>
+                                    <li>
+                                        <label for="password"><b>Senha</b></label>
+                                        <input class="textinput" type="password" id="password" name="password" placeholder="Digite sua Senha" required>
+                                    </li>
+                                    <li>
+                                        <label for="passwordConfirmacao"><b>Senha de confirmação</b></label>
+                                        <input class="textinput" type="password" id="passwordConfirmacao" name="passwordConfirmacao" placeholder="Digite sua Senha" required>
+                                    </li>
+                                    <li>
+                                        <label for="email"><b>Email</b></label>
+                                        <input class="textinput" type="email" id="email" name="email" placeholder="Digite seu email" required>
+                                    </li>
+                                    <li>
+                                        <button id = "buttonRegistrar" type="submit">Cadastre-se</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
