@@ -34,4 +34,10 @@ public class EngenheiroDeSoftwareController {
         EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
         return ResponseEntity.ok().body(eng);
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<EngenheiroDeSoftware> getUserById(@PathVariable Integer id){
+        EngenheiroDeSoftware eng = usuarioService.getUserById(id);
+        return ResponseEntity.ok().body(eng);
+    }
 }

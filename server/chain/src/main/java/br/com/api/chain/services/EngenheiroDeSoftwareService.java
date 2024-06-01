@@ -1,5 +1,7 @@
 package br.com.api.chain.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,10 @@ public class EngenheiroDeSoftwareService {
 
     public EngenheiroDeSoftware getUserByEmail(String email){
         return usuarioRepositorio.findByEmail(email);
+    }
+
+    public EngenheiroDeSoftware getUserById(Integer id){
+        Optional<EngenheiroDeSoftware> eng = usuarioRepositorio.findById(id);
+        return eng.get();
     }
 }
