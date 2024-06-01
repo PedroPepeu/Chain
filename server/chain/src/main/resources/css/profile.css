@@ -1,0 +1,198 @@
+:root{
+    --sidebar-color: #623cea;
+    --topbar-color: #db3254;
+    --white: #f3efe0;
+    --background: #bf8aff; 
+}
+
+html, body{
+    margin: 0;
+}
+
+.main-wrapper{
+    display: flex;
+    position: relative;
+}
+
+
+.sidebar{
+    position: fixed;
+    height: 100vh;
+    width: 18vw;
+    background-color: var(--sidebar-color);
+}
+
+.info{
+    border-radius: 6px;
+    margin: 5vw auto;
+    margin-bottom: 10rem;
+    height: 15vw;
+    width: 15vw;
+    display: grid;
+    align-items: center;
+}
+
+.info img{
+    margin: auto auto;
+    height: 8vw;
+}  
+
+.info h1{
+    text-align: center;
+    font-size: 24px;
+}
+
+
+.calendario{
+    border-radius: 6px;
+    margin: 5vw auto;
+    height: 15vw;
+    width: 15vw;
+}
+
+.project{
+    background-color: var(--sidebar-color);
+    width: 50vw;
+    margin: 0 auto;
+    min-height: 10rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.project a{
+    text-align: center;
+}
+
+.description{
+    width: 40vw;
+    min-height: 5rem;
+    background-color: #db3254;
+}
+
+.calendario .top{
+    background-color: var(--topbar-color);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendario .dates{
+    background-color: var(--white);
+    height: 100%;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.calendario h1{
+    text-align: center;
+    font-size: 12px;
+}
+
+.main-content{
+    margin-left: 18vw;
+    min-height: 100vh;
+    width: 82vw;
+    background-color: var(--white);
+    background-color: var(--background);
+}
+
+.top-bar{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 5rem;
+    border-radius: 6px;
+    height: 3rem;
+    width: 80%;
+    background-color: var(--topbar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-bar h1 {
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.top-bar button {
+    height: 10px;
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#projects{
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+
+/* Project Creation */
+
+.createProject{
+    display: flex;
+}
+
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 1rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 1rem;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.project a{
+    color: #000;
+    font-size: 24px;
+    text-decoration: None;
+}
+
+
+
