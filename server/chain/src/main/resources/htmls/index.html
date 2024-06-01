@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
+{% endblock %}
+
+{% block indexes %}
+<nav>
+    <ul>
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="{{url_for('login')}}">Login</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<article id="sobre">
+    <h2>Motivação</h2>
+    <p>
+        Desenvolver um software é uma tarefa complexa que muitas vezes envolve o uso de vários aplicativos diferentes, porém às vezes é complicado gerenciar todos os aplicativos e engenheiros de software de um projeto. Para resolver esse problema, foi idealizada a criação de um site que interligasse todos os outros aplicativos e engenheiros de software, para ajudar a melhorar a organização de um projeto de software.
+    </p>
+</article>
+<article id="sobre">
+    <h2>Funcionalidades</h2>
+    <p>
+        Nesse site seria possível a criação de projetos em que pudessem ser adicionados os links dos outros aplicativos, unificando mais o projeto. Além disso, dentro dos projetos seria possível adicionar as diversas atividades necessárias e administrar o que cada engenheiro de software deve fazer. Essas atividades ajudariam a mapear o andamento do projeto e cada engenheiro poderia ver quais são as tarefas que faltam ser realizadas a partir de um calendário.              </p>
+</article>
+{% endblock %}
