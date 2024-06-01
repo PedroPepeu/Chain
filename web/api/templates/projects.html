@@ -12,8 +12,36 @@
 
 <body>
     <div class="main-wrapper">
-        <div class="sidebar">
-            <h1>Membros</h1>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa-solid fa-link"></i></span>
+                        <span class="title">Chain</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('index') }}">
+                        <span class="icon"><i class="fa-solid fa-house"></i></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('profile') }}">
+                        <span class="icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="title">Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa-solid fa-poo"></i></span>
+                        <span class="title">Membros</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle">
+
+            </div>
         </div>
         <div class="main-content">
             <div id="root">
@@ -22,9 +50,16 @@
                     <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
                 </div>
             </div>
-            {% include 'components/footer.html' %}
         </div>
     </div>
+
+    <script>
+        let navigation = document.querySelector(".navigation");
+        let toggle = document.querySelector(".toggle");
+        toggle.onclick = function(){
+            navigation.classList.toggle('active');
+        }
+    </script>
 </body>    
 
 <script src="../static/js/projects.js"></script>
