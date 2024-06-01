@@ -3,6 +3,7 @@ package br.com.api.chain.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 
 @Service
@@ -13,5 +14,9 @@ public class EngenheiroDeSoftwareService {
     @Autowired
     public EngenheiroDeSoftwareService(EngenheiroDeSoftwareRepository usuarioRepositorio){
         this.usuarioRepositorio = usuarioRepositorio;
+    }
+
+    public EngenheiroDeSoftware getUserByEmail(String email){
+        return usuarioRepositorio.findByEmail(email);
     }
 }

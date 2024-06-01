@@ -3,7 +3,9 @@ package br.com.api.chain.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,4 +28,10 @@ public class EngenheiroDeSoftwareController {
     public List<EngenheiroDeSoftware> engenheiroDeSoftwares(){
         return usuarioRepositorio.findAll();
     }*/
+
+    @GetMapping("/{email}")
+    public ResponseEntity<EngenheiroDeSoftware> getUserByEmail(@PathVariable String email){
+        EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
+        return ResponseEntity.ok().body(eng);
+    }
 }
