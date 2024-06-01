@@ -27,8 +27,26 @@ html, body{
     width: 100%;
 }
 
+
+/*
+.middle-wrapper {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), 
+                url('https://www.transparenttextures.com/patterns/cubes.png');
+    display: grid;
+    position: relative;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+*/
+
 .middle-wrapper{
-    background-color: var(--background);
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 2%, rgba(191,138,255,1) 35%, rgba(180,130,242,1) 61%, rgba(107,8,128,1) 86%);
     display: grid;
     position: relative;
     min-height: 100vh;

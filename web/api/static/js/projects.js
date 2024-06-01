@@ -26,7 +26,6 @@ class todoList {
         this.h2 = document.createElement('h2');
         this.h2.innerText = this.title;
         this.input = document.createElement('input');
-        this.input.classList.add("comment");
         this.button = document.createElement('button');
         this.button.innerText = 'Add';
         this.button.classList.add("btn-save");
@@ -80,7 +79,6 @@ class Card {
             date: 'Data',
             text: text,
             description: "Click to write a description...",
-            comments: []
         }
         this.render();
     }
@@ -123,9 +121,6 @@ class Card {
         this.menuTitle = document.createElement("div");
         this.menuDate = document.createElement("div");
         this.menuDescription = document.createElement("div");
-        this.commentsInput = document.createElement("input");
-        this.commentsButton = document.createElement('button');
-        this.menuComments = document.createElement("div");
 
 
         //Add class names
@@ -134,13 +129,8 @@ class Card {
         this.menuTitle.className = "menuTitle";
         this.menuDate.className = "menuDate";
         this.menuDescription.className = "menuDescription";
-        this.menuComments.className = "menuComments";
-        this.commentsInput.className = "commentsInput comment";
-        this.commentsButton.className = "commentsButton btn-save";
 
         //Add inner Text
-        this.commentsButton.innerText = "Add";
-        this.commentsInput.placeholder = "Write a comment...";
 
         //Event listeners
         this.menuContainer.addEventListener('click', (e) => {
@@ -150,21 +140,11 @@ class Card {
             }
         });
 
-        this.commentsButton.addEventListener('click', () => {
-            if (this.commentsInput.value != "") {
-                this.state.comments.push(this.commentsInput.value);
-                this.renderComments();
-                this.commentsInput.value = "";
-            }
-        })
-
+        
         //Append
         this.menu.append(this.menuTitle);
         this.menu.append(this.menuDate);
         this.menu.append(this.menuDescription);
-        this.menu.append(this.commentsInput);
-        this.menu.append(this.commentsButton);
-        this.menu.append(this.menuComments);
         this.menuContainer.append(this.menu);
         root.append(this.menuContainer);
 
@@ -172,20 +152,6 @@ class Card {
         this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
         this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
 
-        this.renderComments();
-    }
-
-    renderComments() {
-
-        let currentCommentsDOM = Array.from(this.menuComments.childNodes);
-
-        currentCommentsDOM.forEach(commentDOM => {
-            commentDOM.remove();
-        });
-
-        this.state.comments.forEach(comment => {
-            new Comment(comment, this.menuComments, this);
-        });
     }
 }
 
@@ -223,7 +189,6 @@ class EditableText {
         this.input.value = oldText;
         this.saveButton.innerText = "Save";
         this.saveButton.className = "btn-save";
-        this.input.classList.add("comment");
 
         this.saveButton.addEventListener('click', () => {
             this.text = this.input.value;
@@ -264,22 +229,6 @@ class EditableText {
 
 }
 
-class Comment {
-    constructor(text, place, card) {
-        this.text = text;
-        this.place = place;
-        this.card = card;
-        this.render();
-    }
-
-    render() {
-        this.div = document.createElement('div');
-        this.div.className = "comment";
-        this.div.innerText = this.text;
-
-        this.place.append(this.div);
-    }
-}
 
 
 
