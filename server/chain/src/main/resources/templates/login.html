@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Login Chain</title>
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/login.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/brands.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/header.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
-    <script src="../js/login.js" defer></script>
+    <script src="../static/js/login.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
@@ -21,7 +21,7 @@
 
     <main>
         <div class="backgroundLogin">
-            <img src="../images/noite.jfif" alt="imagem background">
+            <img src="../static/images/noite.jfif" alt="imagem background">
         </div>
         <section class="loginTela">
             <div class="tela">
@@ -29,7 +29,7 @@
                     <div class="transparencia">
                         <form class="loginConteudo" id ="loginConteudo" action="{{ url_for('profile') }}">
                             <div class="imgcontainer">
-                                <img src="../images/pepeu.jfif" alt="Pepeu nosso programador estagiário"
+                                <img src="../static/images/pepeu.jfif" alt="Pepeu nosso programador estagiário"
                                     title="foto do estagiário Pepeu" class="avatar">
                             </div>
                             <div class="containerLogin">
