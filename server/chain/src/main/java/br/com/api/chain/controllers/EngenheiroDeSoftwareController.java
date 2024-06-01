@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 
 @RestController
+@RequestMapping("/users")
 public class EngenheiroDeSoftwareController {
     private final EngenheiroDeSoftwareRepository usuarioRepositorio;
 
@@ -18,7 +20,7 @@ public class EngenheiroDeSoftwareController {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public List<EngenheiroDeSoftware> engenheiroDeSoftwares(){
         return usuarioRepositorio.findAll();
     }
