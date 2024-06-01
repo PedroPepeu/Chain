@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.repositories.AnotacaoRepository;
+import br.com.api.chain.services.AnotacaoService;
 
 @RestController
 @RequestMapping("/anotations")
 public class AnotacaoController {
-    private final AnotacaoRepository anotacaoRepository;
+    
+    private final AnotacaoService anotacaoService;
 
     @Autowired
-    public AnotacaoController(AnotacaoRepository anotacaoRepository){
-        this.anotacaoRepository = anotacaoRepository;
+    public AnotacaoController(AnotacaoService anotacaoService){
+        this.anotacaoService = anotacaoService;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public List<Anotacao> getAnotacoes(){
         return anotacaoRepository.findAll();
-    }
+    }*/
 }

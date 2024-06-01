@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.ProjetoRepository;
+import br.com.api.chain.services.ProjetoService;
 
 @RestController
 @RequestMapping("/projects")
 public class ProjetoController {
-    private final ProjetoRepository projetoRepository;
+    private final ProjetoService projetoService;
 
     @Autowired
-    public ProjetoController(ProjetoRepository projetoRepository){
-        this.projetoRepository = projetoRepository;
+    public ProjetoController(ProjetoService projetoService){
+        this.projetoService = projetoService;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public List<Projeto> getProjeto(){
         return projetoRepository.findAll();
-    }
+    }*/
 }

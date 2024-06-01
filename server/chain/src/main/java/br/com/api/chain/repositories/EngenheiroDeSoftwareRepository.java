@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EngenheiroDeSoftwareRepository extends JpaRepository<EngenheiroDeSoftware, Integer>{
+
+    EngenheiroDeSoftware findByEmail(String email);
+
 }
