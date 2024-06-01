@@ -1,13 +1,13 @@
 :root{
-    --header-color: #6b088c; /* #623cea */
+    --header-color: #020024; /* #623cea */
     --footer-color: #fff; /* #6b088c */
     --background: #bf8aff; 
     --white: #ffffff;
     --black: #000000;
 }
+
 .top-wrapper{
     background-color: var(--header-color);
     width: 100%;
-    
 }
 
