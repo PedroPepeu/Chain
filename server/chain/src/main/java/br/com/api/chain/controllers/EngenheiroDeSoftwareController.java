@@ -22,4 +22,7 @@ public class EngenheiroDeSoftwareController {
     public List<EngenheiroDeSoftware> engenheiroDeSoftwares(){
         return usuarioRepositorio.findAll();
     }
+
+    /*@GetMapping("/users/{id}")
+    public*/ 
 }
