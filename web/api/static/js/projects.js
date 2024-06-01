@@ -77,6 +77,7 @@ class Card {
         this.place = place;
         this.todoList = todoList;
         this.state = {
+            date: 'Data',
             text: text,
             description: "Click to write a description...",
             comments: []
@@ -120,6 +121,7 @@ class Card {
         this.menu = document.createElement("div");
         this.menuContainer = document.createElement("div");
         this.menuTitle = document.createElement("div");
+        this.menuDate = document.createElement("div");
         this.menuDescription = document.createElement("div");
         this.commentsInput = document.createElement("input");
         this.commentsButton = document.createElement('button');
@@ -130,6 +132,7 @@ class Card {
         this.menu.className = "menu";
         this.menuContainer.className = "menuContainer";
         this.menuTitle.className = "menuTitle";
+        this.menuDate.className = "menuDate";
         this.menuDescription.className = "menuDescription";
         this.menuComments.className = "menuComments";
         this.commentsInput.className = "commentsInput comment";
@@ -157,6 +160,7 @@ class Card {
 
         //Append
         this.menu.append(this.menuTitle);
+        this.menu.append(this.menuDate);
         this.menu.append(this.menuDescription);
         this.menu.append(this.commentsInput);
         this.menu.append(this.commentsButton);
@@ -164,6 +168,7 @@ class Card {
         this.menuContainer.append(this.menu);
         root.append(this.menuContainer);
 
+        this.editableDate = new EditableText(this.state.date, this.menuDate, this, "date", "textarea")
         this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
         this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
 
@@ -223,9 +228,11 @@ class EditableText {
         this.saveButton.addEventListener('click', () => {
             this.text = this.input.value;
             this.card.state[this.property] = this.input.value;
+
             if (this.property == "text") {
                 this.card.p.innerText = this.input.value;
             }
+
             this.div.remove();
             this.render();
         });
