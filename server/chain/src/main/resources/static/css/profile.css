@@ -193,6 +193,25 @@ html, body{
     font-size: 24px;
     text-decoration: None;
 }
+.delete-button,.edit-button,.aEdit{
+    display: flex;
+    flex-direction: row;
+    background: rgb(2,0,36);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    font-size: 16px;
+    transition: .2s;
+    border-radius: 10px;
+}
+.delete-button:hover,.edit-button:hover,.aEdit:hover{
+    opacity: 0.8;
+    box-shadow: 0 8px 32px 0 #6b088c;
+    transform: scale(1.03);
+}
 
 
 
