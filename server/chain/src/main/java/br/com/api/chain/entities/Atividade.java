@@ -3,7 +3,7 @@ package br.com.api.chain.entities;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -25,7 +25,6 @@ public class Atividade {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "projeto_id")
-    @JsonBackReference
     private Projeto projetoId;
 
     @Column(name="data_inicio")
@@ -34,11 +33,11 @@ public class Atividade {
     @Column(name="data_entrega")
     private LocalDate dataEntrega;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "realiza", 
                joinColumns = @JoinColumn(name = "atividade_id"), 
                inverseJoinColumns = @JoinColumn(name = "engenheiro_de_software_id"))
-    @JsonBackReference
     Set<EngenheiroDeSoftware> engenheiros;
 
     public Atividade(){}

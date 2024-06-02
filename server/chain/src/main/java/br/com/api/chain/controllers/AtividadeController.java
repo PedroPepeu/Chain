@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.chain.entities.Atividade;
-import br.com.api.chain.repositories.AtividadeRepository;
 import br.com.api.chain.services.AtividadeService;
 
 @RestController

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.api.chain.repositories.LinkRepository;
 import br.com.api.chain.services.LinkService;
 import br.com.api.chain.entities.Link;
 

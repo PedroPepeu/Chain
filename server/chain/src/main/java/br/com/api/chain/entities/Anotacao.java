@@ -2,8 +2,6 @@ package br.com.api.chain.entities;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -21,7 +19,6 @@ public class Anotacao {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "engenheiro_de_software_id")
-    @JsonBackReference
     private EngenheiroDeSoftware engenheiroId;
 
     public Anotacao(){}
