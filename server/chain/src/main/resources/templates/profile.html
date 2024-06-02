@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/profile.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/components/footer.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/brands.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/fontawesome.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fontawesome/css/solid.css') }}">
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="stylesheet" href="../static/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="../static/fontawesome/css/solid.css">
+    <link rel="stylesheet" href="../static/fontawesome/css/brands.css">
+    <link rel="stylesheet" href="../static/css/components/footer.css">
     <title>Perfil</title>
 </head>
 <body>
@@ -37,7 +37,33 @@
             </div>
             <div id="projects">
             </div>
-            {% include 'components/footer.html' %}
+            <footer>
+                <div class="container acb">
+                  <div class="links">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                      <li><a href="./index.html">Início</a></li>
+                      <li><a href="#sobre">Sobre nós</a></li>
+                    </ul>
+                  </div>
+                  <div class="contato">
+                    <h3>Contato</h3>
+                    <p><strong>Email:</strong> <a href="mailto:educalivrosbiblioteca@gmail.com">joao.00000845222@unicap.br</a>
+                    </p>
+                    <!--Protocolo Mailto-->
+                    <p><strong>Telefone:</strong> (81) 99684-5391</p>
+                  </div>
+                  <div class="social">
+                    <h3>Siga-nos</h3>
+                    <ul>
+                      <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                      <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+                      <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+            </footer>
         </div>
     </div>
 </body>
