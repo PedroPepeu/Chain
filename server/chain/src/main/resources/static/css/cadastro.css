@@ -1,59 +1,70 @@
 body {
     background-color: #000000;
-    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-main{
-    position: relative;
-    min-height: 10
-    0vh;
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+section.backgroundCadastro , section.cadastroTela {
+    align-items: center;
+    justify-content: center;
+    background: rgb(2,0,36);
+}
+.backgroundCadastro img{
+    max-width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 10px;
 }
 .tela {
     max-width: 1280px;
-    margin: 0 auto;
-}
-.backgroundCadastro img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 130%;
-    z-index: -1;
 }
 
 .flex {
     display: flex;
     flex-direction: column;
-}
-
-section.cadastroTela {
-    padding: 45px 5%;
-    position: relative;
-    text-align: center;
     align-items: center;
 }
 
+section .cadastroTela {
+    position: relative;
+}
 
 .cadastroTela .transparencia {
     width: 600px;
     height: auto;
-    margin: 0 auto;
-    background: #6b088634;
-    border: 1px solid #623CEA;
+    text-align: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(2,0,36,1) 2%, rgba(191,138,255,1) 35%, rgba(180,130,242,1) 61%, rgba(107,8,128,1) 86%);
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
-    border-radius: 10px;
-    margin-top: 20px;
-
+    border-bottom-right-radius: 10px;
 }
 
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+
 .imgcontainerCadastro {
+    text-align: center;
     margin: 24px 0 12px 0;
 }
 
 img.avatar {
     width: 40%;
     border-radius: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 
@@ -62,6 +73,7 @@ img.avatar {
     list-style-type: none;
     color: white;
 }
+
 .containerCadastro li {
     display: flex;
     flex-direction: column;
@@ -69,26 +81,28 @@ img.avatar {
     margin-bottom: 20px;
     width: 100%;
 }
-.textinput{
-    text-align: center;
-    width: 50%;
+
+.textinput {
     height: 40px;
     border-radius: 10px;
-    border: 1px solid #db32548f;
+    border: 1px solid rgb(2,0,36);
+    text-align: center;
+    width: 50%;
 }
-.textinput::placeholder{
+
+
+.textinput::placeholder {
     color: #623CEA;
     opacity: 0.8;
 }
-.containerCadastro label{
+
+.containerCadastro label {
     font-size: 18px;
     font-weight: 900;
 }
 
-
-
 .containerCadastro button {
-    background-color: #623CEA;
+    background: rgb(2,0,36);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -100,9 +114,98 @@ img.avatar {
     border-radius: 10px;
 }
 
-.containerCadastro button:hover{
+.containerCadastro button:hover {
     opacity: 0.8;
     box-shadow: 0 8px 32px 0 #6b088c;
     transform: scale(1.09);
+}
+
+
+/* WAVE (MAYBE WE WILL USE IT IN THE FUTURE) */
+
+
+.main-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    min-height: 100vh;
+    width: 100%;
+}
+
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+    }
+}
+.waveWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+.waveWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
+}
+.bgTop {
+    z-index: 15;
+    opacity: 0.5;
+}
+.bgMiddle {
+    z-index: 10;
+    opacity: 0.75;
+}
+.bgBottom {
+    z-index: 5;
+}
+
+
+
+.wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+}
+.waveTop {
+    background-image: url('../images/wave-top.png');
+    background-size: 50% 100px;
+}
+.waveAnimation .waveTop {
+  animation: move-wave 3s;
+   -webkit-animation: move-wave 3s;
+   -webkit-animation-delay: 1s;
+   animation-delay: 1s;
+}
+.waveMiddle {
+    background-image: url('../images/wave-mid.png');
+    background-size: 50% 120px;
+}
+.waveAnimation .waveMiddle {
+    animation: move_wave 10s linear infinite;
+}
+.waveBottom {
+    background-image: url('../images/wave-bot.png');
+    background-size: 50% 100px;
+}
+.waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
 }
 
