@@ -1,7 +1,5 @@
 package br.com.api.chain.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +25,6 @@ public class Link {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "projeto_id")
-    @JsonBackReference
     private Projeto projetoId;
 
     public Link(){}

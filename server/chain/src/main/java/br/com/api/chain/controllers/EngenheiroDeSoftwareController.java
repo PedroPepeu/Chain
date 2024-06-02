@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.chain.entities.EngenheiroDeSoftware;
-import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 import br.com.api.chain.services.EngenheiroDeSoftwareService;
 
 @RestController
@@ -29,10 +29,10 @@ public class EngenheiroDeSoftwareController {
         this.usuarioService = usuarioService;
     }
 
-    /*@GetMapping("/")
+    @GetMapping("/ALL") // SÓ PRA TESTES
     public List<EngenheiroDeSoftware> engenheiroDeSoftwares(){
-        return usuarioRepositorio.findAll();
-    }*/
+        return this.usuarioService.getEngenheiros();
+    }
 
     @GetMapping("/{email}")
     public ResponseEntity<EngenheiroDeSoftware> getUserByEmail(@PathVariable String email){
@@ -58,5 +58,11 @@ public class EngenheiroDeSoftwareController {
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         usuarioService.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<EngenheiroDeSoftware> updateUser(@PathVariable Integer id, @RequestBody EngenheiroDeSoftware eng){
+        eng = usuarioService.updateUser(id, eng);
+        return ResponseEntity.ok().body(eng);
     }
 }

@@ -2,8 +2,7 @@ package br.com.api.chain.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -19,19 +18,18 @@ public class Projeto {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "administrador_id")
-    @JsonBackReference
     private EngenheiroDeSoftware administradorId;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "projetoId", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Link> links;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "projetoId", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Atividade> atividades;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "projetoId", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Membro> membros;
 
     public Projeto(){}
