@@ -30,4 +30,8 @@ public class EngenheiroDeSoftwareService {
     public EngenheiroDeSoftware insertUser(EngenheiroDeSoftware eng){
         return usuarioRepositorio.save(eng);
     }
+
+    public void deleteUser(Integer id){
+        usuarioRepositorio.deleteById(id);
+    }
 }
