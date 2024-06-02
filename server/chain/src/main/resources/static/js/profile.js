@@ -9,22 +9,24 @@ class Project {
     render() {
         var node = document.createElement('div');
         node.className = 'project';
-
         this.a = document.createElement('a');
+        this.a.classList.add('aEdit');
         this.input = document.createElement('input');
         this.editButton = document.createElement('button'); // Botão de edição
+        this.editButton.classList.add('edit-button');
         this.editButton.innerText = 'Editar Nome';
         this.editButton.addEventListener('click', () => {
             this.editTitle();
         });
 
         this.deleteButton = document.createElement('button'); // Botão de exclusão
+        this.deleteButton.classList.add('delete-button');
         this.deleteButton.innerText = 'Excluir';
         this.deleteButton.addEventListener('click', () => {
             this.deleteProject();
         });
         
-        this.a.href = './projects';
+        this.a.href = '../templates/projects.html';
         this.a.innerText = this.title;
 
         node.appendChild(this.a);
