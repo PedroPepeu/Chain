@@ -9,7 +9,11 @@ public class HomeController {
     
     @GetMapping("/")
     public ClassPathResource Home() {
-        return new ClassPathResource("templates/teste.html");
+        return new ClassPathResource("templates/index.html");
     }
     
+    @GetMapping("/login")
+    public ClassPathResource Login(){
+        return new ClassPathResource("templates/login.html");
+    }
 }
