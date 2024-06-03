@@ -18,27 +18,27 @@ import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 @Service
 public class EngenheiroDeSoftwareService {
 
-    private final EngenheiroDeSoftwareRepository usuarioRepositorio;
+    private final EngenheiroDeSoftwareRepository usuarioRepository;
 
     @Autowired
-    public EngenheiroDeSoftwareService(EngenheiroDeSoftwareRepository usuarioRepositorio){
-        this.usuarioRepositorio = usuarioRepositorio;
+    public EngenheiroDeSoftwareService(EngenheiroDeSoftwareRepository usuarioRepository){
+        this.usuarioRepository = usuarioRepository;
     }
 
     public List<EngenheiroDeSoftware> getEngenheiros(){
-        return this.usuarioRepositorio.findAll();
+        return this.usuarioRepository.findAll();
     }
 
     public EngenheiroDeSoftware getUserByEmail(String email){
-        EngenheiroDeSoftware eng = usuarioRepositorio.findByEmail(email);
+        EngenheiroDeSoftware eng = usuarioRepository.findByEmail(email);
         if(eng.getId() == null){
             throw new EmailNotFoundException(email);
         }
         return eng;
     }
 
-    public EngenheiroDeSoftware getUserById(Integer id){
-        Optional<EngenheiroDeSoftware> eng = usuarioRepositorio.findById(id);
+    private EngenheiroDeSoftware getUserById(Integer id){
+        Optional<EngenheiroDeSoftware> eng = usuarioRepository.findById(id);
         return eng.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
@@ -46,7 +46,7 @@ public class EngenheiroDeSoftwareService {
         String email = eng.getEmail();
         String senha = eng.getSenha();
 
-        eng = usuarioRepositorio.findByEmail(email);
+        eng = usuarioRepository.findByEmail(email);
 
         if(eng == null){ // A validação não está funcionando aqui
             throw new EmailNotFoundException(email);
@@ -61,17 +61,17 @@ public class EngenheiroDeSoftwareService {
     }
 
     public EngenheiroDeSoftware insertUser(EngenheiroDeSoftware eng){
-        return usuarioRepositorio.save(eng);
+        return usuarioRepository.save(eng);
     }
 
     public void deleteUser(Integer id){
-        usuarioRepositorio.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 
     public EngenheiroDeSoftware updateUser(Integer id, EngenheiroDeSoftware eng){
-        EngenheiroDeSoftware entity = usuarioRepositorio.getReferenceById(id);
+        EngenheiroDeSoftware entity = usuarioRepository.getReferenceById(id);
         updateData(entity, eng);
-        return usuarioRepositorio.save(entity);
+        return usuarioRepository.save(entity);
     }
 
     private void updateData(EngenheiroDeSoftware entity, EngenheiroDeSoftware eng){
