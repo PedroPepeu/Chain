@@ -36,6 +36,21 @@ public class EngenheiroDeSoftwareService {
         return eng.get();
     }
 
+    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){
+        String email = eng.getEmail();
+        String senha = eng.getSenha();
+
+        eng = usuarioRepositorio.findByEmail(email);
+
+        if(eng != null && eng.getSenha().equals(senha)){
+            return eng;
+        }
+        else{
+            // jogar uma exceção
+            return null;
+        }
+    }
+
     public EngenheiroDeSoftware insertUser(EngenheiroDeSoftware eng){
         return usuarioRepositorio.save(eng);
     }
@@ -69,5 +84,14 @@ public class EngenheiroDeSoftwareService {
     public List<Anotacao> getUserAnotations(Integer id){
         EngenheiroDeSoftware eng = this.getUserById(id);
         return eng.getAnotacoes();
+    }
+
+    public Anotacao insertUserAnotation(Integer id, Anotacao anot){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        List<Anotacao> anotacoes = eng.getAnotacoes();
+        // Como salvar isso
+        anotacoes.add(anot);
+        eng.setAnotacoes(anotacoes);
+        return anot;
     }
 }
