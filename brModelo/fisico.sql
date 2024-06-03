@@ -41,7 +41,7 @@ CREATE TABLE participa (
     id INTEGER auto_increment PRIMARY KEY,
     engenheiro_de_software_id INTEGER,
     projeto_id INTEGER,
-    cargo VARCHAR(50)
+    cargo INTEGER NOT NULL
 );
 
 CREATE TABLE realiza (
