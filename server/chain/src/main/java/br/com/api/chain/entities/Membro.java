@@ -1,7 +1,5 @@
 package br.com.api.chain.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,12 +19,10 @@ public class Membro {
 
     @ManyToOne
     @JoinColumn(name = "engenheiro_de_software_id")
-    @JsonBackReference
     private EngenheiroDeSoftware engenheiroId;
 
     @ManyToOne
     @JoinColumn(name = "projeto_id")
-    @JsonBackReference
     private Projeto projetoId;
 
     @Column(name = "cargo")

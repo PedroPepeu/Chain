@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página cadastro Chain</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/cadastro.css') }}">
+    <link rel="stylesheet" href="/css/cadastro.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.css">
+    <link rel="stylesheet" href="/fontawesome/css/brands.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
-    <div class="backgroundCadastro">
-        <img src="../static/images/dia.jfif" alt="imagem background">
+    <div class="top-wrapper">
+        <nav class="navbar navbar-expand-sm navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="/images/logo.png" alt="Bootstrap" height="60px">
+                </a>
+                <a class="navbar-brand" href="#">Chain</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
     <main>
+        <section class="backgroundCadastro">
+            <img src="/images/dia.jfif" alt="imagem background">
+        </section>
         <section class="cadastroTela">
             <div class="tela">
                 <div class="flex">
                     <div class="transparencia">
-
                         <form class="cadastroConteudo">
-
                             <div class="imgcontainer">
-                                <img src="../static/images/flavio.jfif" alt="nosso estagiario do 190 flavio" title="foto do estagiario 190 flavio" class="avatar">
+                                <img src="/images/flavio.jfif" alt="nosso estagiario do 190 flavio" title="foto do estagiario 190 flavio" class="avatar">
                             </div>
                             <div class="containerCadastro">
                                 <ul>
@@ -50,5 +81,32 @@
             </div>
         </section>
     </main>
+    <footer>
+        <div class="container acb">
+          <div class="links">
+            <h3>Links Úteis</h3>
+            <ul>
+              <li><a href="./index.html">Início</a></li>
+              <li><a href="#sobre">Sobre nós</a></li>
+            </ul>
+          </div>
+          <div class="contato">
+            <h3>Contato</h3>
+            <p><strong>Email:</strong> <a href="mailto:educalivrosbiblioteca@gmail.com">joao.00000845222@unicap.br</a>
+            </p>
+            <!--Protocolo Mailto-->
+            <p><strong>Telefone:</strong> (81) 99684-5391</p>
+          </div>
+          <div class="social">
+            <h3>Siga-nos</h3>
+            <ul>
+              <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
+            </ul>
+          </div>
+        </div>
+    </footer>
 </body>
 </html>

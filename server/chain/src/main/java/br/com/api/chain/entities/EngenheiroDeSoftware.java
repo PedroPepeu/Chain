@@ -3,8 +3,7 @@ package br.com.api.chain.entities;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,20 +30,20 @@ public class EngenheiroDeSoftware {
     @Column(name="email")
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "engenheiroId", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Anotacao> anotacoes;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "administradorId", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Projeto> projetos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "engenheiroId", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Membro> participa;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "engenheiros")
-    @JsonManagedReference
     Set<Atividade> atividades;
 
     public EngenheiroDeSoftware(){}

@@ -12,4 +12,8 @@ public class HomeController {
         return new ClassPathResource("templates/index.html");
     }
     
+    @GetMapping("/login")
+    public ClassPathResource Login(){
+        return new ClassPathResource("templates/login.html");
+    }
 }

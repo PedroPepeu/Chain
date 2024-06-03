@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../static/css/projects.css">
-    <link rel="stylesheet" href="../static/fontawesome/css/fontawesome.css">
-    <link rel="stylesheet" href="../static/fontawesome/css/solid.css">
-    <link rel="stylesheet" href="../static/fontawesome/css/brands.css">
-    <link rel="stylesheet" href="../static/css/components/footer.css">
+    <link rel="stylesheet" href="/css/projects.css">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.css">
+    <link rel="stylesheet" href="/fontawesome/css/brands.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
 </head>
 
 
@@ -45,6 +45,15 @@
         </div>
         <div class="main-content">
             <div id="root">
+                <div class="filtro" id="filtro">
+                    <h4>Filtre suas atividades:</h2>
+                    <form>
+                        <input type="radio" id="minhasAtividades" name="filtroAtividade" value="Minhas">
+                        <label for="minhasAtividades">Minhas</label><br>
+                        <input type="radio" id="todasAtividades" name="filtroAtividade" value="Todas">
+                        <label for="todasAtividades">Todas</label><br>
+                    </form>   
+                </div>
                 <div id="addTodoListDiv">
                     <input id="addTodoListInput" class="comment">
                     <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
@@ -62,6 +71,6 @@
     </script>
 </body>    
 
-<script src="../static/js/projects.js"></script>
+<script src="/js/projects.js"></script>
 
 </html>
