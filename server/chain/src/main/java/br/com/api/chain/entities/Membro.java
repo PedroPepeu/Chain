@@ -26,15 +26,15 @@ public class Membro {
     private Projeto projetoId;
 
     @Column(name = "cargo")
-    private String cargo;
+    private Integer cargo;
 
     public Membro(){}
 
-    public Membro(Integer id, EngenheiroDeSoftware engenheiroId, Projeto projetoId, String cargo) {
+    public Membro(Integer id, EngenheiroDeSoftware engenheiroId, Projeto projetoId, Cargo cargo) {
         this.id = id;
         this.engenheiroId = engenheiroId;
         this.projetoId = projetoId;
-        this.cargo = cargo;
+        this.setCargo(cargo);
     }
 
     public Integer getId() {
@@ -49,8 +49,8 @@ public class Membro {
         return projetoId;
     }
 
-    public String getCargo() {
-        return cargo;
+    public Cargo getCargo() {
+        return Cargo.valueOf(cargo);
     }
 
     public void setId(Integer id) {
@@ -65,7 +65,9 @@ public class Membro {
         this.projetoId = projetoId;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setCargo(Cargo cargo) {
+        if(cargo != null){
+            this.cargo = cargo.getCode();
+        }
     }
 }
