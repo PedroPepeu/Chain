@@ -2,11 +2,15 @@ package br.com.api.chain.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.api.chain.entities.Anotacao;
+import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
+import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 
 @Service
@@ -50,5 +54,20 @@ public class EngenheiroDeSoftwareService {
         entity.setNome(eng.getNome());
         entity.setEmail(eng.getEmail());
         entity.setSenha(eng.getSenha());
+    }
+
+    public Set<Atividade> getUserActivities(Integer id){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        return eng.getAtividades();
+    }
+
+    public List<Projeto> getUserProjects(Integer id){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        return eng.getProjetos();
+    }
+
+    public List<Anotacao> getUserAnotations(Integer id){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        return eng.getAnotacoes();
     }
 }
