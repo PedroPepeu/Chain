@@ -42,13 +42,13 @@ public class EngenheiroDeSoftwareController {
     public ResponseEntity<EngenheiroDeSoftware> getUserByEmail(@PathVariable String email){
         EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
         return ResponseEntity.ok().body(eng);
-    }
+    }*/
 
     @GetMapping("/id/{id}")
     public ResponseEntity<EngenheiroDeSoftware> getUserById(@PathVariable Integer id){
         EngenheiroDeSoftware eng = usuarioService.getUserById(id);
         return ResponseEntity.ok().body(eng);
-    }*/
+    }
 
     @GetMapping(value = "/login")
     public ResponseEntity<EngenheiroDeSoftware> login(@RequestBody EngenheiroDeSoftware eng){

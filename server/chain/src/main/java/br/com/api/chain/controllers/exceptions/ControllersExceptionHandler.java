@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.api.chain.services.exceptions.EmailNotFoundException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -21,4 +22,11 @@ public class ControllersExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
+    @ExceptionHandler(EmailNotFoundException.class)
+    public ResponseEntity<StandartError> emailNotFound(ResourceNotFoundException e, HttpServletRequest req){
+        String error = "Email not found";
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(), req.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
 }

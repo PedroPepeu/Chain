@@ -12,6 +12,8 @@ import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
+import br.com.api.chain.services.exceptions.EmailNotFoundException;
+import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class EngenheiroDeSoftwareService {
@@ -28,12 +30,16 @@ public class EngenheiroDeSoftwareService {
     }
 
     public EngenheiroDeSoftware getUserByEmail(String email){
-        return usuarioRepositorio.findByEmail(email);
+        EngenheiroDeSoftware eng = usuarioRepositorio.findByEmail(email);
+        if(eng.getId() == null){
+            throw new EmailNotFoundException(email);
+        }
+        return eng;
     }
 
     public EngenheiroDeSoftware getUserById(Integer id){
         Optional<EngenheiroDeSoftware> eng = usuarioRepositorio.findById(id);
-        return eng.get();
+        return eng.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){
@@ -42,12 +48,15 @@ public class EngenheiroDeSoftwareService {
 
         eng = usuarioRepositorio.findByEmail(email);
 
-        if(eng != null && eng.getSenha().equals(senha)){
-            return eng;
+        if(eng == null){ // A validação não está funcionando aqui
+            throw new EmailNotFoundException(email);
+        }
+        else if(eng.getSenha().equals(senha)){
+            // jogar uma exceção
+            throw new EmailNotFoundException(email);   
         }
         else{
-            // jogar uma exceção
-            return null;
+            return eng;
         }
     }
 
