@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (loginValido && senhaValida) {
             exibirNotificacao("Login efetuado com sucesso");
             exibirNotificacao("pepeu ajusta banco para verificar se senha e login são validos"); 
-            setTimeout(window.location.href = "./profile", 1000);
+            setTimeout(window.location.href = "profile", 1000);
         // Simula a verificação do banco de dados    
         } else {
             if (!loginValido) {
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         exibirNotificacao("redirecionando para area de recuperar conta");
         setTimeout(function() {
-            window.location.href = "./brambrambram";
+            window.location.href = "404";
         }, 1000);
     });
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         exibirNotificacao("redirecionando para tela de cadastro");
         setTimeout(function() {
-            window.location.href = "./cadastro";
+            window.location.href = "cadastro";
         }, 1000);
     });
 });

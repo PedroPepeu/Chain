@@ -57,20 +57,12 @@ html, body{
     min-height: 10rem;
     margin-top: 10px;
     margin-bottom: 10px;
-    display: grid;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-.project a{
-    text-align: center;
-}
-
-.description{
-    width: 40vw;
-    min-height: 5rem;
-    background-color: #db3254;
-}
 
 .calendario .top{
     background-color: var(--topbar-color);
@@ -189,7 +181,7 @@ html, body{
 }
 
 .project a{
-    color: #000;
+    color: #fff;
     font-size: 24px;
     text-decoration: None;
 }
@@ -199,10 +191,11 @@ html, body{
     background: rgb(2,0,36);
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 8px 30px;
     border: none;
     cursor: pointer;
-    width: 40%;
+    width: 150px;
+    height: 60px;
     font-size: 16px;
     transition: .2s;
     border-radius: 10px;

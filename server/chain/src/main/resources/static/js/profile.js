@@ -9,6 +9,8 @@ class Project {
     render() {
         var node = document.createElement('div');
         node.className = 'project';
+
+        
         this.a = document.createElement('a');
         this.a.classList.add('aEdit');
         this.input = document.createElement('input');
@@ -26,13 +28,12 @@ class Project {
             this.deleteProject();
         });
         
-        this.a.href = '../templates/projects.html';
+        this.a.href = 'project';
         this.a.innerText = this.title;
 
         node.appendChild(this.a);
         node.appendChild(this.editButton);
         node.appendChild(this.deleteButton); // Adicionando o botão de exclusão
-        node.appendChild(description());
         this.place.appendChild(node);
     }
 
@@ -51,11 +52,7 @@ class Project {
     }
 }
 
-function description() {
-    var description = document.createElement('div');
-    description.className = 'description';
-    return description;
-}
+
 
 let origin = document.getElementById("projects");
 let projectName = document.getElementById("addProjectInput");
