@@ -21,16 +21,18 @@ import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AnotacaoRepository;
+import br.com.api.chain.repositories.ProjetoRepository;
 import br.com.api.chain.services.AnotacaoService;
 import br.com.api.chain.services.EngenheiroDeSoftwareService;
+import br.com.api.chain.services.ProjetoService;
 
 @RestController
 @RequestMapping("/users")
 public class EngenheiroDeSoftwareController {
 
     private final EngenheiroDeSoftwareService usuarioService;
-
     private final AnotacaoService anotacaoService;
+    private final ProjetoService projetoService;
 
     /*@Autowired
     public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService){
@@ -38,9 +40,10 @@ public class EngenheiroDeSoftwareController {
     }*/
 
     @Autowired
-    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository){
+    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository, ProjetoRepository projetoRepository){
         this.usuarioService = usuarioService;
         this.anotacaoService = new AnotacaoService(anotacaoRepository);
+        this.projetoService = new ProjetoService(projetoRepository); 
     }
 
     @GetMapping("/ALL") // SÓ PRA TESTES
@@ -53,6 +56,8 @@ public class EngenheiroDeSoftwareController {
         EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
         return ResponseEntity.ok().body(eng);
     }*/
+
+    // Usuário em geral
 
     @GetMapping("/{id}")
     public ResponseEntity<EngenheiroDeSoftware> getUserById(@PathVariable Integer id){
@@ -86,7 +91,7 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(eng);
     }
 
-    // Métodos para confirmar com o professor
+    // Atividades
 
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<Set<Atividade>> getUserActivities(@PathVariable Integer id){
@@ -94,11 +99,24 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(ativ);
     }
 
-    @GetMapping(value = "/{id}/myProjects")
+    // Projetos
+
+    @GetMapping(value = "/{id}/myProjects") // Será que seria melhor retornar os projetos que ele faz parte também ?
     public ResponseEntity<List<Projeto>> getUserProjects(@PathVariable Integer id){
         List<Projeto> proj = usuarioService.getUserProjects(id);
         return ResponseEntity.ok().body(proj);
     }
+
+    @PostMapping(value = "/{id}/myProjects")
+    public ResponseEntity<Projeto> insertUserProject(@PathVariable Integer id, @RequestBody Projeto proj){
+        proj = usuarioService.insertUserProject(id, proj);
+        projetoService.insertProject(proj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(proj.getId()).toUri();
+        return ResponseEntity.created(uri).body(proj);
+    }
+
+    // Anotações
 
     @GetMapping(value = "/{id}/anotations")
     public ResponseEntity<List<Anotacao>> getUserAnotations(@PathVariable Integer id){
