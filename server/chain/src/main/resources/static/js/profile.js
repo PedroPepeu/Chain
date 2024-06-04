@@ -10,8 +10,8 @@ class Project {
         var node = document.createElement('div');
         node.className = 'project';
 
-        
-        this.a = document.createElement('a');
+
+        this.a = document.createElement('a');111
         this.a.classList.add('aEdit');
         this.input = document.createElement('input');
         this.editButton = document.createElement('button'); // Botão de edição
