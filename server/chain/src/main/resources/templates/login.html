@@ -74,7 +74,7 @@
                                             placeholder="Digite sua Senha" required>
                                     </li>
                                     <li>
-                                        <button type="submit">Entrar</button>
+                                        <button id="bt_login" type="button">Entrar</button>
                                     </li>
                                     <li>
                                         <label>
@@ -123,7 +123,39 @@
           </div>
         </div>
     </footer>
+
+    <script>
+        const email = document.getElementById('Email');
+        const passwd = document.getElementById('password');
+        const login = document.getElementById('bt_login');
+
+        var logged = window.localStorage.getItem('user')
+        if(logged)
+        {
+            window.location.href = '/profile';
+            console.log('its ok');
+        }
+
+        function makeLogin(){
+            fetch('/users/1', {
+                method: 'GET',
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.localStorage.setItem('user', data);
+                console.log("User Data:", data); // Example usage
+                console.log(data.email);
+            })
+            .catch(error => {
+                console.error("Error fetching user:", error);
+            });
+        }
+
+        login.onclick = makeLogin;
+    </script>
 </body>
 
 </html>
-
