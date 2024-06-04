@@ -42,21 +42,18 @@ public class EngenheiroDeSoftwareService {
         return eng.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){
-        String email = eng.getEmail();
-        String senha = eng.getSenha();
-
-        eng = usuarioRepository.findByEmail(email);
-
-        if(eng == null){ // A validação não está funcionando aqui
+    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){ // Ver como fazer o exception funcionar
+        String email = eng.getEmail(), senha = eng.getSenha();
+        try {
+            eng = usuarioRepository.findByEmail(email);
+            if(eng.getSenha().equals(senha)){
+                return eng;
+            }
+            else{
+                throw new EmailNotFoundException(email);
+            }
+        } catch (EmailNotFoundException e) {
             throw new EmailNotFoundException(email);
-        }
-        else if(eng.getSenha().equals(senha)){
-            // jogar uma exceção
-            throw new EmailNotFoundException(email);   
-        }
-        else{
-            return eng;
         }
     }
 
@@ -81,9 +78,9 @@ public class EngenheiroDeSoftwareService {
 
     private void updateData(EngenheiroDeSoftware entity, EngenheiroDeSoftware eng){
         entity.setNome(eng.getNome());
-        entity.setEmail(eng.getEmail());
         entity.setSenha(eng.getSenha());
-        entity.setAnotacoes(eng.getAnotacoes());
+        // Posso colocar email se necessário, mas precisaria colocar uma verificação
+        //entity.setAnotacoes(eng.getAnotacoes());
     }
 
     public Set<Atividade> getUserActivities(Integer id){
@@ -105,10 +102,15 @@ public class EngenheiroDeSoftwareService {
         EngenheiroDeSoftware eng = this.getUserById(id);
         List<Anotacao> anotacoes = eng.getAnotacoes();
         anotacoes.add(anot);
-        eng.setAnotacoes(anotacoes);
-        updateUser(eng.getId(), eng);
+        //eng.setAnotacoes(anotacoes); Funciona mesmo sem, testei só pra ter certeza
+        //updateUser(eng.getId(), eng);
         return anot;
     }
 
-    
+    public Projeto insertUserProject(Integer id, Projeto proj){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        List<Projeto> projetos = eng.getProjetos();
+        projetos.add(proj);
+        return proj;
+    }
 }
