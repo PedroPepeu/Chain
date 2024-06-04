@@ -20,6 +20,8 @@ import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Projeto;
+import br.com.api.chain.repositories.AnotacaoRepository;
+import br.com.api.chain.services.AnotacaoService;
 import br.com.api.chain.services.EngenheiroDeSoftwareService;
 
 @RestController
@@ -28,9 +30,17 @@ public class EngenheiroDeSoftwareController {
 
     private final EngenheiroDeSoftwareService usuarioService;
 
-    @Autowired
+    private final AnotacaoService anotacaoService;
+
+    /*@Autowired
     public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService){
         this.usuarioService = usuarioService;
+    }*/
+
+    @Autowired
+    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository){
+        this.usuarioService = usuarioService;
+        this.anotacaoService = new AnotacaoService(anotacaoRepository);
     }
 
     @GetMapping("/ALL") // SÓ PRA TESTES
@@ -42,13 +52,13 @@ public class EngenheiroDeSoftwareController {
     public ResponseEntity<EngenheiroDeSoftware> getUserByEmail(@PathVariable String email){
         EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
         return ResponseEntity.ok().body(eng);
-    }
+    }*/
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<EngenheiroDeSoftware> getUserById(@PathVariable Integer id){
         EngenheiroDeSoftware eng = usuarioService.getUserById(id);
         return ResponseEntity.ok().body(eng);
-    }*/
+    }
 
     @GetMapping(value = "/login")
     public ResponseEntity<EngenheiroDeSoftware> login(@RequestBody EngenheiroDeSoftware eng){
@@ -99,7 +109,8 @@ public class EngenheiroDeSoftwareController {
     @PostMapping(value = "/{id}/anotations")
     public ResponseEntity<Anotacao> insertUserAnotation(@PathVariable Integer id, @RequestBody Anotacao anot){
         anot = usuarioService.insertUserAnotation(id, anot);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id/{id}")
+        anotacaoService.insertAnotation(anot);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(anot.getId()).toUri();
         return ResponseEntity.created(uri).body(anot);
     }

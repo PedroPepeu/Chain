@@ -37,7 +37,7 @@ public class EngenheiroDeSoftwareService {
         return eng;
     }
 
-    private EngenheiroDeSoftware getUserById(Integer id){
+    public EngenheiroDeSoftware getUserById(Integer id){
         Optional<EngenheiroDeSoftware> eng = usuarioRepository.findById(id);
         return eng.orElseThrow(() -> new ResourceNotFoundException(id));
     }
@@ -70,14 +70,20 @@ public class EngenheiroDeSoftwareService {
 
     public EngenheiroDeSoftware updateUser(Integer id, EngenheiroDeSoftware eng){
         EngenheiroDeSoftware entity = usuarioRepository.getReferenceById(id);
-        updateData(entity, eng);
-        return usuarioRepository.save(entity);
+        if(entity != null)
+        {
+            updateData(eng, entity);
+        }
+        return eng;
+        /*updateData(entity, eng);
+        return usuarioRepository.save(entity);*/
     }
 
     private void updateData(EngenheiroDeSoftware entity, EngenheiroDeSoftware eng){
         entity.setNome(eng.getNome());
         entity.setEmail(eng.getEmail());
         entity.setSenha(eng.getSenha());
+        entity.setAnotacoes(eng.getAnotacoes());
     }
 
     public Set<Atividade> getUserActivities(Integer id){
@@ -101,6 +107,7 @@ public class EngenheiroDeSoftwareService {
         // Como salvar isso
         anotacoes.add(anot);
         eng.setAnotacoes(anotacoes);
+        updateUser(eng.getId(), eng);
         return anot;
     }
 }
