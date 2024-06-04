@@ -1,8 +1,7 @@
-let root = document.getElementById("root");
-
+let root = document.getElementById("blocks");
 
 class todoList {
-    constructor(place, title = "to-do") {
+    constructor(place, title = "Atividades") {
 
         this.place = place;
         this.title = title;
@@ -33,11 +32,6 @@ class todoList {
         this.div = document.createElement('div');
         this.todoListElement = document.createElement('div');
 
-        // Create delete button
-        this.deleteButton = document.createElement('button');
-        this.deleteButton.innerText = 'X';
-        this.deleteButton.classList.add("btn-delete");
-        this.deleteButton.id = "delete-to-do-list-button";
 
         //Add Event listener
         this.button.addEventListener('click', () => {
@@ -47,14 +41,8 @@ class todoList {
             }
         });
 
-        // Add Event listener to the Delete button
-        this.deleteButton.addEventListener('click', () => {
-            this.todoListElement.remove();
-        });
-
         //Append elements to the to-do list element
         this.todoListElement.append(this.h2);
-        this.todoListElement.append(this.deleteButton);
         this.todoListElement.append(this.input);
         this.todoListElement.append(this.button);
         this.todoListElement.append(this.div);
@@ -80,6 +68,7 @@ class Card {
             text: text,
             description: "Click to write a description...",
         }
+        
         this.render();
     }
 
@@ -232,17 +221,11 @@ class EditableText {
 
 
 
+
+
 //-------------main------------
 
-let addTodoListInput = document.getElementById("addTodoListInput");
-let addTodoListButton = document.getElementById("addTodoListButton");
 
-addTodoListButton.addEventListener('click', () => {
-    if (addTodoListInput.value.trim() != "") {
-        new todoList(root, addTodoListInput.value);
-        addTodoListInput.value = "";
-    }
-});
-
-let todoList1 = new todoList(root);
+let todoList1 = new todoList(root, 'Atividades');
+let todoList2 = new todoList(root, 'Links');
 
