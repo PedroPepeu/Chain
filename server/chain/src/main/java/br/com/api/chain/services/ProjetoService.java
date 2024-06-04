@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.ProjetoRepository;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
