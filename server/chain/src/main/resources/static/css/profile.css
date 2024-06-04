@@ -1,28 +1,30 @@
-:root{
+:root {
     --sidebar-color: #623cea;
     --topbar-color: #db3254;
     --white: #f3efe0;
-    --background: #bf8aff; 
+    --background: #bf8aff;
 }
 
-html, body{
+html,
+body {
     margin: 0;
 }
 
-.main-wrapper{
+.main-wrapper {
     display: flex;
     position: relative;
 }
 
 
-.sidebar{
+.sidebar {
     position: fixed;
     height: 100vh;
     width: 18vw;
-    background-color: var(--sidebar-color);
+    background: rgb(2,0,36);
+background: linear-gradient(180deg, rgba(2,0,36,1) 2%, rgba(98,60,234,1) 38%, rgba(180,130,242,1) 61%, rgba(107,8,128,1) 86%);
 }
 
-.info{
+.info {
     border-radius: 6px;
     margin: 5vw auto;
     margin-bottom: 10rem;
@@ -32,26 +34,25 @@ html, body{
     align-items: center;
 }
 
-.info img{
+.info img {
     margin: auto auto;
     height: 8vw;
-}  
+}
 
-.info h1{
+.info h1 {
     text-align: center;
     font-size: 24px;
 }
 
 
-.calendario{
+.calendario {
     border-radius: 6px;
     margin: 5vw auto;
     height: 15vw;
     width: 15vw;
 }
 
-.project{
-    background-color: var(--sidebar-color);
+.project {
     width: 50vw;
     margin: 0 auto;
     min-height: 10rem;
@@ -61,10 +62,17 @@ html, body{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    background: rgba(255, 255, 255, 0.68);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 
-.calendario .top{
+.calendario .top {
     background-color: var(--topbar-color);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -75,7 +83,7 @@ html, body{
     justify-content: center;
 }
 
-.calendario .dates{
+.calendario .dates {
     background-color: var(--white);
     height: 100%;
     width: 100%;
@@ -83,30 +91,35 @@ html, body{
     border-bottom-left-radius: 10px;
 }
 
-.calendario h1{
+.calendario h1 {
     text-align: center;
     font-size: 12px;
 }
 
-.main-content{
+.main-content {
     margin-left: 18vw;
     min-height: 100vh;
     width: 82vw;
-    background-color: var(--white);
-    background-color: var(--background);
+    background-image: url('../images/WallpaperSpace.jpg');
 }
 
-.top-bar{
+.top-bar {
     position: relative;
     margin: 0 auto;
     margin-top: 5rem;
     border-radius: 6px;
     height: 3rem;
     width: 80%;
-    background-color: var(--topbar-color);
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: rgba(28, 176, 144, 0.68);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    border: 1px solid rgba(28, 176, 144, 0.3);
 }
 
 .top-bar h1 {
@@ -122,73 +135,79 @@ html, body{
     margin-left: 10px;
 }
 
-#projects{
+#projects {
     min-height: 100vh;
     width: 100%;
+    position: relative;
 }
+
+
 
 
 
 /* Project Creation */
 
-.createProject{
+.createProject {
     display: flex;
 }
 
 .button-5 {
-  align-items: center;
-  background-clip: padding-box;
-  background-color: #fa6400;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  justify-content: center;
-  line-height: 1.25;
-  margin: 0;
-  min-height: 1rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-  position: relative;
-  text-decoration: none;
-  transition: all 250ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  width: 1rem;
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 1rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 1rem;
 }
 
 .button-5:hover,
 .button-5:focus {
-  background-color: #fb8332;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
 .button-5:hover {
-  transform: translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .button-5:active {
-  background-color: #c85000;
-  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-  transform: translateY(0);
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
 }
 
-.project a{
+.project a {
     color: #fff;
     font-size: 24px;
     text-decoration: None;
 }
-.delete-button,.edit-button,.aEdit{
+
+.delete-button,
+.edit-button,
+.aEdit {
     display: flex;
     flex-direction: row;
-    background: rgb(2,0,36);
+    background: rgb(2, 0, 36);
     color: white;
     padding: 14px 20px;
     margin: 8px 30px;
@@ -200,7 +219,10 @@ html, body{
     transition: .2s;
     border-radius: 10px;
 }
-.delete-button:hover,.edit-button:hover,.aEdit:hover{
+
+.delete-button:hover,
+.edit-button:hover,
+.aEdit:hover {
     opacity: 0.8;
     box-shadow: 0 8px 32px 0 #6b088c;
     transform: scale(1.03);
@@ -208,3 +230,92 @@ html, body{
 
 
 
+
+
+
+
+
+.main-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    min-height: 100vh;
+    width: 100%;
+}
+
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+    }
+}
+.waveWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+.waveWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
+}
+.bgTop {
+    z-index: 15;
+    opacity: 0.5;
+}
+.bgMiddle {
+    z-index: 10;
+    opacity: 0.75;
+}
+.bgBottom {
+    z-index: 5;
+}
+
+
+
+.wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+}
+.waveTop {
+    background-image: url('../images/wave-top.png');
+    background-size: 50% 100px;
+}
+.waveAnimation .waveTop {
+  animation: move-wave 3s;
+   -webkit-animation: move-wave 3s;
+   -webkit-animation-delay: 1s;
+   animation-delay: 1s;
+}
+.waveMiddle {
+    background-image: url('../images/wave-mid.png');
+    background-size: 50% 120px;
+}
+.waveAnimation .waveMiddle {
+    animation: move_wave 10s linear infinite;
+}
+.waveBottom {
+    background-image: url('../images/wave-bot.png');
+    background-size: 50% 100px;
+}
+.waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
+}
