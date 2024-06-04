@@ -30,7 +30,7 @@ public class AnotacaoService {
     }
 
     public Anotacao insertAnotation(Anotacao anot){
-        return anotacaoRepository.saveOrUpdate(anot);
+        return anotacaoRepository.save(anot);
     }
 
     public void deleteAnotation(Integer id){

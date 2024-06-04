@@ -40,7 +40,7 @@ public class AnotacaoController {
         return ResponseEntity.ok().body(anot);
     }
 
-    @PostMapping 
+    @PostMapping()
     public ResponseEntity<Anotacao> insertAnotation(@RequestBody Anotacao anot){
         anot = anotacaoService.insertAnotation(anot);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
