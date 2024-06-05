@@ -570,4 +570,10 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+#addMemberButton {
+    margin-top: 6%;
+    text-decoration: none;
+    color: inherit; /* Para herdar a cor do texto padrão */
+}
+
 
