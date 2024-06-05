@@ -1,5 +1,5 @@
-let linkLoginUser = "http://127.0.0.1:5000/login";
-let linkHomeUser = "http://127.0.0.1:5000/profile";
+let linkLoginUser = "http://localhost:8080/login";
+let linkHomeUser = "http://localhost:8080/profile";
 
 // add in js of the sites to return the error to the test with the codes
 

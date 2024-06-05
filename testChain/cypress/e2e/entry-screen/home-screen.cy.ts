@@ -1,4 +1,4 @@
-let linkHomePage = "http://127.0.0.1:5000/index";
+let linkHomePage = "http://localhost:8080/";
 
 describe('Home', function() {
     it('Home-button', function() {
