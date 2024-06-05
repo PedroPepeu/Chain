@@ -71,7 +71,7 @@
                                         <input class="textinput" type="email" id="email" name="email" placeholder="Digite seu email" required>
                                     </li>
                                     <li>
-                                        <button id = "buttonRegistrar" type="submit">Cadastre-se</button>
+                                        <button id = "buttonRegistrar" type="button">Cadastre-se</button>
                                     </li>
                                 </ul>
                             </div>
@@ -108,5 +108,45 @@
           </div>
         </div>
     </footer>
+
+    <script>
+        const nome = document.getElementById('username');
+        const passwd = document.getElementById('password');
+        const passwd2 = document.getElementById('passwordConfirmacao');
+        const email = document.getElementById('email');
+        const bt_cadastro = document.getElementById('buttonRegistrar');
+
+        function cadastrar(){
+            const user = {
+                nome: nome.value,
+                email: email.value,
+                senha: passwd.value
+            };
+
+            fetch('/users/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(user),
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Error ao tentar criar o usuário');
+                    throw new Error('Error criar usuário');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Novo usuario inserido');
+                window.location.href = '/login';
+            })
+            .catch(error => {
+                console.error("Error fetching user:", error);
+            });
+        }
+
+        bt_cadastro.onclick = cadastrar;
+    </script>
 </body>
 </html>

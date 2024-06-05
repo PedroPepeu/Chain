@@ -1,5 +1,6 @@
 package br.com.api.chain.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Cargo;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
+import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 import br.com.api.chain.services.exceptions.EmailNotFoundException;
@@ -42,21 +45,18 @@ public class EngenheiroDeSoftwareService {
         return eng.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){
-        String email = eng.getEmail();
-        String senha = eng.getSenha();
-
-        eng = usuarioRepository.findByEmail(email);
-
-        if(eng == null){ // A validação não está funcionando aqui
+    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){ // Ver como fazer o exception funcionar
+        String email = eng.getEmail(), senha = eng.getSenha();
+        try {
+            eng = usuarioRepository.findByEmail(email);
+            if(eng.getSenha().equals(senha)){
+                return eng;
+            }
+            else{
+                throw new EmailNotFoundException(email);
+            }
+        } catch (EmailNotFoundException e) {
             throw new EmailNotFoundException(email);
-        }
-        else if(eng.getSenha().equals(senha)){
-            // jogar uma exceção
-            throw new EmailNotFoundException(email);   
-        }
-        else{
-            return eng;
         }
     }
 
@@ -69,7 +69,7 @@ public class EngenheiroDeSoftwareService {
     }
 
     public EngenheiroDeSoftware updateUser(Integer id, EngenheiroDeSoftware eng){
-        EngenheiroDeSoftware entity = usuarioRepository.getReferenceById(id);
+        EngenheiroDeSoftware entity = getUserById(id);
         if(entity != null)
         {
             updateData(eng, entity);
@@ -81,9 +81,9 @@ public class EngenheiroDeSoftwareService {
 
     private void updateData(EngenheiroDeSoftware entity, EngenheiroDeSoftware eng){
         entity.setNome(eng.getNome());
-        entity.setEmail(eng.getEmail());
         entity.setSenha(eng.getSenha());
-        entity.setAnotacoes(eng.getAnotacoes());
+        // Posso colocar email se necessário, mas precisaria colocar uma verificação
+        //entity.setAnotacoes(eng.getAnotacoes());
     }
 
     public Set<Atividade> getUserActivities(Integer id){
@@ -96,6 +96,20 @@ public class EngenheiroDeSoftwareService {
         return eng.getProjetos();
     }
 
+    public List<Projeto> getUserParticipations(Integer id){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        List<Membro> part = eng.getParticipa();
+        return getListProjetos(part);
+    }
+
+    private List<Projeto> getListProjetos(List<Membro> part){
+        List<Projeto> proj = new ArrayList<>();
+        for(int i = 0; i < part.size(); i++){
+            proj.add(part.get(i).getProjetoId());
+        }
+        return proj;
+    }
+
     public List<Anotacao> getUserAnotations(Integer id){
         EngenheiroDeSoftware eng = this.getUserById(id);
         return eng.getAnotacoes();
@@ -104,10 +118,85 @@ public class EngenheiroDeSoftwareService {
     public Anotacao insertUserAnotation(Integer id, Anotacao anot){
         EngenheiroDeSoftware eng = this.getUserById(id);
         List<Anotacao> anotacoes = eng.getAnotacoes();
-        // Como salvar isso
         anotacoes.add(anot);
-        eng.setAnotacoes(anotacoes);
-        updateUser(eng.getId(), eng);
+        //eng.setAnotacoes(anotacoes); Funciona mesmo sem, testei só pra ter certeza
+        //updateUser(eng.getId(), eng);
         return anot;
+    }
+
+    public Projeto insertUserProject(Integer id, Projeto proj){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        List<Projeto> projetos = eng.getProjetos();
+        projetos.add(proj);
+        return proj;
+    }
+
+    public Atividade insertUserIntoActivity(Integer id, Projeto proj, Atividade ativ, String otherEmail){
+        Integer otherId = this.getUserByEmail(otherEmail).getId();
+        List<Membro> membros = proj.getMembros();
+        boolean membroDoProjeto = verificarSeMembro(membros, otherId);
+        Integer idAdmin = proj.getAdministradorId().getId();
+
+        if(!membroDoProjeto){
+            return null;
+        }
+        else if(id == otherId || id == idAdmin){
+            Set<EngenheiroDeSoftware> engenheiros = ativ.getEngenheiros();
+            EngenheiroDeSoftware eng = this.getUserById(otherId);
+            eng.getAtividades().add(ativ);
+            engenheiros.add(eng);
+            return ativ;
+        }
+        else{
+            return null;
+        }
+        //return ativ; // depois tirar 
+    }
+
+    private boolean verificarSeMembro(List<Membro> membros, Integer otherId){
+        boolean membroDoProjeto = false;
+        if(membros != null){
+            for(int i = 0; i < membros.size(); i++){
+                if(membros.get(i).getEngenheiroId().getId() == otherId){
+                    membroDoProjeto = true;
+                }
+            }
+        }
+        return membroDoProjeto;
+    }
+
+    public Membro insertMember(Integer id, String email, Projeto proj, Cargo cargo){
+        Membro mem = new Membro();
+        EngenheiroDeSoftware eng = getUserByEmail(email);
+        Integer idAdmin = proj.getAdministradorId().getId();
+        if(id == idAdmin){
+            mem = new Membro(eng.getId(), eng, proj, cargo);
+            eng.getParticipa().add(mem);
+            return mem;
+        }
+        else{
+            // jogar exception
+        }
+        return mem; // depois tirar
+    }
+
+    public List<Atividade> getUserProjectActivities(Integer id, Projeto proj){ // VER VALIDAÇÕES
+        List<Atividade> atividades = proj.getAtividades();
+        EngenheiroDeSoftware eng = getUserById(id);
+        return searchUserActivities(atividades, eng);
+    }
+
+    private List<Atividade> searchUserActivities(List<Atividade> atividades, EngenheiroDeSoftware eng){
+        List<Atividade> res = new ArrayList<>();
+        Atividade x;
+        Set<EngenheiroDeSoftware> s;
+        for(int i = 0; i < atividades.size(); i++){
+            x = res.get(i);
+            s = x.getEngenheiros();
+            if(s.size() > 0 && s.contains(eng)){
+                res.add(x);
+            }
+        }
+        return res;
     }
 }

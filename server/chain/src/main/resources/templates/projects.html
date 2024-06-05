@@ -2,11 +2,14 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/projects.css">
     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
     <link rel="stylesheet" href="/fontawesome/css/solid.css">
     <link rel="stylesheet" href="/fontawesome/css/brands.css">
     <link rel="stylesheet" href="/css/components/footer.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 
@@ -28,16 +31,22 @@
                 </li>
                 <li>
                     <a href="profile">
-                        <span class="icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="icon"><i class="fa-solid fa-address-card"></i></i></span>
                         <span class="title">Perfil</span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <span class="icon"><i class="fa-solid fa-poo"></i></span>
+                        <span class="icon"><i class="fa-solid fa-list"></i></i></span>
                         <span class="title">Membros</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#" id="addMember" class="context-menu-trigger">
+                        <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
+                        <span id="addMemberButton">Adicionar membro</span>
+                    </a>
+                </li>  
             </ul>
             <div class="toggle">
 
@@ -54,9 +63,17 @@
                         <label for="todasAtividades">Todas</label><br>
                     </form>   
                 </div>
-                <div id="addTodoListDiv">
-                    <input id="addTodoListInput" class="comment">
-                    <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
+                <div id="blocks">
+                    <div class="links">
+                        <div class="addLink">
+                            <input id="createLinkName">
+                            <input id="createLinkInput">
+                            <button class="button-5" id="createLinkButton">+</button>
+                        </div>
+                        <div class="linkContainer" id="linkPlace">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

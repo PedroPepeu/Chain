@@ -10,9 +10,9 @@ CREATE TABLE atividade (
     id INTEGER auto_increment PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(250),
-    data_inicio DATE NOT NULL,
-    data_entrega DATE NOT NULL,
-    concluida BOOLEAN NOT NULL,
+    data_inicio DATE,
+    data_entrega DATE,
+    concluida BOOLEAN,
     projeto_id INTEGER NOT NULL
 );
 

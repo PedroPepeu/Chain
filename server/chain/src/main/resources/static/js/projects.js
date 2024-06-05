@@ -1,9 +1,37 @@
-let root = document.getElementById("root");
+let root = document.getElementById("blocks");
+let linkRoot = document.getElementById("linkPlace");
 
+class link {
+    constructor(place, url = './brambrambram', title = 'foo') {
+        this.place = place;
+        this.title = title;
+        this.url = url;
+        this.description = 'Adcione uma descrição';
+
+        this.render();
+    }
+
+    render() {
+        this.createLink();
+        this.place.append(this.linkElement);
+    }
+
+    createLink() {
+        this.linkElement = document.createElement('div');
+        this.a = document.createElement('a');
+        this.a.innerText = this.title;
+        this.a.href = this.url;
+        this.p = document.createElement('p');
+        this.p.innerText = this.description;
+
+        this.linkElement.classList.add('link');
+        this.linkElement.append(this.a);
+        this.linkElement.append(this.description);
+    }
+}
 
 class todoList {
-    constructor(place, title = "to-do") {
-
+    constructor(place, title = "Atividades") {
         this.place = place;
         this.title = title;
         this.cardArray = [];
@@ -22,7 +50,6 @@ class todoList {
     }
 
     createToDoListElement() {
-        //Create elements
         this.h2 = document.createElement('h2');
         this.h2.innerText = this.title;
         this.input = document.createElement('input');
@@ -33,13 +60,6 @@ class todoList {
         this.div = document.createElement('div');
         this.todoListElement = document.createElement('div');
 
-        // Create delete button
-        this.deleteButton = document.createElement('button');
-        this.deleteButton.innerText = 'X';
-        this.deleteButton.classList.add("btn-delete");
-        this.deleteButton.id = "delete-to-do-list-button";
-
-        //Add Event listener
         this.button.addEventListener('click', () => {
             if (this.input.value != "") {
                 this.addToDo.call(this);
@@ -47,14 +67,7 @@ class todoList {
             }
         });
 
-        // Add Event listener to the Delete button
-        this.deleteButton.addEventListener('click', () => {
-            this.todoListElement.remove();
-        });
-
-        //Append elements to the to-do list element
         this.todoListElement.append(this.h2);
-        this.todoListElement.append(this.deleteButton);
         this.todoListElement.append(this.input);
         this.todoListElement.append(this.button);
         this.todoListElement.append(this.div);
@@ -62,24 +75,25 @@ class todoList {
     }
 }
 
-class Title{
-    constructor(title, deleteButton){
+class Title {
+    constructor(title, deleteButton) {
         this.title;
         this.deleteButton;
     }
 }
 
-
 class Card {
     constructor(text, place, todoList) {
-
         this.place = place;
         this.todoList = todoList;
         this.state = {
-            date: 'Data',
+            initialDate: 'Data inicial',
+            finalDate: 'Data final',
             text: text,
             description: "Click to write a description...",
+            membro: "Digite o email do membro",
         }
+
         this.render();
     }
 
@@ -114,44 +128,41 @@ class Card {
     }
 
     showMenu() {
-
-        //Create elements
         this.menu = document.createElement("div");
         this.menuContainer = document.createElement("div");
         this.menuTitle = document.createElement("div");
-        this.menuDate = document.createElement("div");
+        this.menuInitialDate = document.createElement("div");
+        this.menuFinalDate = document.createElement("div");
         this.menuDescription = document.createElement("div");
+        this.menuMembro = document.createElement("div");
 
-
-        //Add class names
         this.menu.className = "menu";
         this.menuContainer.className = "menuContainer";
         this.menuTitle.className = "menuTitle";
-        this.menuDate.className = "menuDate";
+        this.menuInitialDate.className = "menuDate";
+        this.menuFinalDate.className = "menuDate";
         this.menuDescription.className = "menuDescription";
+        this.menuMembro.className = "menuMembro";
 
-        //Add inner Text
-
-        //Event listeners
         this.menuContainer.addEventListener('click', (e) => {
-            console.log(e.target);
             if (e.target.classList.contains("menuContainer")) {
                 this.menuContainer.remove();
             }
         });
 
-        
-        //Append
         this.menu.append(this.menuTitle);
-        this.menu.append(this.menuDate);
+        this.menu.append(this.menuInitialDate);
+        this.menu.append(this.menuFinalDate);
         this.menu.append(this.menuDescription);
+        this.menu.append(this.menuMembro);
         this.menuContainer.append(this.menu);
         root.append(this.menuContainer);
 
-        this.editableDate = new EditableText(this.state.date, this.menuDate, this, "date", "textarea")
+        this.editableInitialDate = new EditableText(this.state.initialDate, this.menuInitialDate, this, "date", "textarea")
+        this.editableFinalDate = new EditableText(this.state.finalDate, this.menuFinalDate, this, "date", "textarea")
         this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
         this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
-
+        this.editableMembro = new EditableText(this.state.membro, this.menuMembro, this, "membro", "input"); 
     }
 }
 
@@ -192,6 +203,12 @@ class EditableText {
 
         this.saveButton.addEventListener('click', () => {
             this.text = this.input.value;
+
+            if (this.property == "membro" && !this.validateEmail(this.input.value)) {
+                exibirNotificacao('Por favor, digite um email válido.');
+                return;
+            }
+
             this.card.state[this.property] = this.input.value;
 
             if (this.property == "text") {
@@ -203,11 +220,8 @@ class EditableText {
         });
 
         function clickSaveButton(event, object) {
-            // Number 13 is the "Enter" key on the keyboard
             if (event.keyCode === 13) {
-                // Cancel the default action, if needed
                 event.preventDefault();
-                // Trigger the button element with a click
                 object.saveButton.click();
             }
         }
@@ -227,22 +241,151 @@ class EditableText {
         this.input.select();
     }
 
+    validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
 }
-
-
-
 
 //-------------main------------
 
-let addTodoListInput = document.getElementById("addTodoListInput");
-let addTodoListButton = document.getElementById("addTodoListButton");
+let linkCreationButton = document.getElementById('createLinkButton');
+let linkCreationInput = document.getElementById('createLinkInput');
+let linkCreationName = document.getElementById('createLinkName');
 
-addTodoListButton.addEventListener('click', () => {
-    if (addTodoListInput.value.trim() != "") {
-        new todoList(root, addTodoListInput.value);
-        addTodoListInput.value = "";
+linkCreationButton.addEventListener('click', () => {
+    if(linkCreationInput.value.trim() !== "" && linkCreationName.value.trim() !== ""){
+        new link(linkRoot, linkCreationName, linkCreationInput.value);
+        linkCreationInput.value = "";
+        linkCreationName.value = "";
+    }
+})
+
+let todoList1 = new todoList(root, 'Atividades');
+
+// Função para exibir notificação usando Toastify
+function exibirNotificacao(mensagem) {
+    Toastify({
+        text: mensagem,
+        duration: 4000
+    }).showToast();
+}
+
+// Classe para criar o menu de contexto
+class ContextMenu {
+    constructor(triggerElement) {
+        this.triggerElement = triggerElement;
+        this.menuElement = null;
+        this.init();
+    }
+
+    init() {
+        this.triggerElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.createMenu(e);
+        });
+    }
+
+    createMenu(event) {
+        if (this.menuElement) {
+            this.menuElement.remove();
+        }
+    
+        this.menuElement = document.createElement('div');
+        this.menuElement.className = 'context-menu';
+        this.menuElement.style.top = `${event.clientY}px`;
+        this.menuElement.style.left = `${event.clientX}px`;
+    
+        const title = document.createElement('h3');
+        title.innerText = 'Adicionar Membro';
+        title.className = 'context-menu-title';
+    
+        const emailLabel = document.createElement('label');
+        emailLabel.innerText = 'Digite o email do membro:';
+        emailLabel.className = 'context-menu-email-label';
+    
+        const emailInput = document.createElement('input');
+        emailInput.type = 'email';
+        emailInput.className = 'context-menu-email-input';
+    
+        const categoryLabel = document.createElement('label');
+        categoryLabel.innerText = 'Escolha uma categoria:';
+        categoryLabel.className = 'context-menu-category-label';
+    
+        const categories = ['FRONTEND', 'BACKEND', 'FULL_STACK', 'SCRUM_MASTER', 'NONE'];
+        const categoryContainer = document.createElement('div');
+        categoryContainer.className = 'context-menu-category-container';
+    
+        categories.forEach(category => {
+            const radioLabel = document.createElement('label');
+            radioLabel.innerText = category;
+            radioLabel.className = 'context-menu-radio-label';
+    
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.name = 'category';
+            radioInput.value = category;
+            radioInput.className = 'context-menu-radio-input';
+    
+            radioLabel.appendChild(radioInput);
+            categoryContainer.appendChild(radioLabel);
+        });
+    
+        const addButton = document.createElement('button');
+        addButton.innerText = 'Adicionar Membro';
+        addButton.className = 'context-menu-add-button';
+        addButton.addEventListener('click', () => {
+            this.addMember(emailInput.value, categoryContainer);
+        });
+    
+        const closeButton = document.createElement('button');
+        closeButton.innerText = 'Fechar X';
+        closeButton.className = 'context-menu-close-button';
+        closeButton.addEventListener('click', () => {
+            this.menuElement.remove();
+        });
+    
+        this.menuElement.appendChild(title);
+        this.menuElement.appendChild(emailLabel);
+        this.menuElement.appendChild(emailInput);
+        this.menuElement.appendChild(categoryLabel);
+        this.menuElement.appendChild(categoryContainer);
+        this.menuElement.appendChild(addButton);
+        this.menuElement.appendChild(closeButton);
+    
+        document.body.appendChild(this.menuElement);
+    }
+    
+    addMember(email, categoryContainer) {
+        let memberEmail = email;
+        let memberRole = null;
+
+        if (!memberEmail || !this.validateEmail(memberEmail)) {
+            exibirNotificacao('Por favor, digite um email válido.');
+            return;
+        }
+
+        const selectedCategory = categoryContainer.querySelector('input[name="category"]:checked');
+        if (selectedCategory) {
+            memberRole = selectedCategory.value;
+        } else {
+            exibirNotificacao('Por favor, selecione uma categoria.');
+            return;
+        }
+
+        exibirNotificacao(`Membro adicionado: ${memberEmail} como ${memberRole}`);
+        this.menuElement.remove();
+    }
+
+    validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const addMemberElement = document.getElementById('addMemberButton');
+    if (addMemberElement) {
+        new ContextMenu(addMemberElement);
     }
 });
-
-let todoList1 = new todoList(root);
-

@@ -1,18 +1,17 @@
 name: Test run
 
 on:
-  push:
+  push:  
     branches: ['develop']
+      # paths:
+      #   - 'testChain/cypress/**/*.ts'
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-22.04
+  test-code:
+    name: Test E2E
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress run
+      - name: Install cypress
         uses: cypress-io/github-actions@v6
         with:
-          build: npx cypress run
-          start: npm start
-          browser: chrome
+          

@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Login Chain</title>
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+
     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
     <link rel="stylesheet" href="/fontawesome/css/solid.css">
     <link rel="stylesheet" href="/fontawesome/css/brands.css">
-    <link rel="stylesheet" href="/css/components/footer.css">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/components/header.css">
+
+    <link rel="stylesheet" href="/css/components/footer.css">
     <script src="/js/login.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -50,7 +53,7 @@
         </section>
         <section class="loginTela">
             <div class="tela">
-                <div class="flex">
+                <div class="a">
                     <div class="transparencia">
                         <form class="loginConteudo" id ="loginConteudo" action="profile">
                             <div class="imgcontainer">
@@ -71,7 +74,7 @@
                                             placeholder="Digite sua Senha" required>
                                     </li>
                                     <li>
-                                        <button type="submit">Entrar</button>
+                                        <button id="bt_login" type="button">Entrar</button>
                                     </li>
                                     <li>
                                         <label>
@@ -99,7 +102,7 @@
             <h3>Links Úteis</h3>
             <ul>
               <li><a href="/">Início</a></li>
-              <li><a href="#sobre">Sobre nós</a></li>
+              <li><a href="#">Sobre nós</a></li>
             </ul>
           </div>
           <div class="contato">
@@ -120,7 +123,51 @@
           </div>
         </div>
     </footer>
+
+    <script>
+        const email = document.getElementById('Email');
+        const passwd = document.getElementById('password');
+        const login = document.getElementById('bt_login');
+
+        var logged = window.localStorage.getItem('user')
+        if(logged)
+        {
+            window.location.href = '/profile';
+        }
+        
+        function makeLogin(){
+            const user = {
+                email: email.value,
+                senha: passwd.value
+            };
+            
+            fetch('/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(user),
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Login não sucedido, por favor verique o email e senha');
+                    throw new Error('Error ao tentar fazer login');
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                window.localStorage.setItem('user', JSON.stringify(data));
+                console.log("User Data:", data);
+                window.location.href = '/profile';
+            })
+            .catch(error => {
+                console.error("Error fetching user:", error);
+            });
+        }
+        
+        login.onclick = makeLogin;
+    </script>
 </body>
 
 </html>
-

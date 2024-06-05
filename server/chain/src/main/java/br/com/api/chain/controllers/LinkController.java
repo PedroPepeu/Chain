@@ -20,8 +20,8 @@ public class LinkController {
         this.linkService = linkService;
     }
 
-    /*@GetMapping("/")
+    @GetMapping("/ALL") // TESTE
     public List<Link> getLinks(){
-        return linkRepository.findAll();
-    }*/
+        return linkService.getLinks();
+    }
 }
