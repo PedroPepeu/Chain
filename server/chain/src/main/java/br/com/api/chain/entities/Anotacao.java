@@ -17,7 +17,7 @@ public class Anotacao {
     @Column(name="data_anotacao")
     private LocalDate dataAnotacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "engenheiro_de_software_id")
     private EngenheiroDeSoftware engenheiroId;
 

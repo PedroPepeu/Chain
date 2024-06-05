@@ -16,7 +16,7 @@ public class Projeto {
     @Column(name="nome")
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "administrador_id")
     private EngenheiroDeSoftware administradorId;
 

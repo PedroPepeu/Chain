@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
+import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 import br.com.api.chain.services.exceptions.EmailNotFoundException;
@@ -112,5 +113,36 @@ public class EngenheiroDeSoftwareService {
         List<Projeto> projetos = eng.getProjetos();
         projetos.add(proj);
         return proj;
+    }
+
+    public Atividade insertUserIntoActivity(Integer id, Atividade ativ, Integer otherId){
+        Projeto proj = ativ.getProjetoId();
+        List<Membro> membros = proj.getMembros();
+        boolean membroDoProjeto = verificarSeMembro(membros, otherId); 
+        Integer idAdmin = proj.getAdministradorId().getId();
+        
+        if(!membroDoProjeto){
+            // exception
+        }
+        else if(id == otherId || id == idAdmin){
+            Set<EngenheiroDeSoftware> engenheiros = ativ.getEngenheiros();
+            EngenheiroDeSoftware eng = this.getUserById(otherId);
+            engenheiros.add(eng);
+            return ativ;
+        }
+        else{
+            // exception
+        }
+        return ativ; // depois tirar 
+    }
+
+    private boolean verificarSeMembro(List<Membro> membros, Integer otherId){
+        boolean membroDoProjeto = false;
+        for(int i = 0; i < membros.size(); i++){
+            if(membros.get(i).getEngenheiroId().getId() == otherId){
+                membroDoProjeto = true;
+            }
+        }
+        return membroDoProjeto;
     }
 }

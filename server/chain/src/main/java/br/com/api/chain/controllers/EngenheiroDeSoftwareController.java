@@ -21,8 +21,10 @@ import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AnotacaoRepository;
+import br.com.api.chain.repositories.AtividadeRepository;
 import br.com.api.chain.repositories.ProjetoRepository;
 import br.com.api.chain.services.AnotacaoService;
+import br.com.api.chain.services.AtividadeService;
 import br.com.api.chain.services.EngenheiroDeSoftwareService;
 import br.com.api.chain.services.ProjetoService;
 
@@ -33,6 +35,7 @@ public class EngenheiroDeSoftwareController {
     private final EngenheiroDeSoftwareService usuarioService;
     private final AnotacaoService anotacaoService;
     private final ProjetoService projetoService;
+    private final AtividadeService atividadeService;
 
     /*@Autowired
     public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService){
@@ -40,10 +43,11 @@ public class EngenheiroDeSoftwareController {
     }*/
 
     @Autowired
-    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository, ProjetoRepository projetoRepository){
+    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository, ProjetoRepository projetoRepository, AtividadeRepository atividadeRepository){
         this.usuarioService = usuarioService;
         this.anotacaoService = new AnotacaoService(anotacaoRepository);
-        this.projetoService = new ProjetoService(projetoRepository); 
+        this.projetoService = new ProjetoService(projetoRepository);
+        this.atividadeService = new AtividadeService(atividadeRepository);
     }
 
     @GetMapping("/ALL") // SÓ PRA TESTES
@@ -101,19 +105,28 @@ public class EngenheiroDeSoftwareController {
 
     // Projetos
 
-    @GetMapping(value = "/{id}/myProjects") // Será que seria melhor retornar os projetos que ele faz parte também ?
+    @GetMapping(value = "/{id}/projects") // MUDAR PARA TODOS OS PROJETOS
     public ResponseEntity<List<Projeto>> getUserProjects(@PathVariable Integer id){
         List<Projeto> proj = usuarioService.getUserProjects(id);
         return ResponseEntity.ok().body(proj);
     }
 
-    @PostMapping(value = "/{id}/myProjects")
+    //@GetMapping(value = "/{id}/project")
+
+    @PostMapping(value = "/{id}/projects")
     public ResponseEntity<Projeto> insertUserProject(@PathVariable Integer id, @RequestBody Projeto proj){
         proj = usuarioService.insertUserProject(id, proj);
         projetoService.insertProject(proj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(proj.getId()).toUri();
         return ResponseEntity.created(uri).body(proj);
+    }
+
+    @PutMapping(value = "/{id}/projects/activity/{idOther}")
+    public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @RequestBody Atividade ativ, @PathVariable Integer idOther){
+        ativ = usuarioService.insertUserIntoActivity(id, ativ, idOther);
+        atividadeService.updateUsers(idOther, ativ);
+        return ResponseEntity.ok().body(ativ);
     }
 
     // Anotações

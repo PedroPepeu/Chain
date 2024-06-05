@@ -23,7 +23,7 @@ public class Atividade {
     @Column(name="concluida")
     private boolean concluida;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "projeto_id")
     private Projeto projetoId;
 

@@ -23,7 +23,7 @@ public class Link {
     @Column(name="url_link")
     private String urlLink;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "projeto_id")
     private Projeto projetoId;
 

@@ -46,7 +46,7 @@ public class AnotacaoController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(anot.getId()).toUri();
         return ResponseEntity.created(uri).body(anot);
-    }
+    }*/
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteAnotation(@PathVariable Integer id){
@@ -54,7 +54,7 @@ public class AnotacaoController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}")
+    /*@PutMapping(value = "/{id}")
     public ResponseEntity<Anotacao> updateAnotation(@PathVariable Integer id, @RequestBody Anotacao anot){
         anot = anotacaoService.updateAnotation(id, anot);
         return ResponseEntity.ok().body(anot);
