@@ -1,4 +1,38 @@
 let root = document.getElementById("blocks");
+let linkRoot = document.getElementById("linkPlace");
+
+class link {
+    constructor(place, url = './brambrambram', title = 'foo'){
+        this.place = place;
+        this.title = title
+        this.url = url;
+        this.description = 'Adcione uma descrição';
+
+        this.render();
+    }
+
+    render(){
+        this.createLink();
+        this.place.append(this.linkElement);
+    }
+    
+    createLink(){
+        this.linkElement = document.createElement('div');
+        this.a = document.createElement('a');
+        this.a.innerText = this.title;
+        this.a.href = this.url;
+        this.p = document.createElement('p');
+        this.p.innerText = this.description;
+
+
+        this.linkElement.classList.add('link');
+        this.linkElement.append(this.a);
+        this.linkElement.append(this.description);
+    }
+
+
+}
+
 
 class todoList {
     constructor(place, title = "Atividades") {
@@ -64,7 +98,8 @@ class Card {
         this.place = place;
         this.todoList = todoList;
         this.state = {
-            date: 'Data',
+            initialDate: 'Data inicial',
+            finalDate: 'Data final',
             text: text,
             description: "Click to write a description...",
         }
@@ -108,7 +143,8 @@ class Card {
         this.menu = document.createElement("div");
         this.menuContainer = document.createElement("div");
         this.menuTitle = document.createElement("div");
-        this.menuDate = document.createElement("div");
+        this.menuInitialDate = document.createElement("div");
+        this.menuFinalDate = document.createElement("div");
         this.menuDescription = document.createElement("div");
 
 
@@ -116,7 +152,8 @@ class Card {
         this.menu.className = "menu";
         this.menuContainer.className = "menuContainer";
         this.menuTitle.className = "menuTitle";
-        this.menuDate.className = "menuDate";
+        this.menuInitialDate.className = "menuDate";
+        this.menuFinalDate.className = "menuDate";
         this.menuDescription.className = "menuDescription";
 
         //Add inner Text
@@ -132,12 +169,14 @@ class Card {
         
         //Append
         this.menu.append(this.menuTitle);
-        this.menu.append(this.menuDate);
+        this.menu.append(this.menuInitialDate);
+        this.menu.append(this.menuFinalDate);
         this.menu.append(this.menuDescription);
         this.menuContainer.append(this.menu);
         root.append(this.menuContainer);
 
-        this.editableDate = new EditableText(this.state.date, this.menuDate, this, "date", "textarea")
+        this.editableInitialDate = new EditableText(this.state.initialDate, this.menuInitialDate, this, "date", "textarea")
+        this.editableFinalDate = new EditableText(this.state.finalDate, this.menuFinalDate, this, "date", "textarea")
         this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
         this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
 
@@ -225,7 +264,19 @@ class EditableText {
 
 //-------------main------------
 
+let linkCreationButton = document.getElementById('createLinkButton');
+let linkCreationInput = document.getElementById('createLinkInput');
+let linkCreationName = document.getElementById('createLinkName');
+
+
+linkCreationButton.addEventListener('click', () => {
+    if(linkCreationInput.value.trim() !== "" && linkCreationName.value.trim() !== ""){
+        new link(linkRoot, linkCreationName,linkCreationInput.value);
+        linkCreationInput.value = "";
+        linkCreationName.value = "";
+    }
+})
+
 
 let todoList1 = new todoList(root, 'Atividades');
-let todoList2 = new todoList(root, 'Links');
 
