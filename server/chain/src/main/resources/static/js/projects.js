@@ -290,64 +290,72 @@ class ContextMenu {
         if (this.menuElement) {
             this.menuElement.remove();
         }
-
+    
         this.menuElement = document.createElement('div');
         this.menuElement.className = 'context-menu';
         this.menuElement.style.top = `${event.clientY}px`;
         this.menuElement.style.left = `${event.clientX}px`;
-
+    
         const title = document.createElement('h3');
         title.innerText = 'Adicionar Membro';
         title.className = 'context-menu-title';
-
+    
         const emailLabel = document.createElement('label');
         emailLabel.innerText = 'Digite o email do membro:';
         emailLabel.className = 'context-menu-email-label';
-
+    
         const emailInput = document.createElement('input');
         emailInput.type = 'email';
         emailInput.className = 'context-menu-email-input';
-
+    
         const categoryLabel = document.createElement('label');
         categoryLabel.innerText = 'Escolha uma categoria:';
         categoryLabel.className = 'context-menu-category-label';
-
+    
         const categories = ['FRONTEND', 'BACKEND', 'FULL_STACK', 'SCRUM_MASTER', 'NONE'];
         const categoryContainer = document.createElement('div');
         categoryContainer.className = 'context-menu-category-container';
-
+    
         categories.forEach(category => {
             const radioLabel = document.createElement('label');
             radioLabel.innerText = category;
             radioLabel.className = 'context-menu-radio-label';
-
+    
             const radioInput = document.createElement('input');
             radioInput.type = 'radio';
             radioInput.name = 'category';
             radioInput.value = category;
             radioInput.className = 'context-menu-radio-input';
-
+    
             radioLabel.appendChild(radioInput);
             categoryContainer.appendChild(radioLabel);
         });
-
+    
         const addButton = document.createElement('button');
         addButton.innerText = 'Adicionar Membro';
         addButton.className = 'context-menu-add-button';
         addButton.addEventListener('click', () => {
             this.addMember(emailInput.value, categoryContainer);
         });
-
+    
+        const closeButton = document.createElement('button');
+        closeButton.innerText = 'Fechar X';
+        closeButton.className = 'context-menu-close-button';
+        closeButton.addEventListener('click', () => {
+            this.menuElement.remove();
+        });
+    
         this.menuElement.appendChild(title);
         this.menuElement.appendChild(emailLabel);
         this.menuElement.appendChild(emailInput);
         this.menuElement.appendChild(categoryLabel);
         this.menuElement.appendChild(categoryContainer);
         this.menuElement.appendChild(addButton);
-
+        this.menuElement.appendChild(closeButton);
+    
         document.body.appendChild(this.menuElement);
     }
-
+    
     addMember(email, categoryContainer) {
         let memberEmail = email;
         let memberRole = null;
