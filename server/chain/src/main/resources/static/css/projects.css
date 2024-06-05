@@ -573,7 +573,22 @@ body {
 #addMemberButton {
     margin-top: 6%;
     text-decoration: none;
-    color: inherit; /* Para herdar a cor do texto padrão */
+    color: inherit; 
 }
 
+
+.context-menu-close-button {
+    background-color: #ff0000;
+    color: #ffffff; 
+    border: none; 
+    padding: 8px 16px; 
+    cursor: pointer; 
+    margin-left: 2%;
+    border-radius: 4px; 
+    margin-top: 10px; 
+}
+
+.context-menu-close-button:hover {
+    background-color: #cc0000;
+}
 
