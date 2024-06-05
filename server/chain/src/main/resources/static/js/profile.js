@@ -6,7 +6,6 @@ const user = JSON.parse(userString);
 nome_txt.innerHTML = user.nome;
 email_txt.innerHTML = user.email;
 
-
 //----------------------------------------------------------------------
 
 class Project {
@@ -29,7 +28,7 @@ class Project {
         this.a.classList.add('aEdit');
         this.a.innerText = this.title;
         this.a.addEventListener('click', () => {
-            window.location.href = '/projects/' + this.project.id;
+            window.location.href = '/projects/' + this.project.id + '/html';
         })
 
         this.input = document.createElement('input');
@@ -68,7 +67,7 @@ class Project {
     }
 }
 
-//-------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 function addParticipatingProjects(){
     const url = '/users/' + user.id + '/projects';
@@ -101,8 +100,6 @@ function addParticipatingProjects(){
 
 addParticipatingProjects();
 
-
-
 let origin = document.getElementById("projects");
 let projectName = document.getElementById("addProjectInput");
 let buttonCreation = document.getElementById("addCreationButton");
@@ -115,7 +112,6 @@ function createProject(){
     };
 
     const url = '/users/' + user.id + '/projects';
-    //const url = 'http://localhost:8080/users/' + user.id + '/projects';
     console.log(url);
 
     fetch(url, {
@@ -128,17 +124,16 @@ function createProject(){
     .then(response => {
         if(!response.ok){
             alert('Erro ao tentar criar projeto');
-            throw new Error('Error ao tentar criar projeto');
+            throw new Error('Error criar projeto');
         }
-
         return response.json();
     })
     .then(data => {
         console.log('Novo projeto criado: ', data);
-        new Project(origin, data.nome, JSON.stringify(project));
+        new Project(origin, data.nome, JSON.stringify(data));
     })
     .catch(error => {
-        console.error("Error fetching project:", error);
+        console.error("Error fetching user:", error);
     });
 }
 
