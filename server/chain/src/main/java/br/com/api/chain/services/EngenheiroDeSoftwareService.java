@@ -200,4 +200,17 @@ public class EngenheiroDeSoftwareService {
         }
         return res;
     }
+
+    public void userUpdateProject(Integer id, Projeto proj){
+        if(!verifyIfAdmin(id, proj)){
+            // throw exception
+        }
+    }
+
+    public boolean verifyIfAdmin(Integer id, Projeto proj){
+        if(id == proj.getAdministradorId().getId()){
+            return true;
+        }
+        return false;
+    }
 }

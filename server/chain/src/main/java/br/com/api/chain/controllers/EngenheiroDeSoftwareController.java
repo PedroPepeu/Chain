@@ -137,6 +137,14 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.created(uri).body(proj); 
     }
 
+    @PutMapping(value = "/{id}/projects/{idProj}")
+    public ResponseEntity<Projeto> userUpdateProject(@PathVariable Integer id, @RequestBody Projeto mod, @PathVariable Integer idProj){
+        Projeto proj = projetoService.getProject(idProj);
+        usuarioService.userUpdateProject(idProj, proj);
+        projetoService.updateProject(idProj, mod);
+        return ResponseEntity.ok().body(proj);
+    }
+
     @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}")
     public ResponseEntity<Membro> insertMember(@PathVariable Integer id, @RequestBody Projeto proj, @PathVariable String emailOther, @PathVariable Cargo cargo){
         Membro mem = usuarioService.insertMember(id, emailOther, proj, cargo);
