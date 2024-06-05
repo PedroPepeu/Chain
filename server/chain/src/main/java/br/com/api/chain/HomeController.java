@@ -22,10 +22,10 @@ public class HomeController {
         return new ClassPathResource("templates/profile.html");
     }
 
-    @GetMapping("/project")
+    /*@GetMapping("/project")
     public ClassPathResource Project(){
         return new ClassPathResource("templates/projects.html");
-    }
+    }*/
 
     @GetMapping("/cadastro")
     public ClassPathResource Cadastro(){
