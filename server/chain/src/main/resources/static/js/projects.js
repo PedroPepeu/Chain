@@ -9,7 +9,6 @@ console.log(id);
 class link {
     constructor(place, url = './brambrambram', title = 'foo') {
         this.place = place;
-        this.title = title;
         this.url = url;
         this.description = 'Adcione uma descrição';
 
@@ -24,7 +23,7 @@ class link {
     createLink() {
         this.linkElement = document.createElement('div');
         this.a = document.createElement('a');
-        this.a.innerText = this.title;
+        this.a.innerText = this.url;
         this.a.href = this.url;
         this.p = document.createElement('p');
         this.p.innerText = this.description;
