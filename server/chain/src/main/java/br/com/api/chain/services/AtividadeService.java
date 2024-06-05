@@ -24,20 +24,20 @@ public class AtividadeService {
         return this.atividadeRepository.findAll();
     }
 
-    public Atividade getAnotation(Integer id){
+    public Atividade getActivity(Integer id){
         Optional<Atividade> ativ = atividadeRepository.findById(id);
         return ativ.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Atividade insertAnotation(Atividade ativ){
+    public Atividade insertActivity(Atividade ativ){
         return atividadeRepository.save(ativ);
     }
 
-    public void deleteAnotation(Integer id){
+    public void deleteActivity(Integer id){
         atividadeRepository.deleteById(id);
     }
 
-    public Atividade updateAnotation(Integer id, Atividade ativ){
+    public Atividade updateActivity(Integer id, Atividade ativ){
         Atividade entity = atividadeRepository.getReferenceById(id);
         updateData(entity, ativ);
         return atividadeRepository.save(entity);
@@ -49,5 +49,9 @@ public class AtividadeService {
         entity.setDataEntrega(ativ.getDataEntrega());
         entity.setDataInicio(ativ.getDataInicio());
         entity.setNome(ativ.getNome());
+    }
+
+    public Atividade updateUsers(Integer idUser, Atividade ativ){
+        return atividadeRepository.save(ativ);
     }
 }
