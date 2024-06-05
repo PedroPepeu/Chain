@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
+import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AnotacaoRepository;
 import br.com.api.chain.repositories.AtividadeRepository;
@@ -121,6 +122,11 @@ public class EngenheiroDeSoftwareController {
                 .buildAndExpand(proj.getId()).toUri();
         return ResponseEntity.created(uri).body(proj);
     }
+
+    /*@PutMapping(value = "/{id}/projects/{idOther}")
+    public ResponseEntity<Membro> insertMember(@PathVariable Integer id, @RequestBody Projeto proj, @PathVariable Integer idOther){
+        
+    }*/
 
     @PutMapping(value = "/{id}/projects/activity/{idOther}")
     public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @RequestBody Atividade ativ, @PathVariable Integer idOther){
