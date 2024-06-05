@@ -252,34 +252,48 @@ button {
     display: grid;
     justify-content: center;
     border-radius: 6px;
-    background-color: #fff;
+    background:  #623cea;
     height: 100%;
+    text-align: center;
 }
-
+.links h1{
+   color: #ffffff;
+   font-weight: 900;
+}
 .addLink{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 30rem;
-    background-color:#000;
+    background-color: #623cea;
     height: 5rem;
 }
 
 .addLink input{
     border-radius: .25rem;
-    color: #000;
+    color: #000000;
+    background-color: #ffffff;
     cursor: pointer;
-    margin: 0;
-    height: 2rem;
+    margin-right: 1%;
+    height: 40%;
+    width: 45%;
     position: relative;
     text-decoration: none;
+    text-align: center;
+    
+}
+
+.addLink::placeholder {
+    color: #623cea;
+    opacity: 0.7;
+    
 }
 
 .linkContainer{
     display: grid;
     justify-content: center;
     border-radius: 6px;
-    background-color: maroon;
+    background-color: white;
     margin-top: 10px;
     height: 20rem;
     width: 30rem;
@@ -565,7 +579,7 @@ body {
 /* Botão para adicionar membro */
 .context-menu-add-button {
     padding: 10px 20px;
-    background: #007bff;
+    background:  #623cea;
     color: white;
     border: none;
     border-radius: 4px;
