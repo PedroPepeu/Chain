@@ -9,7 +9,7 @@ email_txt.innerHTML = user.email;
 //----------------------------------------------------------------------
 
 class Project {
-    constructor(place, title = 'default') {
+    constructor(place, title = 'default', projectString) {
         this.place = place;
         this.title = title;
         this.project = JSON.parse(projectString);
@@ -45,9 +45,6 @@ class Project {
         this.deleteButton.addEventListener('click', () => {
             this.deleteProject();
         });
-        
-        this.a.href = 'project';
-        this.a.innerText = this.title;
 
         node.appendChild(this.a);
         node.appendChild(this.editButton);
@@ -70,21 +67,46 @@ class Project {
     }
 }
 
+//--------------------------------------------------------------------------------------------------
 
+function addParticipatingProjects(){
+    const url = '/users/' + user.id + '/projects';
+    console.log(url);
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Error ao tentar pegar os projetos do usuario');
+            throw new Error('Error ao tentar pegar os projetos do usuario');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        for(let i = 0; i < data.length; i++)
+        {
+            new Project(origin, data[i].nome, JSON.stringify(data[i]));
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching project:", error);
+    });
+}
+
+addParticipatingProjects();
 
 let origin = document.getElementById("projects");
 let projectName = document.getElementById("addProjectInput");
 let buttonCreation = document.getElementById("addCreationButton");
 
-/*buttonCreation.addEventListener('click', () => {
-    if (projectName.value.trim() !== "") {
-        new Project(origin, projectName.value);
-        projectName.value = "";
-    }
-});*/
-
 function createProject(){
     const project = {
+        id: 1,
         nome: projectName.value,
         administradorId: user
     };
@@ -108,7 +130,7 @@ function createProject(){
     })
     .then(data => {
         console.log('Novo projeto criado: ', data);
-        new Project(origin, data.nome);
+        new Project(origin, data.nome, JSON.stringify(data));
     })
     .catch(error => {
         console.error("Error fetching user:", error);
