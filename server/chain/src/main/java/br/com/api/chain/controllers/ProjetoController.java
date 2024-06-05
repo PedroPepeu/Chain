@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,16 @@ public class ProjetoController {
     @GetMapping("/ALL")
     public List<Projeto> getProjeto(){
         return projetoService.getProjetos();
+    }
+
+    @GetMapping("/{id}/html")
+    public ClassPathResource Profile(){
+        return new ClassPathResource("templates/projects.html");
+    }
+
+    @GetMapping(value = "/{id}")
+    public Projeto getProjectById(@PathVariable Integer id){
+        return projetoService.getProject(id);
     }
 
     @GetMapping(value = "{id}/members")
