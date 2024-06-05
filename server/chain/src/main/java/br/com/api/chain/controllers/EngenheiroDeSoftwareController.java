@@ -134,7 +134,7 @@ public class EngenheiroDeSoftwareController {
         projetoService.insertProject(proj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(proj.getId()).toUri();
-        return ResponseEntity.created(uri).body(proj);
+        return ResponseEntity.created(uri).body(proj); 
     }
 
     @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}")
