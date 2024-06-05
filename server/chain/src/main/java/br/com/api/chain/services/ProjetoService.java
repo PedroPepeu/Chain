@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Link;
 import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.ProjetoRepository;
@@ -63,5 +64,22 @@ public class ProjetoService {
     public List<Membro> getMembers(Integer id){
         Projeto proj = getProject(id);
         return proj.getMembros();
+    }
+
+    public Link insertLink(Integer id, Link li){
+        Projeto proj = this.getProject(id);
+        List<Link> links = proj.getLinks();
+        links.add(li);
+        return li;
+    }
+
+    public List<Atividade> getActivities(Integer id){
+        Projeto proj = getProject(id);
+        return proj.getAtividades();
+    }
+
+    public List<Link> getLinks(Integer id){
+        Projeto proj = getProject(id);
+        return proj.getLinks();
     }
 }
