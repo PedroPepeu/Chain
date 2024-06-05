@@ -1,3 +1,13 @@
+const nome_txt = document.getElementById('user_nome')
+const email_txt = document.getElementById('user_email')
+
+const userString = window.localStorage.getItem('user');
+const user = JSON.parse(userString);
+nome_txt.innerHTML = user.nome;
+email_txt.innerHTML = user.email;
+
+//----------------------------------------------------------------------
+
 class Project {
     constructor(place, title = 'default') {
         this.place = place;
