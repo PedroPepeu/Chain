@@ -280,3 +280,145 @@ linkCreationButton.addEventListener('click', () => {
 
 let todoList1 = new todoList(root, 'Atividades');
 
+
+// Função para exibir notificação usando Toastify
+function exibirNotificacao(mensagem) {
+    Toastify({
+        text: mensagem,
+        duration: 4000
+    }).showToast();
+}
+
+// Classe para criar o menu de contexto
+class ContextMenu {
+    constructor(triggerElement) {
+        this.triggerElement = triggerElement;
+        this.menuElement = null;
+        this.init();
+    }
+
+    init() {
+        this.triggerElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.createMenu(e);
+        });
+    }
+
+    createMenu(event) {
+        // Remover o menu existente, se houver
+        if (this.menuElement) {
+            this.menuElement.remove();
+        }
+
+        // Criar o contêiner do menu
+        this.menuElement = document.createElement('div');
+        this.menuElement.className = 'context-menu';
+
+        // Posicionar o menu próximo ao ícone clicado
+        this.menuElement.style.top = `${event.clientY}px`;
+        this.menuElement.style.left = `${event.clientX}px`;
+
+        // Criar o título do menu
+        const title = document.createElement('h3');
+        title.innerText = 'Adicionar Membro';
+        title.className = 'context-menu-title';
+
+        // Criar o input para o email
+        const emailLabel = document.createElement('label');
+        emailLabel.innerText = 'Digite o email do membro:';
+        emailLabel.className = 'context-menu-email-label';
+
+        const emailInput = document.createElement('input');
+        emailInput.type = 'email';
+        emailInput.className = 'context-menu-email-input';
+
+        // Criar as opções de categoria
+        const categoryLabel = document.createElement('label');
+        categoryLabel.innerText = 'Escolha uma categoria:';
+        categoryLabel.className = 'context-menu-category-label';
+
+        const categories = ['FRONTEND', 'BACKEND', 'FULL_STACK', 'SCRUM_MASTER', 'NONE'];
+        const categoryContainer = document.createElement('div');
+        categoryContainer.className = 'context-menu-category-container';
+
+        categories.forEach(category => {
+            const radioLabel = document.createElement('label');
+            radioLabel.innerText = category;
+            radioLabel.className = 'context-menu-radio-label';
+
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.name = 'category';
+            radioInput.value = category;
+            radioInput.className = 'context-menu-radio-input';
+
+            radioLabel.appendChild(radioInput);
+            categoryContainer.appendChild(radioLabel);
+        });
+
+        // Criar o botão para adicionar o membro
+        const addButton = document.createElement('button');
+        addButton.innerText = 'Adicionar Membro';
+        addButton.className = 'context-menu-add-button';
+        addButton.addEventListener('click', () => {
+            this.addMember(emailInput.value, categoryContainer);
+        });
+
+        // Adicionar os elementos ao menu
+        this.menuElement.appendChild(title);
+        this.menuElement.appendChild(emailLabel);
+        this.menuElement.appendChild(emailInput);
+        this.menuElement.appendChild(categoryLabel);
+        this.menuElement.appendChild(categoryContainer);
+        this.menuElement.appendChild(addButton);
+
+        // Adicionar o menu ao documento
+        document.body.appendChild(this.menuElement);
+    }
+
+    addMember(email, categoryContainer) {
+        // Variável para armazenar o email do membro
+        let memberEmail = email;
+
+        // Variável para armazenar a função do membro
+        let memberRole = null;
+
+        // Verificar se um email foi fornecido e se é válido
+        if (!memberEmail || !this.validateEmail(memberEmail)) {
+            exibirNotificacao('Por favor, digite um email válido.');
+            return;
+        }
+
+        // Verificar se uma categoria foi selecionada
+        const selectedCategory = categoryContainer.querySelector('input[name="category"]:checked');
+        if (selectedCategory) {
+            memberRole = selectedCategory.value;
+        } else {
+            exibirNotificacao('Por favor, selecione uma categoria.');
+            return;
+        }
+
+        // Se ambos os campos forem preenchidos, mostrar uma notificação de sucesso
+        exibirNotificacao(`Membro adicionado: ${memberEmail} como ${memberRole}`);
+
+        // Limpar o formulário após adicionar o membro
+        this.menuElement.remove();
+    }
+
+    // Função para validar o email
+    validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+}
+
+// Inicializar o menu de contexto
+document.addEventListener('DOMContentLoaded', () => {
+    const addMemberElement = document.getElementById('addMemberButton');
+    if (addMemberElement) {
+        new ContextMenu(addMemberElement);
+    }
+});
+
+
+
