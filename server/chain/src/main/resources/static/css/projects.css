@@ -65,8 +65,8 @@ button {
 }
 
 #blocks{
-    width: 50vw;
-    height: 60vh;
+    width: 60%;
+    height: 60%;
     display: flex;
     justify-content: center;
     overflow-y: scroll;

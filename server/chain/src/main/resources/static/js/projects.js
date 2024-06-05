@@ -277,7 +277,6 @@ linkCreationButton.addEventListener('click', () => {
     }
 })
 
-
 let todoList1 = new todoList(root, 'Atividades');
 
 

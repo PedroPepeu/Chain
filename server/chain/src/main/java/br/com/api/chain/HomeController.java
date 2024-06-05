@@ -36,4 +36,9 @@ public class HomeController {
     public ClassPathResource e404(){
         return new ClassPathResource("templates/errors/404.html");
     }
+
+    @GetMapping("/calendario")
+    public ClassPathResource Calendario(){
+        return new ClassPathResource("templates/calendario.html");
+    }
 }

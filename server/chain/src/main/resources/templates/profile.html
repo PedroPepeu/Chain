@@ -24,8 +24,7 @@
                 <div class="top">
                     <h1>Calendário</h1>
                 </div>
-                <div class="dates">
-                    
+                <div class="dates" id="dates">
                 </div>
             </div>
         </div>
@@ -86,5 +85,12 @@
         </div>
     </div>
 </body>
+
 <script src="/js/profile.js"></script>
+<script>
+  const calendario = document.getElementById('dates');
+  calendario.addEventListener('click', () => {
+      window.location.href = "calendario";
+  });
+</script>
 </html>

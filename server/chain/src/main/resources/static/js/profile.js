@@ -108,3 +108,4 @@ function createProject(){
 }
 
 buttonCreation.onclick = createProject;
+
