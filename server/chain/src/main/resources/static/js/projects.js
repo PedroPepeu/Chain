@@ -1,6 +1,11 @@
 let root = document.getElementById("blocks");
 let linkRoot = document.getElementById("linkPlace");
 
+let id = window.location.href;
+id = id.replace('http://localhost:8080/projects/', '');
+id = id.replace('/html', '');
+console.log(id);
+
 class link {
     constructor(place, url = './brambrambram', title = 'foo') {
         this.place = place;
@@ -252,13 +257,70 @@ let linkCreationButton = document.getElementById('createLinkButton');
 let linkCreationInput = document.getElementById('createLinkInput');
 let linkCreationName = document.getElementById('createLinkName');
 
-linkCreationButton.addEventListener('click', () => {
+/*linkCreationButton.addEventListener('click', () => {
     if(linkCreationInput.value.trim() !== "" && linkCreationName.value.trim() !== ""){
         new link(linkRoot, linkCreationName, linkCreationInput.value);
         linkCreationInput.value = "";
         linkCreationName.value = "";
     }
-})
+})*/
+
+function createLink(){
+    const url = '/projects/' + id;
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Erro ao tentar pegar projeto');
+            throw new Error('Error ao tentar pegar projeto');
+        }
+
+        return response.json();
+    })
+    .then(projeto => {
+        console.log('Projeto foi pego: ', projeto);
+        const newLink = {
+            id: 1,
+            descricao: linkCreationName.value,
+            urlLink: linkCreationInput.value,
+            projetoId: projeto
+        };
+        
+        const linkUrl = url + '/links'
+        fetch(linkUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(newLink),
+        })
+        .then(response => {
+            if(!response.ok){
+                alert('Erro ao tentar criar link');
+                throw new Error('Error ao tentar criar link');
+            }
+        
+            return response.json();
+        })
+        .then(data => {
+            console.log('Novo link criado: ', data);
+            new link(linkRoot, data.nome, data.urlLink); //JSON.stringfy(data)
+        })
+        .catch(error => {
+            console.error("Error fetching link:", error);
+        });
+    })
+    .catch(error => {
+        console.error("Error fetching project:", error);
+    });
+}
+
+linkCreationButton.onclick = createLink;
 
 let todoList1 = new todoList(root, 'Atividades');
 

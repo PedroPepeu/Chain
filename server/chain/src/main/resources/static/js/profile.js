@@ -26,6 +26,11 @@ class Project {
 
         this.a = document.createElement('a');
         this.a.classList.add('aEdit');
+        this.a.innerText = this.title;
+        this.a.addEventListener('click', () => {
+            window.location.href = '/projects/' + this.project.id + '/html';
+        })
+
         this.input = document.createElement('input');
         this.editButton = document.createElement('button'); // Botão de edição
         this.editButton.classList.add('edit-button');
