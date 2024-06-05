@@ -6,12 +6,16 @@ const user = JSON.parse(userString);
 nome_txt.innerHTML = user.nome;
 email_txt.innerHTML = user.email;
 
+
 //----------------------------------------------------------------------
 
 class Project {
-    constructor(place, title = 'default') {
+    constructor(place, title = 'default', projectString) {
         this.place = place;
         this.title = title;
+        this.project = JSON.parse(projectString);
+
+        console.log(this.project.nome);
 
         this.render();
     }
@@ -23,6 +27,11 @@ class Project {
 
         this.a = document.createElement('a');
         this.a.classList.add('aEdit');
+        this.a.innerText = this.title;
+        this.a.addEventListener('click', () => {
+            window.location.href = '/projects/' + this.project.id;
+        })
+
         this.input = document.createElement('input');
         this.editButton = document.createElement('button'); // Botão de edição
         this.editButton.classList.add('edit-button');
@@ -37,9 +46,6 @@ class Project {
         this.deleteButton.addEventListener('click', () => {
             this.deleteProject();
         });
-        
-        this.a.href = 'project';
-        this.a.innerText = this.title;
 
         node.appendChild(this.a);
         node.appendChild(this.editButton);
@@ -62,26 +68,54 @@ class Project {
     }
 }
 
+//-------------------------------------------------------------------------
+
+function addParticipatingProjects(){
+    const url = '/users/' + user.id + '/projects';
+    console.log(url);
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Error ao tentar pegar os projetos do usuario');
+            throw new Error('Error ao tentar pegar os projetos do usuario');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        for(let i = 0; i < data.length; i++)
+        {
+            new Project(origin, data[i].nome, JSON.stringify(data[i]));
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching project:", error);
+    });
+}
+
+addParticipatingProjects();
+
 
 
 let origin = document.getElementById("projects");
 let projectName = document.getElementById("addProjectInput");
 let buttonCreation = document.getElementById("addCreationButton");
 
-/*buttonCreation.addEventListener('click', () => {
-    if (projectName.value.trim() !== "") {
-        new Project(origin, projectName.value);
-        projectName.value = "";
-    }
-});*/
-
 function createProject(){
     const project = {
+        id: 1,
         nome: projectName.value,
         administradorId: user
     };
 
     const url = '/users/' + user.id + '/projects';
+    //const url = 'http://localhost:8080/users/' + user.id + '/projects';
     console.log(url);
 
     fetch(url, {
@@ -94,16 +128,17 @@ function createProject(){
     .then(response => {
         if(!response.ok){
             alert('Erro ao tentar criar projeto');
-            throw new Error('Error criar projeto');
+            throw new Error('Error ao tentar criar projeto');
         }
+
         return response.json();
     })
     .then(data => {
         console.log('Novo projeto criado: ', data);
-        new Project(origin, data.nome);
+        new Project(origin, data.nome, JSON.stringify(project));
     })
     .catch(error => {
-        console.error("Error fetching user:", error);
+        console.error("Error fetching project:", error);
     });
 }
 
