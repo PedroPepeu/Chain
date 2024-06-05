@@ -29,7 +29,7 @@ class Project {
         this.a.classList.add('aEdit');
         this.a.innerText = this.title;
         this.a.addEventListener('click', () => {
-            window.location.href = '/projects/' + this.project.id;
+            window.location.href = '/projects/' + this.project.id + '/html';
         })
 
         this.input = document.createElement('input');
