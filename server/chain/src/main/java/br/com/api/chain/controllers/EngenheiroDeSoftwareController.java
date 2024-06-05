@@ -138,9 +138,11 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(mem);
     }
 
-    @PutMapping(value = "/{id}/projects/activity/{emailOther}") 
-    public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @RequestBody Atividade ativ, @PathVariable String emailOther){
-        ativ = usuarioService.insertUserIntoActivity(id, ativ, emailOther);
+    @PutMapping(value = "/{id}/projects/{idProj}/activity/{idAtiv}/{emailOther}") 
+    public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @PathVariable Integer idProj, @PathVariable Integer idAtiv, @PathVariable String emailOther){
+        Projeto proj = projetoService.getProject(idProj);
+        Atividade ativ = atividadeService.getActivity(idAtiv);
+        ativ = usuarioService.insertUserIntoActivity(id, proj, ativ, emailOther);
         atividadeService.updateUsers(ativ);
         return ResponseEntity.ok().body(ativ);
     }

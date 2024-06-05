@@ -59,4 +59,9 @@ public class ProjetoService {
         Projeto proj = getProject(mem.getProjetoId().getId());
         proj.getMembros().add(mem);
     }
+
+    public List<Membro> getMembers(Integer id){
+        Projeto proj = getProject(id);
+        return proj.getMembros();
+    }
 }

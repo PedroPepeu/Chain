@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AtividadeRepository;
 import br.com.api.chain.services.AtividadeService;
@@ -35,6 +36,12 @@ public class ProjetoController {
     @GetMapping("/ALL")
     public List<Projeto> getProjeto(){
         return projetoService.getProjetos();
+    }
+
+    @GetMapping(value = "{id}/members")
+    public ResponseEntity<List<Membro>> getMembers(@PathVariable Integer id){
+        List<Membro> mem = projetoService.getMembers(id);
+        return ResponseEntity.ok().body(mem);
     }
 
     @PostMapping(value = "/{id}/activity")

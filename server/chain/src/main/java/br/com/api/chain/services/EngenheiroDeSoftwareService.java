@@ -131,15 +131,14 @@ public class EngenheiroDeSoftwareService {
         return proj;
     }
 
-    public Atividade insertUserIntoActivity(Integer id, Atividade ativ, String otherEmail){
+    public Atividade insertUserIntoActivity(Integer id, Projeto proj, Atividade ativ, String otherEmail){
         Integer otherId = this.getUserByEmail(otherEmail).getId();
-        Projeto proj = ativ.getProjetoId();
         List<Membro> membros = proj.getMembros();
         boolean membroDoProjeto = verificarSeMembro(membros, otherId);
         Integer idAdmin = proj.getAdministradorId().getId();
 
         if(!membroDoProjeto){
-            // exception
+            return null;
         }
         else if(id == otherId || id == idAdmin){
             Set<EngenheiroDeSoftware> engenheiros = ativ.getEngenheiros();
@@ -149,9 +148,9 @@ public class EngenheiroDeSoftwareService {
             return ativ;
         }
         else{
-            // exception
+            return null;
         }
-        return ativ; // depois tirar 
+        //return ativ; // depois tirar 
     }
 
     private boolean verificarSeMembro(List<Membro> membros, Integer otherId){
