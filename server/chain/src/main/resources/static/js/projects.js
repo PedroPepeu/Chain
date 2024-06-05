@@ -7,10 +7,10 @@ id = id.replace('/html', '');
 console.log(id);
 
 class link {
-    constructor(place, url = './brambrambram', title = 'foo') {
+    constructor(place, url = './brambrambram', description = 'foo') {
         this.place = place;
         this.url = url;
-        this.description = 'Adcione uma descrição';
+        this.description = description;
 
         this.render();
     }
@@ -253,17 +253,40 @@ class EditableText {
 
 //-------------main------------
 
-let linkCreationButton = document.getElementById('createLinkButton');
-let linkCreationInput = document.getElementById('createLinkInput');
-let linkCreationName = document.getElementById('createLinkName');
+function getLinks(){
+    const url = '/projects/' + id + '/links';
 
-/*linkCreationButton.addEventListener('click', () => {
-    if(linkCreationInput.value.trim() !== "" && linkCreationName.value.trim() !== ""){
-        new link(linkRoot, linkCreationName, linkCreationInput.value);
-        linkCreationInput.value = "";
-        linkCreationName.value = "";
-    }
-})*/
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Erro ao tentar pegar links');
+            throw new Error('Error ao tentar pegar links');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        for(let i = 0; i < data.length; i++)
+        {
+            new link(linkRoot, data[i].urlLink, data[i].descricao); //JSON.stringify(data[i])
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching link:", error);
+    });
+}
+
+getLinks();
+
+let linkCreationInput = document.getElementById('createLinkInput');
+let createLinkDescription = document.getElementById('createLinkDescription');
+let linkCreationButton = document.getElementById('createLinkButton');
 
 function createLink(){
     const url = '/projects/' + id;
@@ -286,7 +309,7 @@ function createLink(){
         console.log('Projeto foi pego: ', projeto);
         const newLink = {
             id: 1,
-            descricao: linkCreationName.value,
+            descricao: createLinkDescription.value,
             urlLink: linkCreationInput.value,
             projetoId: projeto
         };
@@ -309,7 +332,7 @@ function createLink(){
         })
         .then(data => {
             console.log('Novo link criado: ', data);
-            new link(linkRoot, data.nome, data.urlLink); //JSON.stringfy(data)
+            new link(linkRoot, data.urlLink, data.descricao); //JSON.stringfy(data)
         })
         .catch(error => {
             console.error("Error fetching link:", error);
