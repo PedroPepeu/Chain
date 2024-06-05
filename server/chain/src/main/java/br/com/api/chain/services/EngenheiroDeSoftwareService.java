@@ -179,4 +179,24 @@ public class EngenheiroDeSoftwareService {
         }
         return mem; // depois tirar
     }
+
+    public List<Atividade> getUserProjectActivities(Integer id, Projeto proj){ // VER VALIDAÇÕES
+        List<Atividade> atividades = proj.getAtividades();
+        EngenheiroDeSoftware eng = getUserById(id);
+        return searchUserActivities(atividades, eng);
+    }
+
+    private List<Atividade> searchUserActivities(List<Atividade> atividades, EngenheiroDeSoftware eng){
+        List<Atividade> res = new ArrayList<>();
+        Atividade x;
+        Set<EngenheiroDeSoftware> s;
+        for(int i = 0; i < atividades.size(); i++){
+            x = res.get(i);
+            s = x.getEngenheiros();
+            if(s.size() > 0 && s.contains(eng)){
+                res.add(x);
+            }
+        }
+        return res;
+    }
 }

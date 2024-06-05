@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Membro;
-import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.MembroRepository;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 

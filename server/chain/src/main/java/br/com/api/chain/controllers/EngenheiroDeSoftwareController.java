@@ -109,6 +109,13 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(ativ);
     }
 
+    @GetMapping(value = "/{id}/projects/{idProj}/activities") // Mostrar as atividades de um usuário em um projeto
+    public ResponseEntity<List<Atividade>> getUserProjectActivities(@PathVariable Integer id, @PathVariable Integer idProj){
+        Projeto proj = projetoService.getProject(idProj);
+        List<Atividade> ativ = usuarioService.getUserProjectActivities(id, proj);
+        return ResponseEntity.ok().body(ativ);
+    }
+
     // Projetos
 
     @GetMapping(value = "/{id}/projects") // Mostrar todos os projetos
