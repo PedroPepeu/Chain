@@ -118,9 +118,9 @@ public class EngenheiroDeSoftwareService {
     public Atividade insertUserIntoActivity(Integer id, Atividade ativ, Integer otherId){
         Projeto proj = ativ.getProjetoId();
         List<Membro> membros = proj.getMembros();
-        boolean membroDoProjeto = verificarSeMembro(membros, otherId); 
+        boolean membroDoProjeto = verificarSeMembro(membros, otherId);
         Integer idAdmin = proj.getAdministradorId().getId();
-        
+
         if(!membroDoProjeto){
             // exception
         }
@@ -138,9 +138,11 @@ public class EngenheiroDeSoftwareService {
 
     private boolean verificarSeMembro(List<Membro> membros, Integer otherId){
         boolean membroDoProjeto = false;
-        for(int i = 0; i < membros.size(); i++){
-            if(membros.get(i).getEngenheiroId().getId() == otherId){
-                membroDoProjeto = true;
+        if(membros != null){
+            for(int i = 0; i < membros.size(); i++){
+                if(membros.get(i).getEngenheiroId().getId() == otherId){
+                    membroDoProjeto = true;
+                }
             }
         }
         return membroDoProjeto;
