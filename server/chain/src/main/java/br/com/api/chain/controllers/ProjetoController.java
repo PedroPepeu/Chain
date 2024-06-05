@@ -44,9 +44,14 @@ public class ProjetoController {
         return projetoService.getProjetos();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/html")
     public ClassPathResource Profile(){
         return new ClassPathResource("templates/projects.html");
+    }
+
+    @GetMapping(value = "/{id}")
+    public Projeto getProjectById(@PathVariable Integer id){
+        return projetoService.getProject(id);
     }
 
     @GetMapping(value = "{id}/members")
