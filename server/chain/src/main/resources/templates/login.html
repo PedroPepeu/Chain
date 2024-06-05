@@ -148,7 +148,14 @@
                 },
                 body: JSON.stringify(user),
             })
-            .then(response => response.json())
+            .then(response => {
+                if(!response.ok){
+                    alert('Login não sucedido, por favor verique o email e senha');
+                    throw new Error('Error ao tentar fazer login');
+                }
+
+                return response.json();
+            })
             .then(data => {
                 window.localStorage.setItem('user', JSON.stringify(data));
                 console.log("User Data:", data);

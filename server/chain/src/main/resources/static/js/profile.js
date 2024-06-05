@@ -21,7 +21,7 @@ class Project {
         node.className = 'project';
 
 
-        this.a = document.createElement('a');111
+        this.a = document.createElement('a');
         this.a.classList.add('aEdit');
         this.input = document.createElement('input');
         this.editButton = document.createElement('button'); // Botão de edição
@@ -68,9 +68,43 @@ let origin = document.getElementById("projects");
 let projectName = document.getElementById("addProjectInput");
 let buttonCreation = document.getElementById("addCreationButton");
 
-buttonCreation.addEventListener('click', () => {
+/*buttonCreation.addEventListener('click', () => {
     if (projectName.value.trim() !== "") {
         new Project(origin, projectName.value);
         projectName.value = "";
     }
-});
+});*/
+
+function createProject(){
+    const project = {
+        nome: projectName.value,
+        administradorId: user
+    };
+
+    const url = '/users/' + user.id + '/projects';
+    console.log(url);
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(project),
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Erro ao tentar criar projeto');
+            throw new Error('Error criar projeto');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Novo projeto criado: ', data);
+        new Project(origin, data.nome);
+    })
+    .catch(error => {
+        console.error("Error fetching user:", error);
+    });
+}
+
+buttonCreation.onclick = createProject;
