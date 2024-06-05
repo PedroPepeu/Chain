@@ -24,6 +24,6 @@ public class MembroController {
 
     @GetMapping(value = "/ALL") // TESTES
     public ResponseEntity<List<Membro>> getMembers(){
-        return ResponseEntity.ok().body(membroService.getMembers());
+        return ResponseEntity.ok().body(membroService.getMembros());
     }
 }

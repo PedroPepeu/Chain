@@ -51,7 +51,7 @@ public class AtividadeService {
         entity.setNome(ativ.getNome());
     }
 
-    public Atividade updateUsers(Integer idUser, Atividade ativ){
+    public Atividade updateUsers(Atividade ativ){
         return atividadeRepository.save(ativ);
     }
 }

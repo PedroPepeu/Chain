@@ -21,8 +21,8 @@ public class AtividadeController {
         this.atividadeService = atividadeService;
     }
 
-    /*@GetMapping("/")
+    @GetMapping("/ALL")
     public List<Atividade> getAtividades(){
-        return atividadeRepository.findAll();
-    }*/
+        return atividadeService.getAtividades();
+    }
 }
