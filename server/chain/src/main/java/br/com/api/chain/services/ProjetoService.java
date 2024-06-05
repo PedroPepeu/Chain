@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.ProjetoRepository;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
@@ -52,5 +53,15 @@ public class ProjetoService {
         List<Atividade> atividades = proj.getAtividades();
         atividades.add(ativ);
         return ativ;
+    }
+
+    public void insertMember(Membro mem){
+        Projeto proj = getProject(mem.getProjetoId().getId());
+        proj.getMembros().add(mem);
+    }
+
+    public List<Membro> getMembers(Integer id){
+        Projeto proj = getProject(id);
+        return proj.getMembros();
     }
 }

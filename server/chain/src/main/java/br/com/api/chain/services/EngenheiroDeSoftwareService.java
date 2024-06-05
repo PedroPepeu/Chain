@@ -1,5 +1,6 @@
 package br.com.api.chain.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Cargo;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
@@ -67,7 +69,7 @@ public class EngenheiroDeSoftwareService {
     }
 
     public EngenheiroDeSoftware updateUser(Integer id, EngenheiroDeSoftware eng){
-        EngenheiroDeSoftware entity = usuarioRepository.getReferenceById(id);
+        EngenheiroDeSoftware entity = getUserById(id);
         if(entity != null)
         {
             updateData(eng, entity);
@@ -94,6 +96,20 @@ public class EngenheiroDeSoftwareService {
         return eng.getProjetos();
     }
 
+    public List<Projeto> getUserParticipations(Integer id){
+        EngenheiroDeSoftware eng = this.getUserById(id);
+        List<Membro> part = eng.getParticipa();
+        return getListProjetos(part);
+    }
+
+    private List<Projeto> getListProjetos(List<Membro> part){
+        List<Projeto> proj = new ArrayList<>();
+        for(int i = 0; i < part.size(); i++){
+            proj.add(part.get(i).getProjetoId());
+        }
+        return proj;
+    }
+
     public List<Anotacao> getUserAnotations(Integer id){
         EngenheiroDeSoftware eng = this.getUserById(id);
         return eng.getAnotacoes();
@@ -115,25 +131,26 @@ public class EngenheiroDeSoftwareService {
         return proj;
     }
 
-    public Atividade insertUserIntoActivity(Integer id, Atividade ativ, Integer otherId){
-        Projeto proj = ativ.getProjetoId();
+    public Atividade insertUserIntoActivity(Integer id, Projeto proj, Atividade ativ, String otherEmail){
+        Integer otherId = this.getUserByEmail(otherEmail).getId();
         List<Membro> membros = proj.getMembros();
         boolean membroDoProjeto = verificarSeMembro(membros, otherId);
         Integer idAdmin = proj.getAdministradorId().getId();
 
         if(!membroDoProjeto){
-            // exception
+            return null;
         }
         else if(id == otherId || id == idAdmin){
             Set<EngenheiroDeSoftware> engenheiros = ativ.getEngenheiros();
             EngenheiroDeSoftware eng = this.getUserById(otherId);
+            eng.getAtividades().add(ativ);
             engenheiros.add(eng);
             return ativ;
         }
         else{
-            // exception
+            return null;
         }
-        return ativ; // depois tirar 
+        //return ativ; // depois tirar 
     }
 
     private boolean verificarSeMembro(List<Membro> membros, Integer otherId){
@@ -146,5 +163,20 @@ public class EngenheiroDeSoftwareService {
             }
         }
         return membroDoProjeto;
+    }
+
+    public Membro insertMember(Integer id, String email, Projeto proj, Cargo cargo){
+        Membro mem = new Membro();
+        EngenheiroDeSoftware eng = getUserByEmail(email);
+        Integer idAdmin = proj.getAdministradorId().getId();
+        if(id == idAdmin){
+            mem = new Membro(eng.getId(), eng, proj, cargo);
+            eng.getParticipa().add(mem);
+            return mem;
+        }
+        else{
+            // jogar exception
+        }
+        return mem; // depois tirar
     }
 }

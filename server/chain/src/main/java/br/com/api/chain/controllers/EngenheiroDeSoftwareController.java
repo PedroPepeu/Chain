@@ -18,15 +18,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Cargo;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AnotacaoRepository;
 import br.com.api.chain.repositories.AtividadeRepository;
+import br.com.api.chain.repositories.MembroRepository;
 import br.com.api.chain.repositories.ProjetoRepository;
 import br.com.api.chain.services.AnotacaoService;
 import br.com.api.chain.services.AtividadeService;
 import br.com.api.chain.services.EngenheiroDeSoftwareService;
+import br.com.api.chain.services.MembroService;
 import br.com.api.chain.services.ProjetoService;
 
 @RestController
@@ -37,6 +40,7 @@ public class EngenheiroDeSoftwareController {
     private final AnotacaoService anotacaoService;
     private final ProjetoService projetoService;
     private final AtividadeService atividadeService;
+    private final MembroService membroService;
 
     /*@Autowired
     public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService){
@@ -44,11 +48,12 @@ public class EngenheiroDeSoftwareController {
     }*/
 
     @Autowired
-    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository, ProjetoRepository projetoRepository, AtividadeRepository atividadeRepository){
+    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository, ProjetoRepository projetoRepository, AtividadeRepository atividadeRepository, MembroRepository membroRepository){
         this.usuarioService = usuarioService;
         this.anotacaoService = new AnotacaoService(anotacaoRepository);
         this.projetoService = new ProjetoService(projetoRepository);
         this.atividadeService = new AtividadeService(atividadeRepository);
+        this.membroService = new MembroService(membroRepository);
     }
 
     @GetMapping("/ALL") // SÓ PRA TESTES
@@ -106,9 +111,11 @@ public class EngenheiroDeSoftwareController {
 
     // Projetos
 
-    @GetMapping(value = "/{id}/projects") // MUDAR PARA TODOS OS PROJETOS
+    @GetMapping(value = "/{id}/projects") // Mostrar todos os projetos
     public ResponseEntity<List<Projeto>> getUserProjects(@PathVariable Integer id){
         List<Projeto> proj = usuarioService.getUserProjects(id);
+        List<Projeto> participa = usuarioService.getUserParticipations(id);
+        proj.addAll(participa);
         return ResponseEntity.ok().body(proj);
     }
 
@@ -123,15 +130,20 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.created(uri).body(proj);
     }
 
-    /*@PutMapping(value = "/{id}/projects/{idOther}")
-    public ResponseEntity<Membro> insertMember(@PathVariable Integer id, @RequestBody Projeto proj, @PathVariable Integer idOther){
-        
-    }*/
+    @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}")
+    public ResponseEntity<Membro> insertMember(@PathVariable Integer id, @RequestBody Projeto proj, @PathVariable String emailOther, @PathVariable Cargo cargo){
+        Membro mem = usuarioService.insertMember(id, emailOther, proj, cargo);
+        projetoService.insertMember(mem);
+        membroService.insertMembers(mem);
+        return ResponseEntity.ok().body(mem);
+    }
 
-    @PutMapping(value = "/{id}/projects/activity/{idOther}")
-    public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @RequestBody Atividade ativ, @PathVariable Integer idOther){
-        ativ = usuarioService.insertUserIntoActivity(id, ativ, idOther);
-        atividadeService.updateUsers(idOther, ativ);
+    @PutMapping(value = "/{id}/projects/{idProj}/activity/{idAtiv}/{emailOther}") 
+    public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @PathVariable Integer idProj, @PathVariable Integer idAtiv, @PathVariable String emailOther){
+        Projeto proj = projetoService.getProject(idProj);
+        Atividade ativ = atividadeService.getActivity(idAtiv);
+        ativ = usuarioService.insertUserIntoActivity(id, proj, ativ, emailOther);
+        atividadeService.updateUsers(ativ);
         return ResponseEntity.ok().body(ativ);
     }
 
