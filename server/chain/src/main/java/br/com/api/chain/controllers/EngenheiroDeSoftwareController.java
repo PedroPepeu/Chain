@@ -70,13 +70,13 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(eng);
     }
 
-    @GetMapping(value = "/login")
+    @PostMapping(value = "/login")
     public ResponseEntity<EngenheiroDeSoftware> login(@RequestBody EngenheiroDeSoftware eng){
         eng = usuarioService.login(eng);
         return ResponseEntity.ok().body(eng);
     }
 
-    @PostMapping
+    @PostMapping(value = "/create")
     public ResponseEntity<EngenheiroDeSoftware> insertUser(@RequestBody EngenheiroDeSoftware eng){ // cadastrar
         eng = usuarioService.insertUser(eng);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
