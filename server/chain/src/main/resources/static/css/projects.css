@@ -73,6 +73,7 @@ button {
 }
 
 .filtro {
+    margin: 0 auto;
     color: white;
     padding: 2% 5%;
 }
@@ -243,6 +244,107 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.links{
+    padding: 1em;
+    margin: 1em 1em 1em 0;
+    display: grid;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: #fff;
+    min-height: 100px;
+    max-width: 50rem;
+}
+
+.addLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    background-color:#000;
+    height: 5rem;
+}
+
+.addLink input{
+    border-radius: .25rem;
+    color: #000;
+    cursor: pointer;
+    margin: 0;
+    height: 2rem;
+    position: relative;
+    text-decoration: none;
+}
+
+.linkContainer{
+    display: grid;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: maroon;
+    margin-top: 10px;
+    height: 20rem;
+    width: 30rem;
+    overflow-y: scroll;
+}
+
+.link{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+    height: 5rem;
+    width: 20rem;
+    background-color: #fff;
+    border-radius: 6px;
+
+    margin-top: 1rem;
+}
+
+.button-5 {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    height: 2rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 1rem;
+}
+
+.button-5:hover,
+.button-5:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+    transform: translateY(-1px);
+}
+
+.button-5:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+}
+
 
 html,
 body {
