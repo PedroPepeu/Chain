@@ -424,6 +424,17 @@ class ContextMenu {
         addButton.addEventListener('click', () => {
             //this.addMember(emailInput.value, categoryContainer);
 
+            const radios = document.querySelectorAll('input[name="category"]');
+            let selected;
+            for(const radio of radios){
+                if(radio.checked){
+                    selected = radio.value;
+                    break;
+                }
+            }
+
+            console.log(selected);
+
             const url = '/projects/' + id;
     
             fetch(url, {
@@ -443,7 +454,7 @@ class ContextMenu {
             .then(projeto => {
                 console.log('Projeto foi pego: ', projeto);
                 
-                const urlAddMember = '/users/' + user.id + '/projects/' + emailInput.value + '/BACKEND';
+                const urlAddMember = '/users/' + user.id + '/projects/' + emailInput.value + '/' + selected;
                 fetch(urlAddMember, {
                     method: 'PUT',
                     headers: {
