@@ -59,9 +59,8 @@
             })
             .then(anotacao => {
                 console.log('Anotacao pega', anotacao);
-                let dateValue;
                 for(let i = 0; i < anotacao.length; i++){
-                    dateValue = new Date(anotacao[i].dataAnotacao);
+                    let dateValue = new Date(anotacao[i].dataAnotacao);
                     dateValue.setDate(dateValue.getDate() + 1);
 
                     $(document).ready(function(){
