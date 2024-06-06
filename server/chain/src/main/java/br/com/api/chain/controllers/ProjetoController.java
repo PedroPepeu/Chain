@@ -67,6 +67,14 @@ public class ProjetoController {
         return ResponseEntity.ok().body(ativ);
     }
 
+    @GetMapping(value = "/{id}/activity/{idAtiv}")
+    public ResponseEntity<Atividade> getProjectActivity(@PathVariable Integer id, @PathVariable Integer idAtiv){
+        Projeto proj = projetoService.getProject(id);
+        projetoService.getProjectActivity(proj, idAtiv);
+        Atividade ativ = atividadeService.getActivity(idAtiv);
+        return ResponseEntity.ok().body(ativ);
+    }
+
     @GetMapping(value = "/{id}/links")
     public ResponseEntity<List<Link>> getLinks(@PathVariable Integer id){
         List<Link> li = projetoService.getLinks(id);
