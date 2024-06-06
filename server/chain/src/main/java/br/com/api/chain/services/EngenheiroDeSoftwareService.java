@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,9 @@ import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
+import br.com.api.chain.services.exceptions.EmailAlreadyExistsException;
 import br.com.api.chain.services.exceptions.EmailNotFoundException;
+import br.com.api.chain.services.exceptions.InvalidUserDataException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -58,10 +62,34 @@ public class EngenheiroDeSoftwareService {
     }
 
     public EngenheiroDeSoftware insertUser(EngenheiroDeSoftware eng){
+        if(eng.getEmail() == null || eng.getSenha() == null || eng.getNome() == null){
+            throw new InvalidUserDataException();
+        }
+        else if(!validacaoEmail(eng.getEmail())){
+            throw new InvalidUserDataException();
+        }
+        EngenheiroDeSoftware x = this.usuarioRepository.findByEmail(eng.getEmail());
+        if(x != null){
+            throw new EmailAlreadyExistsException(eng.getEmail());
+        }
         return usuarioRepository.save(eng);
     }
 
+    private boolean validacaoEmail(String email){
+        boolean valido = false;
+        if(email.length() > 0){
+            String exp = "^[\\\\w\\\\.-]+@([\\\\w\\\\-]+\\\\.)+[A-Z]{2,4}$";
+            Pattern pat = Pattern.compile(exp, Pattern.CASE_INSENSITIVE);
+            Matcher mat = pat.matcher(email);
+            if(mat.matches()){
+                valido = true;
+            }
+        }
+        return valido;
+    }
+
     public void deleteUser(Integer id){
+        this.getUserById(id);
         usuarioRepository.deleteById(id);
     }
 
@@ -71,16 +99,13 @@ public class EngenheiroDeSoftwareService {
         {
             updateData(eng, entity);
         }
-        return eng;
-        /*updateData(entity, eng);
-        return usuarioRepository.save(entity);*/
+        updateData(entity, eng);
+        return usuarioRepository.save(entity);
     }
 
     private void updateData(EngenheiroDeSoftware entity, EngenheiroDeSoftware eng){
         entity.setNome(eng.getNome());
         entity.setSenha(eng.getSenha());
-        // Posso colocar email se necessário, mas precisaria colocar uma verificação
-        //entity.setAnotacoes(eng.getAnotacoes());
     }
 
     public Set<Atividade> getUserActivities(Integer id){
