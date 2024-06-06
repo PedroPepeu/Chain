@@ -9,13 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Install dependencies
-      run: npm install cypress --save-dev
-
     - name: Run Cypress tests
+      run: cd testChain
       run: npx cypress run
