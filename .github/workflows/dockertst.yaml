@@ -15,7 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress run
-        working-directory: ./testChain
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
