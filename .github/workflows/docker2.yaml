@@ -27,6 +27,7 @@ jobs:
         run: |
           cd ./testChain
           npm install
+          npm install cypress --save-dev
           cypress install
           npx cypress run
       # - name: Cypress run
