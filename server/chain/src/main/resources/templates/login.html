@@ -128,12 +128,6 @@
         const email = document.getElementById('Email');
         const passwd = document.getElementById('password');
         const login = document.getElementById('bt_login');
-
-        var logged = window.localStorage.getItem('user')
-        if(logged)
-        {
-            window.location.href = '/profile';
-        }
         
         function makeLogin(){
             const user = {
