@@ -69,8 +69,7 @@ public class ProjetoController {
 
     @GetMapping(value = "/{id}/activity/{idAtiv}")
     public ResponseEntity<Atividade> getProjectActivity(@PathVariable Integer id, @PathVariable Integer idAtiv){
-        Projeto proj = projetoService.getProject(id);
-        //projetoService.getProjectActivity(proj, idAtiv);
+        projetoService.getProjectActivity(id, idAtiv);
         Atividade ativ = atividadeService.getActivity(idAtiv);
         return ResponseEntity.ok().body(ativ);
     }

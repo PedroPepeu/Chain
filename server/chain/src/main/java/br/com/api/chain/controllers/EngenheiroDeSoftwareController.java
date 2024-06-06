@@ -63,7 +63,8 @@ public class EngenheiroDeSoftwareController {
 
     @GetMapping("/email/{email}")
     public ResponseEntity<EngenheiroDeSoftware> getUserByEmail(@PathVariable String email){
-        EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
+        EngenheiroDeSoftware eng;
+        eng = usuarioService.getUserByEmail(email);
         return ResponseEntity.ok().body(eng);
     }
 
