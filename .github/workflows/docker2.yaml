@@ -32,7 +32,6 @@ jobs:
           cd ./testChain
           npm install
           npm install cypress --save-dev
-          cypress install
           npx cypress run
       # - name: Cypress run
       #   uses: cypress-io/github-action@v6
