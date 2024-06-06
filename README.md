@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Descrição do Sistema
+## Chain: Sistema de Gerenciamento de Projetos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O Chain é uma plataforma completa projetada para otimizar a gestão de projetos e equipes de desenvolvimento de software. Inspirado na ideia de conectar pessoas como elos de uma corrente, o Chain oferece uma experiência intuitiva e eficiente para colaboração e organização.
 
-## Available Scripts
+## Recursos Principais
 
-In the project directory, you can run:
+- Página Inicial Atraente: Uma interface visualmente atraente dá as boas-vindas aos usuários, destacando a proposta do sistema e oferecendo fácil acesso à tela de login.
 
-### `npm start`
+- Autenticação Segura: Com o Chain, os usuários podem criar uma conta ou fazer login de forma segura, garantindo acesso personalizado às funcionalidades do sistema.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Perfil do Usuário: Após o login, os usuários são redirecionados para sua página de perfil, onde podem visualizar e acessar facilmente o calendário de atividades e os projetos aos quais estão vinculados. Além disso, eles têm a opção de criar novos projetos conforme necessário.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-  Gestão de Projetos Eficiente: Como administrador ou criador de projeto, os usuários têm a capacidade de convidar membros da equipe, atribuir atividades com datas de início e término e designar responsáveis por cada tarefa. Isso promove uma gestão eficaz do progresso do projeto e da distribuição de tarefas.
 
-### `npm test`
+- Organização de Links e Comentários: O Chain oferece uma lista dedicada para adicionar links relevantes ao projeto, permitindo que os membros da equipe compartilhem recursos importantes e comentários sobre eles. Essa funcionalidade melhora a colaboração e a comunicação dentro do projeto.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Comentários no Calendário: Os usuários podem adicionar comentários diretamente ao calendário, fornecendo informações contextuais adicionais sobre atividades específicas ou eventos importantes. Isso facilita a comunicação e o acompanhamento do progresso do projeto.
 
-### `npm run build`
+- LogOut Seguro: Para garantir a privacidade e segurança dos usuários, o Chain oferece uma opção de logout fácil de usar na tela de perfil, permitindo que os usuários encerrem sua sessão quando desejarem.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+O Chain é uma solução abrangente para organizar, criar e gerenciar projetos de forma eficiente, proporcionando uma colaboração harmoniosa entre os membros da equipe. Com sua interface amigável e recursos poderosos, o Chain eleva a produtividade e o sucesso dos projetos de desenvolvimento de software.
+# Diagrama de Casos de Uso
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p align="center">
+<img src="imagens/DiagramaDeCasoDeUso.png" width="500px" />
+</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Diagrama de Classes do Sistema
 
-### `npm run eject`
+<p align="center">
+<img src="imagens/DiagramaUML.png" width="500px" />
+</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Modelo Relacional 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<p align="center">
+<img src="brModelo/Modelo_Conceitual.png" width="500px" />
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# HomePage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<p align="center">
+<img src="imagens/HomePage.png" width="500px" />
+</p>
 
-## Learn More
+# Perfil
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="center">
+<img src="imagens/Perfil.png" width="500px" />
+</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Projeto
 
-### Code Splitting
+<p align="center">
+<img src="imagens/Projeto.png" width="500px" />
+</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
