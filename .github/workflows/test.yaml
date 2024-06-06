@@ -1,22 +1,36 @@
-# Example for a GitHub Actions workflow file (.github/workflows/ci.yml)
-name: CI
+name: Cypress Tests using Cypress Docker Image
 
 on:
-  push:
-    branches:
+  push:  
+    branches: 
       - develop
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  cypress-run:
+    runs-on: ubuntu-22.04
     env:
-      working-directory: ./testChain/cypress
+      shell: bash
+      working-directory: ./testChain
+    container:
+      image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+      options: --user 1001
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run Cypress tests
-      run: npm run cy:run
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with: 
+          node-version: 20
+      # - name: Checkout
+      #   uses: actions/checkout@v4
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      #     cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome
