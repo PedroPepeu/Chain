@@ -23,6 +23,10 @@ jobs:
       #   with:
       #     node-version: 20
       #     cache: 'npm'
+      - name: Run Springboot
+        run: |
+          cd ./server/chain
+          mvn spring-boot:run
       - name: Install dependencies
         run: |
           cd ./testChain
