@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,6 +67,14 @@ public class ProjetoController {
         return ResponseEntity.ok().body(ativ);
     }
 
+    @GetMapping(value = "/{id}/activity/{idAtiv}")
+    public ResponseEntity<Atividade> getProjectActivity(@PathVariable Integer id, @PathVariable Integer idAtiv){
+        Projeto proj = projetoService.getProject(id);
+        //projetoService.getProjectActivity(proj, idAtiv);
+        Atividade ativ = atividadeService.getActivity(idAtiv);
+        return ResponseEntity.ok().body(ativ);
+    }
+
     @GetMapping(value = "/{id}/links")
     public ResponseEntity<List<Link>> getLinks(@PathVariable Integer id){
         List<Link> li = projetoService.getLinks(id);
@@ -89,4 +98,12 @@ public class ProjetoController {
                 .buildAndExpand(li.getId()).toUri();
         return ResponseEntity.created(uri).body(li);
     }
+
+    @PutMapping(value = "/{id}/activity")
+    public ResponseEntity<Atividade> updateActivity(@PathVariable Integer id, @RequestBody Atividade ativ){
+        //projetoService.updateActivity(id);
+        ativ = atividadeService.updateActivity(ativ.getId(), ativ);
+        return ResponseEntity.ok().body(ativ);
+    }
+
 }
