@@ -106,7 +106,7 @@ let buttonCreation = document.getElementById("addCreationButton");
 
 function createProject(){
     const project = {
-        id: 1,
+        id: -1,
         nome: projectName.value,
         administradorId: user
     };
