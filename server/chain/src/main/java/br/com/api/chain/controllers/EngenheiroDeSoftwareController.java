@@ -61,11 +61,11 @@ public class EngenheiroDeSoftwareController {
         return this.usuarioService.getEngenheiros();
     }
 
-    /*@GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<EngenheiroDeSoftware> getUserByEmail(@PathVariable String email){
         EngenheiroDeSoftware eng = usuarioService.getUserByEmail(email);
         return ResponseEntity.ok().body(eng);
-    }*/
+    }
 
     // Usuário em geral
 

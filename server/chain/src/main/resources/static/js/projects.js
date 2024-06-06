@@ -1,5 +1,6 @@
 let root = document.getElementById("blocks");
 let linkRoot = document.getElementById("linkPlace");
+let displayAtividades = document.getElementById('displayAtividades');
 
 const userString = window.localStorage.getItem('user');
 const user = JSON.parse(userString);
@@ -37,7 +38,7 @@ class link {
     }
 }
 
-class todoList {
+/*class todoList {
     constructor(place, title = "Atividades") {
         this.place = place;
         this.title = title;
@@ -252,6 +253,44 @@ class EditableText {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(String(email).toLowerCase());
     }
+}*/
+
+class atividade {
+    constructor(nomeTxt, descricaoTxt, data_inicio, data_termino) {
+        this.nomeTxt = nomeTxt;
+        this.descricaoTxt = descricaoTxt;
+        this.data_inicio = data_inicio;
+        this.data_termino = data_termino;
+
+        this.render();
+    }
+
+    render() {
+        this.createActivity();
+        displayAtividades.append(this.attElement);
+    }
+
+    createActivity() {
+        this.attElement = document.createElement('div');
+        this.attElement.classList.add('atividade_item');
+
+        this.nome = document.createElement('p');
+        this.descricao = document.createElement('p');
+        this.dataInicio = document.createElement('p');
+        this.dataTermino = document.createElement('p');
+        this.linha = document.createElement('hr');
+
+        this.nome.innerText = 'NOME: ' + this.nomeTxt;
+        this.descricao.innerText = 'DESCRICAO: ' + this.descricaoTxt;
+        this.dataInicio.innerText = 'DATA INICIO: ' + this.data_inicio;
+        this.dataTermino.innerText = 'DATA TERMINO: ' + this.data_termino;
+
+        this.attElement.append(this.nome);
+        this.attElement.append(this.descricao);
+        this.attElement.append(this.dataInicio);
+        this.attElement.append(this.dataTermino);
+        this.attElement.append(this.linha);
+    }
 }
 
 //-------------main------------
@@ -348,7 +387,7 @@ function createLink(){
 
 linkCreationButton.onclick = createLink;
 
-let todoList1 = new todoList(root, 'Atividades');
+//let todoList1 = new todoList(root, 'Atividades');
 
 // Função para exibir notificação usando Toastify
 function exibirNotificacao(mensagem) {
@@ -475,7 +514,8 @@ class ContextMenu {
                     return response.json();
                 })
                 .then(data => {
-
+                    console.log(data.engenheiroId.nome);
+                    addMember(data.engenheiroId.nome, data.engenheiroId.email);
                 })
                 .catch(error => {
                     console.error("Error fetching add member to project:", error);
@@ -537,3 +577,149 @@ document.addEventListener('DOMContentLoaded', () => {
         new ContextMenu(addMemberElement);
     }
 });
+
+const displayMembers = document.getElementsByClassName('display')[0];
+
+function addMember(nome, email){
+    const div = document.createElement('div');
+    div.className = 'membro';
+
+    const nomeTxt = document.createElement('p');
+    nomeTxt.textContent = 'Nome: ' + nome;
+
+    const emailTxt = document.createElement('p');
+    emailTxt.textContent = 'Email: ' + email;
+
+    div.appendChild(nomeTxt);
+    div.appendChild(emailTxt);
+
+    displayMembers.appendChild(div);
+}
+
+function addParticipatingMembers(){
+    const url = '/projects/' + id + '/members';
+    console.log(url);
+
+    fetch(url, {
+        method: 'GET',
+        headers:{
+            'Content-Type':'application/json',
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Erro ao tentar pegar membros');
+            throw new Error('Erro ao tentar pegar membros');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        for(let i = 0; i < data.length; i++)
+        {
+            addMember(data[i].engenheiroId.nome, data[i].engenheiroId.email);
+        }
+    })
+    .catch(error => {
+        console.error('error fetching get members: ', error);
+    });
+}
+
+addParticipatingMembers();
+
+function getAtividades(){
+    const url = '/projects/' + id + '/activities';
+    fetch(url, {
+        method: 'GET',
+        headers:{
+            'Content-Type' : 'application/json',
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Error ao tentar pegar atividades');
+            throw new Error('Error ao tentar pegar atividades');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        for(let i = 0; i < data.length; i++){
+            new atividade(data[i].nome, data[i].descricao, data[i].dataInicio, data[i].dataEntrega);
+        }
+    })
+    .catch(error => {
+        console.error('fetching trying get activities: ', error);
+    })
+}
+
+getAtividades();
+
+const nomeAtt = document.getElementById('nomeAtt');
+const descAtt = document.getElementById('descAtt');
+const in_dataInicio = document.getElementById('dataInicio');
+const in_dataTermino = document.getElementById('dataTermino');
+
+function addAtividade(){
+    const url = '/projects/' + id;
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Erro ao tentar pegar projeto');
+            throw new Error('Error ao tentar pegar projeto');
+        }
+
+        return response.json();
+    })
+    .then(projeto => {
+        console.log('Projeto foi pego(criar atividade): ', projeto);
+
+        const attUrl = url + '/activity';
+        console.log(attUrl);
+
+        const ativ = {
+            id: -1,
+            nome: nomeAtt.value,
+            descricao: descAtt.value,
+            dataInicio: in_dataInicio.value,
+            dataEntrega: in_dataTermino.value,
+            concluida: true,
+            projetoId: projeto
+        };
+    
+        fetch(attUrl, {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(ativ),
+        })
+        .then(response => {
+            if(!response.ok){
+                alert('erro ao tentar criar atividade');
+                throw new Error('erro ao tentar criar atividade');
+            }
+    
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            new atividade(data.nome, data.descricao, data.dataInicio, data.dataTermino);
+        })
+        .catch(error => {
+            console.error('error fetching create activity', error);
+        })
+    })
+    .catch(error => {
+        console.error("Error fetching project:", error);
+    });
+}
+
+document.getElementById('criarAtividade').onclick = addAtividade;

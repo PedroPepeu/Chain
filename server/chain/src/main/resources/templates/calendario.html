@@ -19,11 +19,11 @@
 
     <div class="memberEvents">
         <div class="memberInput">
-            <input type="date" placeholder="Data do evento."> 
+            <input id="in_date" type="date" placeholder="Data do evento."> 
             <button class="button-29">+</button>
         </div>
         <textarea id="commentInput" placeholder="Detalhes do evento."></textarea>
-        <button class="button-5">+</button>
+        <button id="bt_add" class="button-5">+</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
@@ -34,26 +34,104 @@
             $('#calendar').evoCalendar({
                 theme: "Midnight Blue",
                 calendarEvents: [
-                    {
-                        id: 'event1', // Event's ID (required)
-                        name: "Atividade 1", // Event name (required)
-                        description: "Atividade",
-                        date: "January/1/2020", // Event date (required)
-                        type: "activity", // Event type (required)
-                        everyYear: true, // Same event every year (optional)
-                        color: "#63d867"
-                    },
-                    {
-                        name: "Vacation Leave",
-                        badge: "02/13 - 02/15", // Event badge (optional)
-                        date: ["February/13/2020", "February/15/2020"], // Date range
-                        description: "Vacation leave for 3 days.", // Event description (optional)
-                        type: "event",
-                        color: "#63d867" // Event custom color (optional)
-                    }
                 ]
-            })
+            });
         })
+
+        const userString = window.localStorage.getItem('user');
+        const user = JSON.parse(userString);
+
+        function getAnotations(){
+            const url = '/users/' + user.id + '/anotations';
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                }
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('erro ao pegar anotacao');
+                    throw new Error('erro ao pegar anotacao');
+                }
+
+                return response.json();
+            })
+            .then(anotacao => {
+                console.log('Anotacao pega', anotacao);
+                for(let i = 0; i < anotacao.length; i++){
+                    let dateValue = new Date(anotacao[i].dataAnotacao);
+                    dateValue.setDate(dateValue.getDate() + 1);
+
+                    $(document).ready(function(){
+                        $('#calendar').evoCalendar('addCalendarEvent', {
+                            id: 'TESTE',
+                            name: 'Anotacao',
+                            date: dateValue,
+                            description: anotacao[i].texto,
+                            type: 'anotacao',
+                            color: '#00FF00'
+                        });
+                    })
+                }
+            })
+            .catch(error => {
+                console.error('error fetching get anotation', error);
+            });
+        }
+
+        getAnotations();
+
+        const inputDate = document.getElementById('in_date');
+        const inputComment = document.getElementById('commentInput');
+
+        function addAnotation(){
+            const Anot = {
+                id: -1,
+                texto: inputComment.value,
+                dataAnotacao: inputDate.value,
+                engenheiroId: user
+            };
+
+            const url = '/users/' + user.id + '/anotations';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify(Anot)
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('erro ao adicionar anotacao');
+                    throw new Error('erro ao adicionar anotacao');
+                }
+
+                return response.json();
+            })
+            .then(anotacao => {
+                console.log('Anotacao inserida', anotacao);
+                let dateValue = new Date(anotacao.dataAnotacao);
+                dateValue.setDate(dateValue.getDate() + 1);
+
+                $(document).ready(function(){
+                    $('#calendar').evoCalendar('addCalendarEvent', {
+                        id: 'TESTE',
+                        name: 'Anotacao',
+                        date: dateValue,
+                        description: anotacao.texto,
+                        type: 'anotacao',
+                        color: '#00FF00'
+                    });
+                })
+            })
+            .catch(error => {
+                console.error('error fetching add anotation', error);
+            });
+        }
+
+        document.getElementById('bt_add').onclick = addAnotation;
+            
     </script>
 </body>
 

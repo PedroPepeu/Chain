@@ -51,6 +51,10 @@ public class AtividadeService {
         entity.setNome(ativ.getNome());
     }
 
+    /*private boolean validacaoDataInicio(){
+
+    }*/
+
     public Atividade updateUsers(Atividade ativ){
         return atividadeRepository.save(ativ);
     }

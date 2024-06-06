@@ -1,36 +1,30 @@
 let linkHomeUser = "http://localhost:8080/profile";
+let linkLoginUser = "http://localhost:8080/login";
 
 const lgout = '#logout';
+const projName = '#addProjectInput';
+const projAdd = '#addCreationButton';
 
 describe('Checkup-home-user', function() {
-    this.beforeEach(() => {
+    beforeEach(() => {
         cy.visit(linkHomeUser);
     });
 
-    it('Check-components', function() {
-        cy.get('#addProjectInput').should('exist');
-        cy.get('#addCreationButton').should('exist');
+    it('Checking-logout', function() {
+        cy.get(lgout).should('exists');
     });
 
-    it('Check-create-work', function() {
-        cy.get('#addProjectInput').type('Project test 1');
-        cy.get('#addCreationButton').click();
-
-        // should check something in the database of the user
+    it('Checking-name-project', function() {
+        cy.get(projName).should('exists');
     });
 
-    it('Check-create-work-null', function() {
-        cy.get('#addCreationButton').click();
-
-        // should check something in the database of the user
+    it('Checking-project-creation', function() {
+        cy.get(projAdd).should('exists');
     });
 
-    it('Check-create-work-space', function() {
-        cy.get('#addProjectInput').type(' ');
-        cy.get('#addCreationButton').click();
+    it('Loggin-out', function() {
+        cy.get(lgout).click();
 
-        // should check something in the database of the user
+        cy.url().should('eq', linkLoginUser);
     });
-
-    // continue
 });
