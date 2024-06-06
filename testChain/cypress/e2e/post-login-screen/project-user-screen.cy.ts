@@ -1,1 +1,1 @@
-let linkProjectUser = "http://localhost:8080/project";
+// let linkProjectUser = "http://localhost:8080/project";
