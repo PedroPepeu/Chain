@@ -17,25 +17,9 @@ jobs:
         uses: actions/setup-node@v2
         with: 
           node-version: '20'
-      # - name: Checkout
-      #   uses: actions/checkout@v4
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-      #     cache: 'npm'
-      - name: Run Springboot
-        run: |
-          cd ./server/chain
-          mvn spring-boot:run
       - name: Install dependencies
         run: |
           cd ./testChain
           npm install
           npm install cypress --save-dev
           npx cypress run
-      # - name: Cypress run
-      #   uses: cypress-io/github-action@v6
-      #   with:
-      #     build: npm run build
-      #     start: npm start
-      #     browser: chrom
