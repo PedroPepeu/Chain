@@ -131,17 +131,25 @@ public class EngenheiroDeSoftwareController {
     @PostMapping(value = "/{id}/projects")
     public ResponseEntity<Projeto> insertUserProject(@PathVariable Integer id, @RequestBody Projeto proj){
         proj = usuarioService.insertUserProject(id, proj);
-        projetoService.insertProject(proj);
+        proj = projetoService.insertProject(proj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(proj.getId()).toUri();
         return ResponseEntity.created(uri).body(proj); 
     }
 
-    @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}")
+    @PutMapping(value = "/{id}/projects/{idProj}")
+    public ResponseEntity<Projeto> userUpdateProject(@PathVariable Integer id, @RequestBody Projeto mod, @PathVariable Integer idProj){
+        Projeto proj = projetoService.getProject(idProj);
+        usuarioService.userUpdateProject(idProj, proj);
+        proj = projetoService.updateProject(idProj, mod);
+        return ResponseEntity.ok().body(proj);
+    }
+
+    @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}") // TESTAR
     public ResponseEntity<Membro> insertMember(@PathVariable Integer id, @RequestBody Projeto proj, @PathVariable String emailOther, @PathVariable Cargo cargo){
         Membro mem = usuarioService.insertMember(id, emailOther, proj, cargo);
         projetoService.insertMember(mem);
-        membroService.insertMembers(mem);
+        mem = membroService.insertMembers(mem);
         return ResponseEntity.ok().body(mem);
     }
 
@@ -150,7 +158,7 @@ public class EngenheiroDeSoftwareController {
         Projeto proj = projetoService.getProject(idProj);
         Atividade ativ = atividadeService.getActivity(idAtiv);
         ativ = usuarioService.insertUserIntoActivity(id, proj, ativ, emailOther);
-        atividadeService.updateUsers(ativ);
+        ativ = atividadeService.updateUsers(ativ);
         return ResponseEntity.ok().body(ativ);
     }
 
@@ -165,7 +173,7 @@ public class EngenheiroDeSoftwareController {
     @PostMapping(value = "/{id}/anotations")
     public ResponseEntity<Anotacao> insertUserAnotation(@PathVariable Integer id, @RequestBody Anotacao anot){
         anot = usuarioService.insertUserAnotation(id, anot);
-        anotacaoService.insertAnotation(anot);
+        anot = anotacaoService.insertAnotation(anot);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(anot.getId()).toUri();
         return ResponseEntity.created(uri).body(anot);
