@@ -2,9 +2,9 @@ name: Test run
 
 on:
   push:  
-    branches: ['develop']
-      # paths:
-      #   - 'testChain/cypress/**/*.ts'
+    branches: 
+      - develop
+      
 
 jobs:
   test-code:
@@ -14,4 +14,6 @@ jobs:
       - name: Install cypress
         uses: cypress-io/github-actions@v6
         with:
+          build: npm run build
+          start: npm start
           
