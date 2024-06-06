@@ -646,7 +646,7 @@ function getAtividades(){
     })
     .then(data => {
         for(let i = 0; i < data.length; i++){
-            new atividade(data[i].nome, data[i].descricao, data[i].datInicio, data[i].dataEntrega);
+            new atividade(data[i].nome, data[i].descricao, data[i].dataInicio, data[i].dataEntrega);
         }
     })
     .catch(error => {
