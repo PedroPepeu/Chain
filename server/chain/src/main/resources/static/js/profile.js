@@ -55,8 +55,32 @@ class Project {
     editTitle() {
         let newTitle = prompt('Digite o novo nome do projeto:');
         if (newTitle !== null) {
-            this.title = newTitle;
-            this.a.innerText = this.title;
+            this.project.nome = newTitle;
+            
+            const url = '/users/' + user.id + '/projects/' + this.project.id;
+            console.log('URL = ', url);
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(this.project)
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Error ao tentar deletar projeto');
+                    throw new Error('Error ao tentar deletar projeto');
+                }
+        
+                return response.json();
+            })
+            .then(data => {
+                this.title = newTitle;
+                this.a.innerText = this.title;
+            })
+            .catch(error => {
+                console.error("Error fetching deleting project:", error);
+            });
         }
     }
 
@@ -75,16 +99,16 @@ class Project {
                     alert('Error ao tentar deletar projeto');
                     throw new Error('Error ao tentar deletar projeto');
                 }
+                else
+                {
+                    this.place.removeChild(this.a.parentNode);
+                }
         
                 return response.json();
-            })
-            .then(data => {
-                this.place.removeChild(this.a.parentNode);
             })
             .catch(error => {
                 console.error("Error fetching deleting project:", error);
             });
-            this.place.removeChild(this.a.parentNode); // Remove o nó pai do link (div.project)
         }
         console.log('Projeto deletado: ', this.project);
     }
