@@ -18,4 +18,4 @@ jobs:
         - name: Running compose install
           run: composer install
         - name: Running cypress E2E test
-          run: .
+          run: 
