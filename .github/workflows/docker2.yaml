@@ -8,8 +8,6 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    env:
-      working-directory: ./testChain
     container:
       image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
       options: --user 1001
@@ -26,7 +24,9 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd ./testChain
+          npm install
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
