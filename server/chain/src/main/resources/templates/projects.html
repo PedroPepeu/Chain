@@ -40,7 +40,7 @@
                         <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
                         <span id="addMemberButton">Adicionar membro</span>
                     </a>
-                </li>  
+                </li>
                 <li>
                     <a href="#">
                         <span class="icon"><i class="fa-solid fa-list"></i></i></span>
@@ -62,38 +62,43 @@
         <div class="main-content">
             <div id="root">
                 <div class="filtro" id="filtro">
-                    <h4>Filtre suas atividades:</h2>
+                    <h4>Filtre suas atividades:</h4>
                     <form>
                         <input type="radio" id="minhasAtividades" name="filtroAtividade" value="Minhas">
                         <label for="minhasAtividades">Minhas</label><br>
                         <input type="radio" id="todasAtividades" name="filtroAtividade" value="Todas">
                         <label for="todasAtividades">Todas</label><br>
-                    </form>   
+                    </form>
                 </div>
-                <div id="blocks">
-                    <div class="links">
-                        <h1>Adicione links abaixo:</h1>
-                        <div class="addLink">
-                            <input id="createLinkInput" placeholder="Endereço do link">
-                            <input id="createLinkDescription" placeholder="Descrição do link">
-                            <button class="button-5" id="createLinkButton">+</button>
-                        </div>
-                        <div class="linkContainer" id="linkPlace">
+                <div class="toggleDisplayBlocks"></div>
+                <div class="rootDisplay">
+                    <div class="blocks">
+                        <div class="links">
+                            <h1>Adicione links abaixo:</h1>
+                            <div class="addLink">
+                                <input id="createLinkInput" placeholder="Endereço do link">
+                                <input id="createLinkDescription" placeholder="Descrição do link">
+                                <button class="button-5" id="createLinkButton">+</button>
+                            </div>
+                            <div class="linkContainer" id="linkPlace">
 
+                            </div>
+                        </div>
+                        <div id="displayAtividades" class="displayAtividades">
+                            <div class="inputContainer">
+                                <h4>ATIVIDADES</h4>
+                                <input id="nomeAtt" type="text" placeholder="nome da atividade">
+                                <input id="descAtt" type="text" placeholder="descricao da atividade">
+                                <label>Data inicio</label>
+                                <input id="dataInicio" type="date">
+                                <label>Data término</label>
+                                <input id="dataTermino" type="date">
+                                <input id="criarAtividade" type="button" value="criar atividade" class="button-29">
+                            </div>
                         </div>
                     </div>
-                    <div id="displayAtividades" class="displayAtividades">
-                        <h1>ATIVIDADES</h1>
-                        <br>
-                        <input id="nomeAtt" type="text" placeholder="nome da atividade">
-                        <input id="descAtt" type="text" placeholder="descricao da atividade">
-                        <br>
-                        <label>Data inicio</label>
-                        <input id="dataInicio" type="date">
-                        <label>Data término</label>
-                        <input id="dataTermino" type="date">
-                        <input id="criarAtividade" type="button" value="criar atividade">
-                        <hr>
+                    <div class="containerAtividades">
+
                     </div>
                 </div>
             </div>
@@ -101,14 +106,20 @@
     </div>
 
     <script>
+        let blocks = document.querySelector(".blocks")
+        let toggleDisplayBlocks = document.querySelector(".toggleDisplayBlocks")
+        toggleDisplayBlocks.onclick = function () {
+            blocks.classList.toggle('active');
+        }
+
         let navigation = document.querySelector(".navigation");
         let toggle = document.querySelector(".toggle");
-        toggle.onclick = function(){
+        toggle.onclick = function () {
             navigation.classList.toggle('active');
         }
     </script>
 
-</body>    
+</body>
 
 <script src="/js/projects.js"></script>
 
