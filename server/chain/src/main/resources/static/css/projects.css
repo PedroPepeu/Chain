@@ -495,6 +495,26 @@ body {
     transform: translateY(0px) rotate(225deg);
 }
 
+.display{
+    margin-left: 5rem;
+    width: 12rem;
+    height: 10rem;
+    overflow-y: scroll;
+    overflow-x: scroll;    
+    display: grid;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.membro{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 12rem;
+    height: 2rem;
+    background-color: #c85000;
+    border-radius: 6px;
+}
+
 .main-content {
     display: flex;
     justify-content: center;
@@ -587,4 +607,3 @@ body {
 .context-menu-close-button:hover {
     background-color: #cc0000;
 }
-
