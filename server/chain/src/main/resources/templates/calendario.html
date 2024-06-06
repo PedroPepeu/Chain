@@ -17,6 +17,15 @@
         <div id="calendar"></div>
     </div>
 
+    <div class="memberEvents">
+        <div class="memberInput">
+            <input type="date" placeholder="Data do evento."> 
+            <button class="button-29">+</button>
+        </div>
+        <textarea id="commentInput" placeholder="Detalhes do evento."></textarea>
+        <button class="button-5">+</button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
     <script src="/js/evo-calendar.min.js"></script>
 
@@ -27,11 +36,12 @@
                 calendarEvents: [
                     {
                         id: 'event1', // Event's ID (required)
-                        name: "New Year", // Event name (required)
-                        description: "Happy new year",
+                        name: "Atividade 1", // Event name (required)
+                        description: "Atividade",
                         date: "January/1/2020", // Event date (required)
-                        type: "holiday", // Event type (required)
-                        everyYear: true // Same event every year (optional)
+                        type: "activity", // Event type (required)
+                        everyYear: true, // Same event every year (optional)
+                        color: "#63d867"
                     },
                     {
                         name: "Vacation Leave",

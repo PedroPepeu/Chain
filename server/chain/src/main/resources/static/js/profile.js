@@ -55,15 +55,62 @@ class Project {
     editTitle() {
         let newTitle = prompt('Digite o novo nome do projeto:');
         if (newTitle !== null) {
-            this.title = newTitle;
-            this.a.innerText = this.title;
+            this.project.nome = newTitle;
+            
+            const url = '/users/' + user.id + '/projects/' + this.project.id;
+            console.log('URL = ', url);
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(this.project)
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Error ao tentar deletar projeto');
+                    throw new Error('Error ao tentar deletar projeto');
+                }
+        
+                return response.json();
+            })
+            .then(data => {
+                this.title = newTitle;
+                this.a.innerText = this.title;
+            })
+            .catch(error => {
+                console.error("Error fetching deleting project:", error);
+            });
         }
     }
 
     deleteProject() {
         if (confirm('Tem certeza de que deseja excluir este projeto?')) {
-            this.place.removeChild(this.a.parentNode); // Remove o nó pai do link (div.project)
+            const url = '/users/' + user.id + '/projects/' + this.project.id;
+            console.log('URL = ', url);
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type' : 'application/json',
+                }
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Error ao tentar deletar projeto');
+                    throw new Error('Error ao tentar deletar projeto');
+                }
+                else
+                {
+                    this.place.removeChild(this.a.parentNode);
+                }
+        
+                return response.json();
+            })
+            .catch(error => {
+                console.error("Error fetching deleting project:", error);
+            });
         }
+        console.log('Projeto deletado: ', this.project);
     }
 }
 
@@ -106,7 +153,7 @@ let buttonCreation = document.getElementById("addCreationButton");
 
 function createProject(){
     const project = {
-        id: 1,
+        id: -1,
         nome: projectName.value,
         administradorId: user
     };

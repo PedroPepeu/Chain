@@ -1,6 +1,9 @@
 let root = document.getElementById("blocks");
 let linkRoot = document.getElementById("linkPlace");
 
+const userString = window.localStorage.getItem('user');
+const user = JSON.parse(userString);
+
 let id = window.location.href;
 id = id.replace('http://localhost:8080/projects/', '');
 id = id.replace('/html', '');
@@ -308,7 +311,7 @@ function createLink(){
     .then(projeto => {
         console.log('Projeto foi pego: ', projeto);
         const newLink = {
-            id: 1,
+            id: -1,
             descricao: createLinkDescription.value,
             urlLink: linkCreationInput.value,
             projetoId: projeto
@@ -419,7 +422,68 @@ class ContextMenu {
         addButton.innerText = 'Adicionar Membro';
         addButton.className = 'context-menu-add-button';
         addButton.addEventListener('click', () => {
-            this.addMember(emailInput.value, categoryContainer);
+            //this.addMember(emailInput.value, categoryContainer);
+
+            const radios = document.querySelectorAll('input[name="category"]');
+            let selected;
+            for(const radio of radios){
+                if(radio.checked){
+                    selected = radio.value;
+                    break;
+                }
+            }
+
+            console.log(selected);
+
+            const url = '/projects/' + id;
+    
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Erro ao tentar pegar projeto');
+                    throw new Error('Error ao tentar pegar projeto');
+                }
+            
+                return response.json();
+            })
+            .then(projeto => {
+                console.log('Projeto foi pego: ', projeto);
+                
+                const urlAddMember = '/users/' + user.id + '/projects/' + emailInput.value + '/' + selected;
+                fetch(urlAddMember, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                    },
+                    body: JSON.stringify(projeto),
+                })
+                .then(response => {
+                    if(!response.ok){
+                        alert('Erro ao tentar adicionar membro ao projeto');
+                        throw new Error('Erro ao tentar adicionar membro ao projeto');
+                    }
+                    else
+                    {
+                        console.log('membro adicionado');
+                    }
+                
+                    return response.json();
+                })
+                .then(data => {
+
+                })
+                .catch(error => {
+                    console.error("Error fetching add member to project:", error);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching project:", error);
+            });
         });
     
         const closeButton = document.createElement('button');
