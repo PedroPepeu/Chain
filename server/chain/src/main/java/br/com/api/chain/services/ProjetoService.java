@@ -82,4 +82,10 @@ public class ProjetoService {
         Projeto proj = getProject(id);
         return proj.getLinks();
     }
+
+    /*public Void updateActivity(Integer idProj){
+        if(!verifyIfAdmin(id, idproj)){
+            // throw exception
+        }
+    }*/
 }

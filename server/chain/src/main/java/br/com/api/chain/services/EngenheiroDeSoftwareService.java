@@ -33,9 +33,11 @@ public class EngenheiroDeSoftwareService {
         return this.usuarioRepository.findAll();
     }
 
-    public EngenheiroDeSoftware getUserByEmail(String email){
+    public EngenheiroDeSoftware getUserByEmail(String email) throws EmailNotFoundException{
         EngenheiroDeSoftware eng = usuarioRepository.findByEmail(email);
-        if(eng.getId() == null){
+        System.out.println("Prestes a entrar");
+        if(eng == null){
+            System.out.println("Entrou aqui");
             throw new EmailNotFoundException(email);
         }
         return eng;
