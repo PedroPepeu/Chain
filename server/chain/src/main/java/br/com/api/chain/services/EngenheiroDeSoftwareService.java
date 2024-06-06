@@ -33,11 +33,9 @@ public class EngenheiroDeSoftwareService {
         return this.usuarioRepository.findAll();
     }
 
-    public EngenheiroDeSoftware getUserByEmail(String email) throws EmailNotFoundException{
+    public EngenheiroDeSoftware getUserByEmail(String email){
         EngenheiroDeSoftware eng = usuarioRepository.findByEmail(email);
-        System.out.println("Prestes a entrar");
         if(eng == null){
-            System.out.println("Entrou aqui");
             throw new EmailNotFoundException(email);
         }
         return eng;
@@ -48,17 +46,13 @@ public class EngenheiroDeSoftwareService {
         return eng.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){ // Ver como fazer o exception funcionar
+    public EngenheiroDeSoftware login(EngenheiroDeSoftware eng){ 
         String email = eng.getEmail(), senha = eng.getSenha();
-        try {
-            eng = usuarioRepository.findByEmail(email);
-            if(eng.getSenha().equals(senha)){
-                return eng;
-            }
-            else{
-                throw new EmailNotFoundException(email);
-            }
-        } catch (EmailNotFoundException e) {
+        eng = this.getUserByEmail(email);
+        if(eng.getSenha().equals(senha)){
+            return eng;
+        }
+        else{
             throw new EmailNotFoundException(email);
         }
     }

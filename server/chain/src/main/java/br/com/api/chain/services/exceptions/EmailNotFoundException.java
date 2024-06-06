@@ -4,7 +4,7 @@ public class EmailNotFoundException extends RuntimeException{
     
     private static final long serialVersionUID = 1L;
 
-    public EmailNotFoundException(Object email){
+    public EmailNotFoundException(String email){
         super("Email not found, email = " + email);
     }
 }

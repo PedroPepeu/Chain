@@ -23,7 +23,7 @@ public class ControllersExceptionHandler {
     }
 
     @ExceptionHandler(EmailNotFoundException.class)
-    public ResponseEntity<StandartError> emailNotFound(ResourceNotFoundException e, HttpServletRequest req){
+    public ResponseEntity<StandartError> emailNotFound(EmailNotFoundException e, HttpServletRequest req){
         String error = "Email not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(), req.getRequestURI());

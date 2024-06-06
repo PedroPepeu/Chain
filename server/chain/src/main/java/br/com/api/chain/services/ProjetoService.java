@@ -83,7 +83,18 @@ public class ProjetoService {
         return proj.getLinks();
     }
 
-    //public void 
+    public void getProjectActivity(Integer id, Integer idAtiv){
+        List<Atividade> atividades = getActivities(id);
+        boolean achou = false;
+        for(int i = 0; i < atividades.size(); i++){
+            if(idAtiv == atividades.get(i).getId()){
+                achou = true;
+            }
+        }
+        if(!achou){
+            // jogar exception
+        }
+    }
 
     /*public Void updateActivity(Integer idProj){
         if(!verifyIfAdmin(id, idproj)){
