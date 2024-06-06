@@ -1,8 +1,8 @@
 name: Cypress Tests using Cypress Docker Image
 
 on:
-  push:  
-    branches: 
+  push:
+    branches:
       - develop
 
 jobs:
@@ -15,22 +15,14 @@ jobs:
       image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
       options: --user 1001
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with: 
-          node-version: 20
-      # - name: Checkout
-      #   uses: actions/checkout@v4
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-      #     cache: 'npm'
+      - uses: actions/checkout@v4  # Keep only the latest version
+
       - name: Install dependencies
-        run: npm install
+        run: npm install  # Install dependencies within the container
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
-          start: npm start
+          build: npm run build  # Assuming build command is correct
+          start: npm start      # Assuming start command is correct
           browser: chrome
