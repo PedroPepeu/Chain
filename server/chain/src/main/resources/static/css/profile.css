@@ -358,3 +358,6 @@ body {
     transform: translateY(2px);
   }
   
+#dates{
+    cursor: pointer;
+}

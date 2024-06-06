@@ -91,5 +91,11 @@
   calendario.addEventListener('click', () => {
       window.location.href = "calendario";
   });
+
+  const bt_logout = document.getElementById('logout');
+  bt_logout.onclick = () =>{
+    window.localStorage.setItem('user', '');
+    window.location.href = '/login';
+  }
 </script>
 </html>
