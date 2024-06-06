@@ -1,6 +1,7 @@
 package br.com.api.chain.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -189,14 +190,27 @@ public class EngenheiroDeSoftwareService {
     private List<Atividade> searchUserActivities(List<Atividade> atividades, EngenheiroDeSoftware eng){
         List<Atividade> res = new ArrayList<>();
         Atividade x;
-        Set<EngenheiroDeSoftware> s;
+        Set<EngenheiroDeSoftware> s = new HashSet<>();
         for(int i = 0; i < atividades.size(); i++){
-            x = res.get(i);
+            x = atividades.get(i);
             s = x.getEngenheiros();
             if(s.size() > 0 && s.contains(eng)){
                 res.add(x);
             }
         }
         return res;
+    }
+
+    public void userUpdateProject(Integer id, Projeto proj){
+        if(!verifyIfAdmin(id, proj)){
+            // throw exception
+        }
+    }
+
+    public boolean verifyIfAdmin(Integer id, Projeto proj){
+        if(id == proj.getAdministradorId().getId()){
+            return true;
+        }
+        return false;
     }
 }

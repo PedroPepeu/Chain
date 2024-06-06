@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,16 @@ public class ProjetoController {
         return projetoService.getProjetos();
     }
 
+    @GetMapping("/{id}/html")
+    public ClassPathResource Profile(){
+        return new ClassPathResource("templates/projects.html");
+    }
+
+    @GetMapping(value = "/{id}")
+    public Projeto getProjectById(@PathVariable Integer id){
+        return projetoService.getProject(id);
+    }
+
     @GetMapping(value = "{id}/members")
     public ResponseEntity<List<Membro>> getMembers(@PathVariable Integer id){
         List<Membro> mem = projetoService.getMembers(id);
@@ -64,7 +75,7 @@ public class ProjetoController {
     @PostMapping(value = "/{id}/activity")
     public ResponseEntity<Atividade> insertActivity(@PathVariable Integer id, @RequestBody Atividade ativ){
         ativ = projetoService.insertActivity(id, ativ);
-        atividadeService.insertActivity(ativ);
+        ativ = atividadeService.insertActivity(ativ);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(ativ.getId()).toUri();
         return ResponseEntity.created(uri).body(ativ);
@@ -73,7 +84,7 @@ public class ProjetoController {
     @PostMapping(value = "/{id}/links")
     public ResponseEntity<Link> insertLink(@PathVariable Integer id, @RequestBody Link li){
         li = projetoService.insertLink(id, li);
-        linkService.insertLink(li);
+        li = linkService.insertLink(li);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(li.getId()).toUri();
         return ResponseEntity.created(uri).body(li);
