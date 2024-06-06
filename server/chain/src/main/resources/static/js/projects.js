@@ -308,7 +308,7 @@ function createLink(){
     .then(projeto => {
         console.log('Projeto foi pego: ', projeto);
         const newLink = {
-            id: 1,
+            id: -1,
             descricao: createLinkDescription.value,
             urlLink: linkCreationInput.value,
             projetoId: projeto
