@@ -475,7 +475,8 @@ class ContextMenu {
                     return response.json();
                 })
                 .then(data => {
-
+                    console.log(data.engenheiroId.nome);
+                    addMember(data.engenheiroId.nome, data.engenheiroId.email);
                 })
                 .catch(error => {
                     console.error("Error fetching add member to project:", error);
@@ -537,3 +538,53 @@ document.addEventListener('DOMContentLoaded', () => {
         new ContextMenu(addMemberElement);
     }
 });
+
+const displayMembers = document.getElementsByClassName('display')[0];
+
+function addMember(nome, email){
+    const div = document.createElement('div');
+    div.className = 'membro';
+
+    const nomeTxt = document.createElement('p');
+    nomeTxt.textContent = 'Nome: ' + nome;
+
+    const emailTxt = document.createElement('p');
+    emailTxt.textContent = 'Email: ' + email;
+
+    div.appendChild(nomeTxt);
+    div.appendChild(emailTxt);
+
+    displayMembers.appendChild(div);
+}
+
+function addParticipatingMembers(){
+    const url = '/projects/' + id + '/members';
+    console.log(url);
+
+    fetch(url, {
+        method: 'GET',
+        headers:{
+            'Content-Type':'application/json',
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            alert('Erro ao tentar pegar membros');
+            throw new Error('Erro ao tentar pegar membros');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        for(let i = 0; i < data.length; i++)
+        {
+            addMember(data[i].engenheiroId.nome, data[i].engenheiroId.email);
+        }
+    })
+    .catch(error => {
+        console.error('error fetching get members: ', error);
+    });
+}
+
+addParticipatingMembers();
