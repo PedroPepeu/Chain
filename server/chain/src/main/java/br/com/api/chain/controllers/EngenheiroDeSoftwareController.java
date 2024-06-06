@@ -140,9 +140,17 @@ public class EngenheiroDeSoftwareController {
     @PutMapping(value = "/{id}/projects/{idProj}")
     public ResponseEntity<Projeto> userUpdateProject(@PathVariable Integer id, @RequestBody Projeto mod, @PathVariable Integer idProj){
         Projeto proj = projetoService.getProject(idProj);
-        usuarioService.userUpdateProject(idProj, proj);
+        usuarioService.userUpdateProject(id, proj);
         proj = projetoService.updateProject(idProj, mod);
         return ResponseEntity.ok().body(proj);
+    }
+
+    @DeleteMapping(value = "/{id}/projects/{idProj}")
+    public ResponseEntity<Void> userDeleteProject(@PathVariable Integer id, @PathVariable Integer idProj){
+        Projeto proj = projetoService.getProject(idProj);
+        usuarioService.userUpdateProject(id, proj);
+        projetoService.deleteProject(idProj);
+        return ResponseEntity.ok().body(null);
     }
 
     @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}") // TESTAR
