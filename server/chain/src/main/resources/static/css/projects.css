@@ -608,3 +608,18 @@ body {
 .context-menu-close-button:hover {
     background-color: #cc0000;
 }
+
+/*----- FLAVIO -----*/
+
+#displayAtividades{
+    width: 1000px;
+    background-color: white;
+}
+
+#displayAtividades h1{
+    text-align: center;
+}
+
+.atividade_item{
+    background-color: lightgray;
+}
