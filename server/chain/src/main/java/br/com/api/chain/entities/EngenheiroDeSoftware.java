@@ -43,7 +43,7 @@ public class EngenheiroDeSoftware {
     private List<Membro> participa;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "engenheiros")
+    @ManyToMany(mappedBy = "engenheiros", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Set<Atividade> atividades;
 
     public EngenheiroDeSoftware(){}

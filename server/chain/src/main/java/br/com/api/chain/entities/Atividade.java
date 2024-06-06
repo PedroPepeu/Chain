@@ -23,7 +23,7 @@ public class Atividade {
     @Column(name="concluida")
     private boolean concluida;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "projeto_id")
     private Projeto projetoId;
 
@@ -34,7 +34,7 @@ public class Atividade {
     private LocalDate dataEntrega;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "realiza", 
                joinColumns = @JoinColumn(name = "atividade_id"), 
                inverseJoinColumns = @JoinColumn(name = "engenheiro_de_software_id"))

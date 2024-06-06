@@ -18,19 +18,29 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.chain.entities.Anotacao;
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.Cargo;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
+import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AnotacaoRepository;
+import br.com.api.chain.repositories.AtividadeRepository;
+import br.com.api.chain.repositories.MembroRepository;
+import br.com.api.chain.repositories.ProjetoRepository;
 import br.com.api.chain.services.AnotacaoService;
+import br.com.api.chain.services.AtividadeService;
 import br.com.api.chain.services.EngenheiroDeSoftwareService;
+import br.com.api.chain.services.MembroService;
+import br.com.api.chain.services.ProjetoService;
 
 @RestController
 @RequestMapping("/users")
 public class EngenheiroDeSoftwareController {
 
     private final EngenheiroDeSoftwareService usuarioService;
-
     private final AnotacaoService anotacaoService;
+    private final ProjetoService projetoService;
+    private final AtividadeService atividadeService;
+    private final MembroService membroService;
 
     /*@Autowired
     public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService){
@@ -38,9 +48,12 @@ public class EngenheiroDeSoftwareController {
     }*/
 
     @Autowired
-    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository){
+    public EngenheiroDeSoftwareController(EngenheiroDeSoftwareService usuarioService, AnotacaoRepository anotacaoRepository, ProjetoRepository projetoRepository, AtividadeRepository atividadeRepository, MembroRepository membroRepository){
         this.usuarioService = usuarioService;
         this.anotacaoService = new AnotacaoService(anotacaoRepository);
+        this.projetoService = new ProjetoService(projetoRepository);
+        this.atividadeService = new AtividadeService(atividadeRepository);
+        this.membroService = new MembroService(membroRepository);
     }
 
     @GetMapping("/ALL") // SÓ PRA TESTES
@@ -54,19 +67,21 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(eng);
     }*/
 
+    // Usuário em geral
+
     @GetMapping("/{id}")
     public ResponseEntity<EngenheiroDeSoftware> getUserById(@PathVariable Integer id){
         EngenheiroDeSoftware eng = usuarioService.getUserById(id);
         return ResponseEntity.ok().body(eng);
     }
 
-    @GetMapping(value = "/login")
+    @PostMapping(value = "/login")
     public ResponseEntity<EngenheiroDeSoftware> login(@RequestBody EngenheiroDeSoftware eng){
         eng = usuarioService.login(eng);
         return ResponseEntity.ok().body(eng);
     }
 
-    @PostMapping
+    @PostMapping(value = "/create")
     public ResponseEntity<EngenheiroDeSoftware> insertUser(@RequestBody EngenheiroDeSoftware eng){ // cadastrar
         eng = usuarioService.insertUser(eng);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -86,7 +101,7 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(eng);
     }
 
-    // Métodos para confirmar com o professor
+    // Atividades
 
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<Set<Atividade>> getUserActivities(@PathVariable Integer id){
@@ -94,11 +109,60 @@ public class EngenheiroDeSoftwareController {
         return ResponseEntity.ok().body(ativ);
     }
 
-    @GetMapping(value = "/{id}/myProjects")
+    @GetMapping(value = "/{id}/projects/{idProj}/activities") // Mostrar as atividades de um usuário em um projeto
+    public ResponseEntity<List<Atividade>> getUserProjectActivities(@PathVariable Integer id, @PathVariable Integer idProj){
+        Projeto proj = projetoService.getProject(idProj);
+        List<Atividade> ativ = usuarioService.getUserProjectActivities(id, proj);
+        return ResponseEntity.ok().body(ativ);
+    }
+
+    // Projetos
+
+    @GetMapping(value = "/{id}/projects") // Mostrar todos os projetos
     public ResponseEntity<List<Projeto>> getUserProjects(@PathVariable Integer id){
         List<Projeto> proj = usuarioService.getUserProjects(id);
+        List<Projeto> participa = usuarioService.getUserParticipations(id);
+        proj.addAll(participa);
         return ResponseEntity.ok().body(proj);
     }
+
+    //@GetMapping(value = "/{id}/project")
+
+    @PostMapping(value = "/{id}/projects")
+    public ResponseEntity<Projeto> insertUserProject(@PathVariable Integer id, @RequestBody Projeto proj){
+        proj = usuarioService.insertUserProject(id, proj);
+        proj = projetoService.insertProject(proj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(proj.getId()).toUri();
+        return ResponseEntity.created(uri).body(proj); 
+    }
+
+    @PutMapping(value = "/{id}/projects/{idProj}")
+    public ResponseEntity<Projeto> userUpdateProject(@PathVariable Integer id, @RequestBody Projeto mod, @PathVariable Integer idProj){
+        Projeto proj = projetoService.getProject(idProj);
+        usuarioService.userUpdateProject(idProj, proj);
+        proj = projetoService.updateProject(idProj, mod);
+        return ResponseEntity.ok().body(proj);
+    }
+
+    @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}") // TESTAR
+    public ResponseEntity<Membro> insertMember(@PathVariable Integer id, @RequestBody Projeto proj, @PathVariable String emailOther, @PathVariable Cargo cargo){
+        Membro mem = usuarioService.insertMember(id, emailOther, proj, cargo);
+        projetoService.insertMember(mem);
+        mem = membroService.insertMembers(mem);
+        return ResponseEntity.ok().body(mem);
+    }
+
+    @PutMapping(value = "/{id}/projects/{idProj}/activity/{idAtiv}/{emailOther}") 
+    public ResponseEntity<Atividade> insertUserIntoActivity(@PathVariable Integer id, @PathVariable Integer idProj, @PathVariable Integer idAtiv, @PathVariable String emailOther){
+        Projeto proj = projetoService.getProject(idProj);
+        Atividade ativ = atividadeService.getActivity(idAtiv);
+        ativ = usuarioService.insertUserIntoActivity(id, proj, ativ, emailOther);
+        ativ = atividadeService.updateUsers(ativ);
+        return ResponseEntity.ok().body(ativ);
+    }
+
+    // Anotações
 
     @GetMapping(value = "/{id}/anotations")
     public ResponseEntity<List<Anotacao>> getUserAnotations(@PathVariable Integer id){
@@ -109,7 +173,7 @@ public class EngenheiroDeSoftwareController {
     @PostMapping(value = "/{id}/anotations")
     public ResponseEntity<Anotacao> insertUserAnotation(@PathVariable Integer id, @RequestBody Anotacao anot){
         anot = usuarioService.insertUserAnotation(id, anot);
-        anotacaoService.insertAnotation(anot);
+        anot = anotacaoService.insertAnotation(anot);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(anot.getId()).toUri();
         return ResponseEntity.created(uri).body(anot);

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/profile.css">
+
     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
     <link rel="stylesheet" href="/fontawesome/css/solid.css">
     <link rel="stylesheet" href="/fontawesome/css/brands.css">
@@ -16,19 +17,19 @@
         <div class="sidebar">
             <div class="info">
                 <img src="/images/logo.png" alt="Perfil">
-                <h1>Nome do sujeito</h1>
-                <h1>Email do sujeito</h1>
+                <h1 id="user_nome">Nome do sujeito</h1>
+                <h1 id="user_email">Email do sujeito</h1>
             </div>
             <div class="calendario">
                 <div class="top">
                     <h1>Calendário</h1>
                 </div>
-                <div class="dates">
-                    
+                <div class="dates" id="dates">
                 </div>
             </div>
         </div>
         <div class="main-content">
+          
             <div class="top-bar">
                 <h1>Projetos</h1>
                 <div class="createProject">
@@ -37,6 +38,22 @@
                 </div>
             </div>
             <div id="projects">
+              <div class="main-background">
+                <div class="waveWrapper waveAnimation">
+                  <div class=" bgTop">
+                    <div class="wave waveTop">
+                    </div>
+                  </div>
+                  <div class=" bgMiddle">
+                    <div class="wave waveMiddle">
+                    </div>
+                  </div>
+                  <div class=" bgBottom">
+                    <div class="wave waveBottom">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <footer>
                 <div class="container acb">
@@ -68,5 +85,12 @@
         </div>
     </div>
 </body>
+
 <script src="/js/profile.js"></script>
+<script>
+  const calendario = document.getElementById('dates');
+  calendario.addEventListener('click', () => {
+      window.location.href = "calendario";
+  });
+</script>
 </html>
