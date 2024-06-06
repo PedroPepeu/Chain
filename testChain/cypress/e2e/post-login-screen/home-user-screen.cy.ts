@@ -1,36 +1,36 @@
-// describe('Checkup-home-user', function() {
-//     it('Check-components', function() {
-//         cy.visit(linkHomeUser);
+let linkHomeUser = "http://localhost:8080/profile";
 
-//         cy.get('#addProjectInput').should('exist');
-//         cy.get('#addCreationButton').should('exist');
-//     });
+const lgout = '#logout';
 
-//     it('Check-create-work', function() {
-//         cy.visit(linkHomeUser);
+describe('Checkup-home-user', function() {
+    this.beforeEach(() => {
+        cy.visit(linkHomeUser);
+    });
 
-//         cy.get('#addProjectInput').type('Project test 1');
-//         cy.get('#addCreationButton').click();
+    it('Check-components', function() {
+        cy.get('#addProjectInput').should('exist');
+        cy.get('#addCreationButton').should('exist');
+    });
 
-//         // should check something in the database of the user
-//     });
+    it('Check-create-work', function() {
+        cy.get('#addProjectInput').type('Project test 1');
+        cy.get('#addCreationButton').click();
 
-//     it('Check-create-work-null', function() {
-//         cy.visit(linkHomeUser);
+        // should check something in the database of the user
+    });
 
-//         cy.get('#addCreationButton').click();
+    it('Check-create-work-null', function() {
+        cy.get('#addCreationButton').click();
 
-//         // should check something in the database of the user
-//     });
+        // should check something in the database of the user
+    });
 
-//     it('Check-create-work-space', function() {
-//         cy.visit(linkHomeUser);
+    it('Check-create-work-space', function() {
+        cy.get('#addProjectInput').type(' ');
+        cy.get('#addCreationButton').click();
 
-//         cy.get('#addProjectInput').type(' ');
-//         cy.get('#addCreationButton').click();
+        // should check something in the database of the user
+    });
 
-//         // should check something in the database of the user
-//     });
-
-//     // continue
-// });
+    // continue
+});

@@ -1,215 +1,189 @@
-// let linkLogonUser = "http://127.0.0.1:5000/cadastro";
-// let linkConfirmationLogon = "";
+let linkLogonUser = "http://localhost:8080/cadastro";
+let linkLoginUser = "http://localhost:8080/login";
 
-// describe('Logon', function() {
-//     it('Check-logon-components', function() {
-//         cy.visit(linkLogonUser);
+const user = '#username';
+const pass = '#password';
+const passC = '#passwordConfirmacao';
+const email = '#email';
+const button = '#buttonRegistrar';
 
-//         cy.get('#username').should('exist');
-//         cy.get('#password').should('exist');
-//         cy.get('#passwordConfirmacao').should('exist');
-//         cy.get('#email').should('exist');
-//         cy.get('#buttonRegistrar').should('exist');
-//     });
+describe('Logon', function() {
+    beforeEach(() => {
+        cy.visit(linkLogonUser);
+    });
 
-//     it('Default', function() {
-//         cy.visit(linkLogonUser);
+    it('Check-logon-components', function() {
+        cy.get(user).should('exist');
+        cy.get(pass).should('exist');
+        cy.get(passC).should('exist');
+        cy.get(email).should('exist');
+        cy.get(button).should('exist');
+    });
 
-//         cy.get('#buttonRegistrar').click();
+    it('Default', function() {
+        cy.get(button).click();
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//     it('Default-username', function() {
-//         cy.visit(linkLogonUser);
+    it('Default-username', function() {
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type('teste@teste.com');
+        cy.get(button).click();
 
-//         cy.get('#buttonRegistrar').click();
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+    it('Default-password', function() {
+        cy.get(user).type('user');
+        cy.get(email).type('teste@teste.com');
 
-//     it('Default-password', function() {
-//         cy.visit(linkLogonUser);
+        cy.get(button).click();
 
-//         cy.get('#username').type('user');
-//         cy.get('#email').type('teste@teste.com');
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#buttonRegistrar').click();
+    it('Default-email', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.get(button).click();
 
-//     it('Default-email', function() {
-//         cy.visit(linkLogonUser);
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#username').type('user');
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
+    it('Black-space', function() {
+        cy.get(user).type(' ');
+        cy.get(pass).type(' ');
+        cy.get(passC).type(' ');
+        cy.get(email).type(' ');
 
-//         cy.get('#buttonRegistrar').click();
+        cy.get(button).click();
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//     it('Black-space', function() {
-//         cy.visit(linkLogonUser);
+    it('Black-space-username', function() {
+        cy.get(user).type(' ');
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.get('#username').type(' ');
-//         cy.get('#password').type(' ');
-//         cy.get('#passwordConfirmacao').type(' ');
-//         cy.get('#email').type(' ');
+        cy.get(button).click();
 
-//         cy.get('#buttonRegistrar').click();
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+    it('Black-space-password-correct-pass', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type(' ');
+        cy.get(passC).type(' ');
+        cy.get(email).type('teste@teste.com');
 
-//     it('Black-space-username', function() {
-//         cy.visit(linkLogonUser);
+        cy.get(button).click();
 
-//         cy.get('#username').type(' ');
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type('teste@teste.com');
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#buttonRegistrar').click();
+    it('Black-space-password-incorrect-pass-double-space', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type(' ');
+        cy.get(passC).type('  ');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.get(button).click();
 
-//     it('Black-space-password-correct-pass', function() {
-//         cy.visit(linkLogonUser);
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#username').type('user');
-//         cy.get('#password').type(' ');
-//         cy.get('#passwordConfirmacao').type(' ');
-//         cy.get('#email').type('teste@teste.com');
+    it('Black-space-password-incorrect-pass', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type(' ');
+        cy.get(passC).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.get('#buttonRegistrar').click();
+        cy.get(button).click();
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//     it('Black-space-password-incorrect-pass-double-space', function() {
-//         cy.visit(linkLogonUser);
+    it('Black-space-email', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
+        cy.get(email).type(' ');
 
-//         cy.get('#username').type('user');
-//         cy.get('#password').type(' ');
-//         cy.get('#passwordConfirmacao').type('  ');
-//         cy.get('#email').type('teste@teste.com');
+        cy.get(button).click();
 
-//         cy.get('#buttonRegistrar').click();
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+    it('Not-username', function() {
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//     it('Black-space-password-incorrect-pass', function() {
-//         cy.visit(linkLogonUser);
+        cy.get(button).click();
 
-//         cy.get('#username').type('user');
-//         cy.get('#password').type(' ');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type('teste@teste.com');
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#buttonRegistrar').click();
+    it('Not-both-pass', function() {
+        cy.get(user).type('user');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.get(button).click();
 
-//     it('Black-space-email', function() {
-//         cy.visit(linkLogonUser);
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#username').type('user');
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type(' ');
+    it('Not-pass', function() {
+        cy.get(user).type('user');
+        cy.get(passC).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.get('#buttonRegistrar').click();
+        cy.get(button).click();
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//     it('Not-username', function() {
-//         cy.visit(linkLogonUser);
+    it('Not-pass-confirmation', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type('teste@teste.com');
+        cy.get(button).click();
 
-//         cy.get('#buttonRegistrar').click();
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+    it('Not-email', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
 
-//     it('Not-both-pass', function() {
-//         cy.visit(linkLogonUser);
+        cy.get(button).click();
 
-//         cy.get('#username').type('user');
-//         cy.get('#email').type('teste@teste.com');
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//         cy.get('#buttonRegistrar').click();
+    it('Nothing', function() {
+        cy.get(button).click();
 
-//         cy.url().should('eq', linkLogonUser);
-//     });
+        cy.url().should('eq', linkLogonUser);
+    });
 
-//     it('Not-pass', function() {
-//         cy.visit(linkLogonUser);
+    it('Complete-correct-logon', function() {
+        cy.get(user).type('user');
+        cy.get(pass).type('pass');
+        cy.get(passC).type('pass');
+        cy.get(email).type('teste@teste.com');
 
-//         cy.get('#username').type('user');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type('teste@teste.com');
+        cy.get(button).click();
 
-//         cy.get('#buttonRegistrar').click();
-
-//         cy.url().should('eq', linkLogonUser);
-//     });
-
-//     it('Not-pass-confirmation', function() {
-//         cy.visit(linkLogonUser);
-
-//         cy.get('#username').type('user');
-//         cy.get('#password').type('pass');
-//         cy.get('#email').type('teste@teste.com');
-
-//         cy.get('#buttonRegistrar').click();
-
-//         cy.url().should('eq', linkLogonUser);
-//     });
-
-//     it('Not-email', function() {
-//         cy.visit(linkLogonUser);
-
-//         cy.get('#username').type('user');
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
-
-//         cy.get('#buttonRegistrar').click();
-
-//         cy.url().should('eq', linkLogonUser);
-//     });
-
-//     it('Nothing', function() {
-//         cy.visit(linkLogonUser);
-
-//         cy.get('#buttonRegistrar').click();
-
-//         cy.url().should('eq', linkLogonUser);
-//     });
-
-//     it('Complete-correct-logon', function() {
-//         cy.visit(linkLogonUser);
-
-//         cy.get('#username').type('user');
-//         cy.get('#password').type('pass');
-//         cy.get('#passwordConfirmacao').type('pass');
-//         cy.get('#email').type('teste@teste.com');
-
-//         cy.get('#buttonRegistrar').click();
-
-//         cy.url().should('eq', linkConfirmationLogon);
-//     });
-// });
+        cy.url().should('eq', linkLoginUser);
+    });
+});

@@ -1,27 +1,18 @@
 let linkHomePage = "http://localhost:8080/";
+let linkLoginUser = "http://localhost:8080/login";
 
 describe('Home', function() {
-    it('Home-button', function() {
+    beforeEach(() => {
         cy.visit(linkHomePage);
+    });
 
-        cy.get('#Home-button').click();
-
+    it('Check-link', function() {
         cy.url().should('eq', linkHomePage);
     });
 
-    it('Home-button', function() {
-        cy.visit(linkHomePage);
-
-        cy.get('#Login-button').click();
+    it('User-button', function() {
+        cy.get('#bt_login').click();
 
         cy.url().should('eq', linkLoginUser);
-    });
-
-    it('Home-button', function() {
-        cy.visit(linkHomePage);
-
-        cy.get('#Chain-home-button').click();
-
-        cy.url().should('eq', linkHomePage);
     });
 });

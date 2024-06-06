@@ -1,64 +1,58 @@
 let linkLoginUser = "http://localhost:8080/login";
 let linkHomeUser = "http://localhost:8080/profile";
 
-// // add in js of the sites to return the error to the test with the codes
+const email = '#Email';
+const pass = '#password';
+const button = '#bt_login';
 
-// // test suite name
-// describe('Login', function() {
-//     // test case
-//     it('Check-login-components', function() {
-//         cy.visit(linkLoginUser);
+// test suite name
+describe('Login', function() {
+    this.beforeEach(() => {
+        cy.visit(linkLoginUser);
+    });
 
-//         cy.get('#username').should('exist');
-//         cy.get('#password').should('exist');
-//         cy.get('#submitLogin').should('exist');
-//     });
+    // test case
+    it('Check-login-components', function() {
+        cy.get(email).should('exist');
+        cy.get(pass).should('exist');
+        cy.get(button).should('exist');
+    });
 
-//     it('Default', function() {
-//         cy.visit(linkLoginUser);
+    it('Blank', function() {
+        cy.get(button).click();
 
-//         cy.get('#submitLogin').click();
+        cy.url().should('eq', linkLoginUser);
+    });
 
-//         cy.url().should('eq', linkLoginUser);
-//     });
+    it('Without-email', function() {
+       cy.get(pass).type('pass');
 
-//     it('Default-username', function() {
-//        cy.visit(linkLoginUser);
+       cy.get(button).click();
 
-//        cy.get('#password').type('pass');
+       cy.url().should('eq', linkLoginUser);
+    });
 
-//        cy.get('#submitLogin').click();
+    it('Default-password', function() {
+        cy.get(email).type('user');
 
-//        cy.url().should('eq', linkLoginUser);
-//     });
+        cy.get(button).click();
+        cy.url().should('eq', linkLoginUser);
+    });
 
-//     it('Default-password', function() {
-//         cy.visit(linkLoginUser);
+    it('Black-space', function() {
+        cy.get(email).type(' ');
+        cy.get(pass).type(' ');
 
-//         cy.get('#username').type('user');
+        cy.get(button).click();
+        cy.url().should('eq', linkLoginUser);
+    });
 
-//         cy.get('#submitLogin').click();
-//         cy.url().should('eq', linkLoginUser);
-//     });
+    it('Complete-login', function() {
+        cy.get(email).type('user@user.com');
+        cy.get(pass).type('pass');
 
-//     it('Black-space', function() {
-//         cy.visit(linkLoginUser);
+        cy.get(button).click();
 
-//         cy.get('#username').type(' ');
-//         cy.get('#password').type(' ');
-
-//         cy.get('#submitLogin').click();
-//         cy.url().should('eq', linkLoginUser);
-//     });
-
-//     it('Complete-login', function() {
-//         cy.visit(linkLoginUser);
-
-//         cy.get('#username').type('user');
-//         cy.get('#password').type('pass');
-
-//         cy.get('#submitLogin').click();
-
-//         cy.url().should('eq', linkHomeUser);
-//     });
-// });
+        cy.url().should('eq', linkLoginUser);
+    });
+});
