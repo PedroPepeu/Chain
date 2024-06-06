@@ -1,23 +1,21 @@
-name: Test run
+# Example for a GitHub Actions workflow file (.github/workflows/ci.yml)
+name: CI
 
 on:
-  push:  
-    branches: 
+  push:
+    branches:
       - develop
-      
 
 jobs:
-  test-code:
-    name: Test E2E
-    runs-on: ubuntu-22.04
-    env:
-      working-directory: ./testChain
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install cypress
-        uses: cypress-io/github-actions@v6
-        with:
-          build: npm run build
-          start: npm start
-          
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run cy:run

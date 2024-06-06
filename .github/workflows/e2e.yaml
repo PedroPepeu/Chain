@@ -1,18 +1,21 @@
-name: Test E2E
+# Example for a GitHub Actions workflow file (.github/workflows/ci.yml)
+name: E2E
 
 on:
-  push:  
-    branches: 
+  push:
+    branches:
       - develop
-      
 
 jobs:
-  test-code:
-    name: Test E2E
-    runs-on: ubuntu-22.04
-    env:
-      working-directory: ./testChain
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Run cypress
-        run: npx cypress run
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install cypress --save-dev
+
+    - name: Run Cypress tests
+      run: npx cypress run
