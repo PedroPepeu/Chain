@@ -206,3 +206,7 @@ aside{
 .waveAnimation .waveBottom {
     animation: move_wave 15s linear infinite;
 }
+
+#bt_login{
+    cursor: pointer;
+}
