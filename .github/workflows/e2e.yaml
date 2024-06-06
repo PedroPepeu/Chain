@@ -9,9 +9,10 @@ on:
 jobs:
   test-code:
     name: Test E2E
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    env:
+      working-directory: ./testChain
     steps:
       - uses: actions/checkout@v1
       - name: Run cypress
-        working-directory: ./testChain
         run: npx cypress run
