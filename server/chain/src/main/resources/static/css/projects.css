@@ -510,7 +510,7 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
     width: 12rem;
-    height: 2rem;
+    min-height: 2rem;
     background-color: #c85000;
     border-radius: 6px;
 }
