@@ -62,8 +62,31 @@ class Project {
 
     deleteProject() {
         if (confirm('Tem certeza de que deseja excluir este projeto?')) {
+            const url = '/users/' + user.id + '/projects/' + this.project.id;
+            console.log('URL = ', url);
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type' : 'application/json',
+                }
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Error ao tentar deletar projeto');
+                    throw new Error('Error ao tentar deletar projeto');
+                }
+        
+                return response.json();
+            })
+            .then(data => {
+                this.place.removeChild(this.a.parentNode);
+            })
+            .catch(error => {
+                console.error("Error fetching deleting project:", error);
+            });
             this.place.removeChild(this.a.parentNode); // Remove o nó pai do link (div.project)
         }
+        console.log('Projeto deletado: ', this.project);
     }
 }
 

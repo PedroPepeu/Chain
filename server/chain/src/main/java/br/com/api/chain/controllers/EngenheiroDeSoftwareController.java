@@ -150,7 +150,7 @@ public class EngenheiroDeSoftwareController {
         Projeto proj = projetoService.getProject(idProj);
         usuarioService.userUpdateProject(id, proj);
         projetoService.deleteProject(idProj);
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}/projects/{emailOther}/{cargo}") // TESTAR
