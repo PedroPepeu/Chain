@@ -92,7 +92,7 @@ public class ProjetoService {
             }
         }
         if(!achou){
-            // jogar exception
+            throw new ResourceNotFoundException(idAtiv);
         }
     }
 

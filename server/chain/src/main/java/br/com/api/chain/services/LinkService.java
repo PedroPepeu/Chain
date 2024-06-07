@@ -37,13 +37,13 @@ public class LinkService {
         linkRepository.deleteById(id);
     }
 
-    public Link updateLink(Integer id, Link link){
+    /*public Link updateLink(Integer id, Link link){
         Link entity = linkRepository.getReferenceById(id);
         updateData(entity, link);
         return linkRepository.save(entity);
     }
 
     private void updateData(Link entity, Link link){
-        //entity
-    }
+        
+    }*/
 }
