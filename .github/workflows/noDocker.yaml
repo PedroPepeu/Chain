@@ -1,0 +1,56 @@
+name: Cypress Teste
+
+on:
+  push:  
+    branches: 
+      - develop
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with: 
+          node-version: '20'
+      # - name: Checkout
+      #   uses: actions/checkout@v4
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      #     cache: 'npm'
+      - name: Set up JDK 22
+        uses: actions/setup-java@v3
+        with:
+          java-version: '22'
+          distribution: 'adopt'
+
+      - name: Set up the Maven dependencies caching
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Install Maven dependencies
+        run: mvn install
+      - name: Run Springboot
+        run: |
+          cd ./server/chain
+          mvn spring-boot:run
+      - name: Install dependencies
+        run: |
+          cd ./testChain
+          npm install
+          npm install cypress --save-dev
+          npx cypress run
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     build: npm run build
+      #     start: npm start
+      #     browser: chrom
