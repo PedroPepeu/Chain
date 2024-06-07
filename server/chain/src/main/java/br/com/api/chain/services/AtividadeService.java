@@ -1,13 +1,17 @@
 package br.com.api.chain.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.repositories.AtividadeRepository;
+import br.com.api.chain.services.exceptions.InvalidDateException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -30,6 +34,8 @@ public class AtividadeService {
     }
 
     public Atividade insertActivity(Atividade ativ){
+        this.validacaoDataInicio(ativ.getDataInicio());
+        this.validacaoDataEntrega(ativ.getDataInicio(), ativ.getDataEntrega());
         return atividadeRepository.save(ativ);
     }
 
@@ -51,11 +57,26 @@ public class AtividadeService {
         entity.setNome(ativ.getNome());
     }
 
-    /*private boolean validacaoDataInicio(){
+    private void validacaoDataInicio(LocalDate dataDeInicio){
+        LocalDate agora = LocalDate.now();
+        if(dataDeInicio.isBefore(agora)){
+            throw new InvalidDateException();
+        }
+    }
 
-    }*/
+    private void validacaoDataEntrega(LocalDate dataDeInicio, LocalDate dataDeEntrega){
+        LocalDate agora = LocalDate.now();
+        if(dataDeEntrega.isBefore(agora) || dataDeEntrega.isBefore(dataDeInicio)){
+            throw new InvalidDateException();
+        }
+    }
 
     public Atividade updateUsers(Atividade ativ){
         return atividadeRepository.save(ativ);
+    }
+
+    public Set<EngenheiroDeSoftware> getMembersOfActivity(Integer id){
+        Atividade ativ = this.getActivity(id);
+        return ativ.getEngenheiros();
     }
 }
