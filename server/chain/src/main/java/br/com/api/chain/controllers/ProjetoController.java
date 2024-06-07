@@ -2,6 +2,7 @@ package br.com.api.chain.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.entities.Link;
 import br.com.api.chain.entities.Membro;
 import br.com.api.chain.entities.Projeto;
@@ -59,6 +61,13 @@ public class ProjetoController {
     public ResponseEntity<List<Membro>> getMembers(@PathVariable Integer id){
         List<Membro> mem = projetoService.getMembers(id);
         return ResponseEntity.ok().body(mem);
+    }
+
+    @GetMapping(value = "/{id}/activity/members/{idAtiv}")
+    public ResponseEntity<Set<EngenheiroDeSoftware>> getMembersOfActivity(@PathVariable Integer id, @PathVariable Integer idAtiv){
+        Projeto proj = projetoService.getProject(id);
+        Set<EngenheiroDeSoftware> eng = atividadeService.getMembersOfActivity(idAtiv, proj);
+        return ResponseEntity.ok().body(eng);
     }
 
     @GetMapping(value = "/{id}/activities")

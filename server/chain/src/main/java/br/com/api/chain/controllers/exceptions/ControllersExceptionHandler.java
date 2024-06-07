@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.api.chain.services.exceptions.EmailAlreadyExistsException;
 import br.com.api.chain.services.exceptions.EmailNotFoundException;
+import br.com.api.chain.services.exceptions.InvalidAccessException;
 import br.com.api.chain.services.exceptions.InvalidUserDataException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,6 +44,14 @@ public class ControllersExceptionHandler {
     @ExceptionHandler(InvalidUserDataException.class)
     public ResponseEntity<StandartError> invalidData(InvalidUserDataException e, HttpServletRequest req){
         String error = "Invalid Data";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(), req.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(InvalidAccessException.class)
+    public ResponseEntity<StandartError> invalidAccess(InvalidAccessException e, HttpServletRequest req){
+        String error = "Invalid Access";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(err);
