@@ -3,11 +3,13 @@ package br.com.api.chain.services;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Atividade;
+import br.com.api.chain.entities.EngenheiroDeSoftware;
 import br.com.api.chain.repositories.AtividadeRepository;
 import br.com.api.chain.services.exceptions.InvalidDateException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
@@ -71,5 +73,10 @@ public class AtividadeService {
 
     public Atividade updateUsers(Atividade ativ){
         return atividadeRepository.save(ativ);
+    }
+
+    public Set<EngenheiroDeSoftware> getMembersOfActivity(Integer id){
+        Atividade ativ = this.getActivity(id);
+        return ativ.getEngenheiros();
     }
 }
