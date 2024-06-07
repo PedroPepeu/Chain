@@ -20,6 +20,7 @@ import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.EngenheiroDeSoftwareRepository;
 import br.com.api.chain.services.exceptions.EmailAlreadyExistsException;
 import br.com.api.chain.services.exceptions.EmailNotFoundException;
+import br.com.api.chain.services.exceptions.InvalidAccessException;
 import br.com.api.chain.services.exceptions.InvalidUserDataException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 
@@ -65,27 +66,11 @@ public class EngenheiroDeSoftwareService {
         if(eng.getEmail() == null || eng.getSenha() == null || eng.getNome() == null){
             throw new InvalidUserDataException();
         }
-        else if(!validacaoEmail(eng.getEmail())){
-            throw new InvalidUserDataException();
-        }
         EngenheiroDeSoftware x = this.usuarioRepository.findByEmail(eng.getEmail());
         if(x != null){
             throw new EmailAlreadyExistsException(eng.getEmail());
         }
         return usuarioRepository.save(eng);
-    }
-
-    private boolean validacaoEmail(String email){
-        boolean valido = false;
-        if(email.length() > 0){
-            String exp = "^[\\\\w\\\\.-]+@([\\\\w\\\\-]+\\\\.)+[A-Z]{2,4}$";
-            Pattern pat = Pattern.compile(exp, Pattern.CASE_INSENSITIVE);
-            Matcher mat = pat.matcher(email);
-            if(mat.matches()){
-                valido = true;
-            }
-        }
-        return valido;
     }
 
     public void deleteUser(Integer id){
@@ -159,10 +144,7 @@ public class EngenheiroDeSoftwareService {
         boolean membroDoProjeto = verificarSeMembro(membros, otherId);
         Integer idAdmin = proj.getAdministradorId().getId();
 
-        if(!membroDoProjeto){
-            return null;
-        }
-        else if(id == otherId || id == idAdmin){
+        if((id == otherId && membroDoProjeto) || id == idAdmin){
             Set<EngenheiroDeSoftware> engenheiros = ativ.getEngenheiros();
             EngenheiroDeSoftware eng = this.getUserById(otherId);
             eng.getAtividades().add(ativ);
@@ -170,9 +152,8 @@ public class EngenheiroDeSoftwareService {
             return ativ;
         }
         else{
-            return null;
+            throw new InvalidAccessException();
         }
-        //return ativ; // depois tirar 
     }
 
     private boolean verificarSeMembro(List<Membro> membros, Integer otherId){
@@ -197,9 +178,8 @@ public class EngenheiroDeSoftwareService {
             return mem;
         }
         else{
-            // jogar exception
+            throw new InvalidAccessException();
         }
-        return mem; // depois tirar
     }
 
     public List<Atividade> getUserProjectActivities(Integer id, Projeto proj){ // VER VALIDAÇÕES
@@ -224,7 +204,7 @@ public class EngenheiroDeSoftwareService {
 
     public void userUpdateProject(Integer id, Projeto proj){
         if(!verifyIfAdmin(id, proj)){
-            // throw exception
+            throw new InvalidAccessException();
         }
     }
 
