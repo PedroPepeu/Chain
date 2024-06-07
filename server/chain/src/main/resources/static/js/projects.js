@@ -650,9 +650,32 @@ function getAtividades(){
 
         return response.json();
     })
-    .then(data => {
-        for(let i = 0; i < data.length; i++){
-            new atividade(data[i].nome, data[i].descricao, data[i].dataInicio, data[i].dataEntrega);
+    .then(ativi => {
+        for(let i = 0; i < ativi.length; i++){
+            //new atividade(ativi[i].nome, ativi[i].descricao, ativi[i].dataInicio, ativi[i].dataEntrega);
+            const url2 = '/projects/' + id + '/activity/members/' + ativi[i].id;
+
+            fetch(url2, {
+                method: 'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                }
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('Erro ao tentar pegar membros de uma atividade');
+                    throw new Error('Erro ao tentar pegar membros de uma atividade');
+                }
+
+                return response.json();
+            })
+            .then(membros => {
+                console.log('MEMBROS: ', membros);
+                new atividade(ativi[i].nome, ativi[i].descricao, ativi[i].dataInicio, ativi[i].dataEntrega, membros[0].email);
+            })
+            .catch(error => {
+                console.error('error fetching members from activity: ', error);
+            })
         }
     })
     .catch(error => {
