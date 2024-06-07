@@ -1,6 +1,6 @@
 let root = document.getElementById("blocks");
 let linkRoot = document.getElementById("linkPlace");
-let displayAtividades = document.getElementById('displayAtividades');
+let containerAtividades = document.getElementById('containerAtividades');
 
 const userString = window.localStorage.getItem('user');
 const user = JSON.parse(userString);
@@ -256,18 +256,19 @@ class EditableText {
 }*/
 
 class atividade {
-    constructor(nomeTxt, descricaoTxt, data_inicio, data_termino) {
+    constructor(nomeTxt, descricaoTxt, data_inicio, data_termino, email='a') {
         this.nomeTxt = nomeTxt;
         this.descricaoTxt = descricaoTxt;
         this.data_inicio = data_inicio;
         this.data_termino = data_termino;
+        this.email = email;
 
         this.render();
     }
 
     render() {
         this.createActivity();
-        displayAtividades.append(this.attElement);
+        containerAtividades.append(this.attElement);
     }
 
     createActivity() {
@@ -278,17 +279,21 @@ class atividade {
         this.descricao = document.createElement('p');
         this.dataInicio = document.createElement('p');
         this.dataTermino = document.createElement('p');
+        this.membros = document.createElement('p');
         this.linha = document.createElement('hr');
 
         this.nome.innerText = 'NOME: ' + this.nomeTxt;
         this.descricao.innerText = 'DESCRICAO: ' + this.descricaoTxt;
         this.dataInicio.innerText = 'DATA INICIO: ' + this.data_inicio;
         this.dataTermino.innerText = 'DATA TERMINO: ' + this.data_termino;
+        this.membros.innerText = 'RESPONSAVEIS: ' + this.email;
 
         this.attElement.append(this.nome);
         this.attElement.append(this.descricao);
         this.attElement.append(this.dataInicio);
         this.attElement.append(this.dataTermino);
+        this.attElement.append(this.membros);
+
         this.attElement.append(this.linha);
     }
 }
@@ -329,6 +334,7 @@ getLinks();
 let linkCreationInput = document.getElementById('createLinkInput');
 let createLinkDescription = document.getElementById('createLinkDescription');
 let linkCreationButton = document.getElementById('createLinkButton');
+let emailMembro = document.getElementById('email_membro');
 
 function createLink(){
     const url = '/projects/' + id;
@@ -709,9 +715,30 @@ function addAtividade(){
     
             return response.json();
         })
-        .then(data => {
-            console.log(data);
-            new atividade(data.nome, data.descricao, data.dataInicio, data.dataTermino);
+        .then(ativi => {
+            console.log('atividade: ', ativi);
+            const membroUrl = '/users/' + user.id + '/projects/' + id + '/activity/' + ativi.id + '/' + emailMembro.value;
+            fetch(membroUrl, {
+                method: 'PUT',
+                headers:{
+                    'Content-Type':'application/json',
+                }
+            })
+            .then(response => {
+                if(!response.ok){
+                    alert('erro ao tentar colocar membro a atividade');
+                    throw new Error('erro ao tentar colocar membro a atividade');
+                }
+
+                return response.json();
+            })
+            .then(membro => {
+                console.log('membro foi adicionado: ', membro);
+                new atividade(ativi.nome, ativi.descricao, ativi.dataInicio, ativi.dataEntrega, emailMembro.value);
+            })
+            .catch(error => {
+                console.error('fetching add member activity: ', error);
+            });
         })
         .catch(error => {
             console.error('error fetching create activity', error);
