@@ -29,10 +29,4 @@ public class AtividadeController {
     public List<Atividade> getAtividades(){
         return atividadeService.getAtividades();
     }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Set<EngenheiroDeSoftware>> getMembersOfActivity(@PathVariable Integer id){
-        Set<EngenheiroDeSoftware> eng = atividadeService.getMembersOfActivity(id);
-        return ResponseEntity.ok().body(eng);
-    }
 }

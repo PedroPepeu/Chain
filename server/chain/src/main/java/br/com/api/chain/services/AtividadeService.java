@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.api.chain.entities.Atividade;
 import br.com.api.chain.entities.EngenheiroDeSoftware;
+import br.com.api.chain.entities.Projeto;
 import br.com.api.chain.repositories.AtividadeRepository;
+import br.com.api.chain.services.exceptions.InvalidAccessException;
 import br.com.api.chain.services.exceptions.InvalidDateException;
 import br.com.api.chain.services.exceptions.ResourceNotFoundException;
 
@@ -75,8 +77,11 @@ public class AtividadeService {
         return atividadeRepository.save(ativ);
     }
 
-    public Set<EngenheiroDeSoftware> getMembersOfActivity(Integer id){
+    public Set<EngenheiroDeSoftware> getMembersOfActivity(Integer id, Projeto proj){
         Atividade ativ = this.getActivity(id);
+        if(!ativ.getProjetoId().equals(proj)){
+            throw new InvalidAccessException();
+        }
         return ativ.getEngenheiros();
     }
 }
